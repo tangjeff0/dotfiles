@@ -60,3 +60,17 @@ export PS1="\u@\h \[\033[32m\]\w\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $ "
  :only            - keep only this window open
  :ls              - show current buffers
  :b 2             - open buffer #2 in this window
+
+# VIM
+:! - run terminal command from vim
+While in insert mode, you can use Ctrl-R {register}, where register can be:
+
++ for the clipboard,
+* for the X clipboard (last selected text in X),
+" for the unnamed register (last delete or yank in Vim),
+or a number of others (see :h registers).
+Ctrl-R {register} inserts the text as if it were typed.
+
+Ctrl-R Ctrl-O {register} inserts the text with the original indentation.
+
+Ctrl-R Ctrl-P {register} inserts the text and auto-indents it.

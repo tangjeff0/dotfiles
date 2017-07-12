@@ -24,4 +24,4 @@ vcs_info_wrapper() {
 }
 
 RPROMPT=$'$(vcs_info_wrapper)  %F{magenta}%*%f'
-export PS1="%F{white}%d %% %f"
+export PS1="%F{gray}%d %% %f"
