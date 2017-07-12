@@ -8,6 +8,9 @@ let g:NERDTreeWinPos = "left"
 map <C-n> :NERDTreeToggle<CR>
 
 
-execute pathogen#infect()
-syntax on
-filetype plugin indent on
+execute pathogen#infect('bundle/{}', '~/.vim/bundle/{}')
+" syntax on
+" filetype plugin indent on
+
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'ctrlp'
