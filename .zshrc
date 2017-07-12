@@ -11,7 +11,7 @@ autoload -Uz vcs_info
 zstyle ':vcs_info:*' actionformats \
         '%F{yellow}(%r/%b%u)%F{5}%f'
 zstyle ':vcs_info:*' formats       \
-        '%F{yellow}(%r/%b%u)%F{5}%f'
+        '%F{blue}(%r/%b%u)%F{5}%f'
 zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b%F{1}:%F{3}%r'
 
 zstyle ':vcs_info:*' enable git cvs svn
