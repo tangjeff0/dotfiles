@@ -1,0 +1,46 @@
+useful command line shortcuts
+source: https://github.com/0nn0/terminal-mac-cheatsheet
+
+# Writing
+Ctrl + WTFPLCut one word backwards using white space as delimiter
+# Ctrl + H - backspace
+# Ctrl + YPaste whatever was cut by the last cut command  
+# Ctrl + _Undo the last command. (Underscore. So it's actually Ctrl +  Shift + minus)
+
+# Command History
+![value]Execute the last command typed that starts with ‘value’
+!!Execute the last c        ommand typed
+
+# File Management
+pbcopy < [file]Copies file contents to clipboard
+pbpaste Paste clipboard contents
+pbpaste > [file]Past clipboard contents into fi le, pbpaste > paste-test.txt
+
+# Search
+find [dir] -name [search_pattern]Search for files, e.g. find /Users -name "file.t xt"
+grep [search_pattern] [file]Search for all lines that contain the     pattern, e.g. grep "Tom" file.txt
+grep -r [search_pattern] [file]Recur  sively search for all lines that contain the pattern
+grep -v [search_pattern] [file]Search for all lines that do NOT contain the pattern   
+
+# Openning New Tabs
+open -a Terminal `pwd`
+
+# Knowledge
+echo $0 # shell knowledge
+uname -a # OS knowledge
+
+
+# Custom terminals
+# bash
+# write a function to compute the current git branch
+parse_git_branch() {
+      git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+}
+# if using VM
+if [ "$color_prompt" = yes ]; then
+    PS1="\[$(tput setaf 6)\]\u@\h: \w\[\e[0;33;49m\] \$(parse_git_branch)\[\e[0;0m\]$ "
+else
+    PS1="\[$(tput setaf 6)\]\u@\h: \w\[\e[0;33;49m\] \$(parse_git_branch)\[\e[0;0m\]$ "
+fi
+# otherwise
+export PS1="\u@\h \[\033[32m\]\w\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $ "
