@@ -11,8 +11,10 @@ map <C-n> :NERDTreeToggle<CR>
 execute pathogen#infect('bundle/{}', '~/.vim/bundle/{}')
 
 " https://github.com/altercation/vim-colors-solarized
+" https://github.com/altercation/solarized/tree/master/osx-terminal.app-colors-solarized
+" https://github.com/timmfin/terminalcolours
 syntax enable
-set background=dark
+set background=light
 let g:solarized_termcolors=256
 colorscheme solarized
 
