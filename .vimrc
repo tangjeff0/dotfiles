@@ -7,10 +7,14 @@ set pastetoggle=<F3>
 let g:NERDTreeWinPos = "left"
 map <C-n> :NERDTreeToggle<CR>
 
-
+" https://github.com/tpope/vim-pathogen
 execute pathogen#infect('bundle/{}', '~/.vim/bundle/{}')
-" syntax on
-" filetype plugin indent on
+
+" https://github.com/altercation/vim-colors-solarized
+syntax enable
+set background=dark
+let g:solarized_termcolors=256
+colorscheme solarized
 
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'ctrlp'
