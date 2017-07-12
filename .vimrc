@@ -2,12 +2,14 @@
 " https://stackoverflow.com/questions/2514445/turning-off-auto-indent-when-pasting-text-into-vim#2514520
 set pastetoggle=<F3>
 
-
+set autoindent
 set number
 set undofile
 
 set tabstop=2 softtabstop=0 expandtab shiftwidth=2 smarttab
 set backspace=indent,eol,start
+
+set nosmartindent
 
 " https://github.com/tpope/vim-pathogen
 execute pathogen#infect()
