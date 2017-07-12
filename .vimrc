@@ -22,7 +22,7 @@ map <C-n> :NERDTreeToggle<CR>
 " https://github.com/altercation/solarized/tree/master/osx-terminal.app-colors-solarized
 " https://github.com/timmfin/terminalcolours
 syntax enable
-call togglebg#map("<F5>")
+set background=dark 
 let g:solarized_termcolors=256
 let g:solarized_termtrans=1
 colorscheme solarized
