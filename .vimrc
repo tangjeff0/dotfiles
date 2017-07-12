@@ -1,4 +1,4 @@
-"# NATIVE TO VIM
+"# NATIVE VIM
 set pastetoggle=<F3>
 set autoindent
 set nosmartindent
@@ -22,8 +22,9 @@ map <C-n> :NERDTreeToggle<CR>
 " https://github.com/altercation/solarized/tree/master/osx-terminal.app-colors-solarized
 " https://github.com/timmfin/terminalcolours
 syntax enable
-set background=light
+call togglebg#map("<F5>")
 let g:solarized_termcolors=256
+let g:solarized_termtrans=1
 colorscheme solarized
 
 " CTRLP
@@ -42,3 +43,6 @@ let g:syntastic_check_on_wq = 0
 
 " FUGITIVE
 " https://github.com/tpope/vim-fugitive
+
+" COMMENTARY
+" git://github.com/tpope/vim-commentary.git
