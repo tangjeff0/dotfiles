@@ -5,7 +5,6 @@ export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 alias gg='git log --oneline --abbrev-commit --all --graph --decorate --color'
 
-
-
 RPROMPT='%F{magenta}%*%f'
-# export PS1="%d %F{red}%f %% "
+source ~/.zsh-git-prompt/zshrc.sh
+PROMPT='%d $(git_super_status) %% '
