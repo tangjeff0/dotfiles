@@ -4,3 +4,6 @@
 [submodule "mru.vim"]
 	path = mru.vim
 	url = git@github.com:vim-scripts/mru.vim.git
+[submodule "bundle/nerdtree"]
+	path = bundle/nerdtree
+	url = git@github.com:scrooloose/nerdtree.git
