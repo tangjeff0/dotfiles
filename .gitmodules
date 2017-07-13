@@ -16,3 +16,6 @@
 [submodule "bundle/vim-fugitive"]
 	path = bundle/vim-fugitive
 	url = git@github.com:tpope/vim-fugitive.git
+[submodule "zsh-git-prompt"]
+	path = zsh-git-prompt
+	url = git@github.com:olivierverdier/zsh-git-prompt.git
