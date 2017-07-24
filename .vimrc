@@ -1,14 +1,26 @@
 "# NATIVE VIM
+
+" I would love if I could see the status of pastetoggle in the status line
+
+map <F1> :set invnumber<CR>
 set pastetoggle=<F3>
 set autoindent
-set nosmartindent
-set number
+" set smartindent
 set undofile
 set tabstop=2 softtabstop=0 expandtab shiftwidth=2 smarttab
 set backspace=indent,eol,start
+set statusline=%f
+
+
+" Automatically open last session of Vim
 
 "# PLUGINS
-" PATHOGEN
+" MatchParen
+set showmatch
+" DoMatchParen " WHY DONT THIS WORK :( 
+hi MatchParen ctermbg=green
+
+" PATHOGEN(   )
 " https://github.com/tpope/vim-pathogen
 execute pathogen#infect()
 
@@ -22,10 +34,11 @@ map <C-n> :NERDTreeToggle<CR>
 " https://github.com/altercation/solarized/tree/master/osx-terminal.app-colors-solarized
 " https://github.com/timmfin/terminalcolours
 syntax enable
-set background=dark 
+set background=dark
 let g:solarized_termcolors=256
 let g:solarized_termtrans=1
 colorscheme solarized
+call togglebg#map("<F2>")
 
 " CTRLP
 let g:ctrlp_map = '<c-p>'
@@ -33,9 +46,9 @@ let g:ctrlp_cmd = 'CtrlP'
 
 " SYNTASTIC
 " https://github.com/vim-syntastic/syntastic#introduction
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+ "set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
@@ -46,3 +59,4 @@ let g:syntastic_check_on_wq = 0
 
 " COMMENTARY
 " git://github.com/tpope/vim-commentary.git
+set commentstring=#\ %s
