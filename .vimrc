@@ -5,14 +5,22 @@
 map <F1> :set invnumber<CR>
 set pastetoggle=<F3>
 set autoindent
+<<<<<<< HEAD
 " set smartindent
+=======
+set smartindent
+set number
+>>>>>>> 9f649beab386d068fbbc4719f7597265cca0567f
 set undofile
 set tabstop=2 softtabstop=0 expandtab shiftwidth=2 smarttab
 set backspace=indent,eol,start
 set statusline=%f
+<<<<<<< HEAD
 
 
 " Automatically open last session of Vim
+=======
+>>>>>>> 9f649beab386d068fbbc4719f7597265cca0567f
 
 "# PLUGINS
 " MatchParen
@@ -34,7 +42,11 @@ map <C-n> :NERDTreeToggle<CR>
 " https://github.com/altercation/solarized/tree/master/osx-terminal.app-colors-solarized
 " https://github.com/timmfin/terminalcolours
 syntax enable
+<<<<<<< HEAD
 set background=dark
+=======
+set background=light
+>>>>>>> 9f649beab386d068fbbc4719f7597265cca0567f
 let g:solarized_termcolors=256
 let g:solarized_termtrans=1
 colorscheme solarized
