@@ -5,6 +5,7 @@ export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 alias vi='vim'
 alias gg='git log --oneline --abbrev-commit --all --graph --decorate --color'
+alias cdpwd='open -a Terminal `pwd`'
 
 # https://github.com/olivierverdier/zsh-git-prompt
 source ~/.zsh-git-prompt/zshrc.sh

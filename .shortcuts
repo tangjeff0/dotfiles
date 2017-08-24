@@ -36,7 +36,9 @@ export PS1="\u@\h \[\033[32m\]\w\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $ "
 
  VIM
 :r !ls
-zz
+setlocal commentstring=#\ %s
+- WORDs (W, B, E, rather than w, b, e)
+- marks
 
 # https://en.wikipedia.org/wiki/Man_page
 The manual is generally split into eight numbered sections, organized as follows (on Research Unix, BSD, macOS and Linux):
