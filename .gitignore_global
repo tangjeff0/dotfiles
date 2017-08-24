@@ -1,0 +1,138 @@
+# Automatically created by GitHub for Mac
+# To make edits, delete these initial comments, or else your changes may be lost!
+
+*.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \r
+Icon
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# stuff that came from .gitignore for Mercatus
+.bash_history
+.cache/
+.sudo_as_admin_successful
+.vagrant/
+Vagrantfile
+dump.rdb
+mercatus-state-machine.sketch
+
+# stuff from https://gist.github.com/octocat/9257657
+# Compiled source #
+###################
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# Packages #
+############
+# it's better to unpack these files and commit the raw source
+# git has its own built in compression methods
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Logs and databases #
+######################
+*.log
+*.sql
+*.sqlite
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# all the shit on my Desktop
+.CFUserTextEncoding
+.atom/
+.bash_profile
+.bash_profile.pysave
+.bash_sessions/
+.bashrc
+.bundle/
+.config/
+.cups/
+.docker/
+.gem/
+.gemrc
+.gitconfig
+.gnupg/
+.heroku/
+.idlerc/
+.irb-history
+.irbc
+.lesshst
+.local/
+.magick
+.mkshrc
+.mplayer/
+.netrc
+.npm/
+.open-same-dir
+.ovftool.ssldb
+.p2/
+.pgadmin/
+.phet/
+.profile
+.pry_history
+.psql_history
+.rvm/
+.sqlite_history
+.ssh/
+.subversion/
+.swp
+.tooling/
+.vagrant.d/
+.vim_mru_files
+.vim_runtime/
+.viminfo
+.vimrc
+.zlogin
+.zprofile
+Desktop/*
+Documents/
+Downloads/
+Google-Drive/
+Library/
+Movies/
+Music/
+Pictures/
+VirtualBox VMs/
+
+*.un~
+.zshrc.swp
+.NERDTreeBookmarks
+*.swp
