@@ -34,7 +34,6 @@ Temporary Items
 .vagrant/
 Vagrantfile
 dump.rdb
-mercatus-state-machine.sketch
 
 # stuff from https://gist.github.com/octocat/9257657
 # Compiled source #
@@ -136,3 +135,5 @@ VirtualBox VMs/
 .zshrc.swp
 .NERDTreeBookmarks
 *.swp
+sessions/*
+node_modules

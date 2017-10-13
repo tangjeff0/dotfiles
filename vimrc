@@ -3,6 +3,7 @@
 " set shellcmdflag " what does this do?
 
 map <F1> :set invnumber<CR>
+map <F2> :SyntasticToggleMode<CR>
 set pastetoggle=<F3>
 set autoindent
 " set smartindent
@@ -17,8 +18,9 @@ set backspace=indent,eol,start
 "# PLUGINS
 " MatchParen
 set showmatch
+set mps+=<:>
 " DoMatchParen " WHY DONT THIS WORK :( 
-hi MatchParen ctermbg=green
+hi MatchParen ctermbg=blue
 
 " PATHOGEN(   )
 " https://github.com/tpope/vim-pathogen
@@ -33,12 +35,12 @@ map <C-n> :NERDTreeToggle<CR>
 " https://github.com/altercation/vim-colors-solarized
 " https://github.com/altercation/solarized/tree/master/osx-terminal.app-colors-solarized
 " https://github.com/timmfin/terminalcolours
+" syntax on
 syntax enable
 set background=dark
 let g:solarized_termcolors=256
-let g:solarized_termtrans=1
 colorscheme solarized
-call togglebg#map("<F2>")
+let g:solarized_termtrans=1
 
 " CTRLP
 let g:ctrlp_map = '<c-p>'
@@ -53,7 +55,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-let g:syntastic_javascript_checkers = ['jshint'] " why no js checkers yet?
+let g:syntastic_javascript_checkers = ['eslint']
 
 " FUGITIVE
 " https://github.com/tpope/vim-fugitive
@@ -61,7 +63,7 @@ let g:syntastic_javascript_checkers = ['jshint'] " why no js checkers yet?
 
 " COMMENTARY
 " git://github.com/tpope/vim-commentary.git
-set commentstring=//\ %s
+"set commentstring=//\ %s
 
 
 " VIM INSTANT MARKDOWN
