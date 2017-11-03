@@ -1,41 +1,31 @@
-"# NATIVE VIM
+" commands im tryna use
+" :g/pattern/z#.5|echo "=========="
+" <c-6>
+" 2J join two lines... holy tits
+" { motion
 
-" set shellcmdflag " what does this do?
-
-map <F1> :set invnumber<CR>
-map <F2> :SyntasticToggleMode<CR>
-set pastetoggle=<F3>
+set shellpipe=>
+set invnumber
+set pastetoggle=<F1>
+map <F2> :set invnumber<CR>
+map <F3> :NERDTreeMirror<CR>
 set autoindent
-" set smartindent
 set undofile
-set tabstop=2 softtabstop=0 expandtab shiftwidth=2 smarttab
+set tabstop=2 softtabstop=0 expandtab shiftwidth=2 expandtab
 set backspace=indent,eol,start
-" set statusline=%f
-
-
-" Automatically open last session of Vim
-
-"# PLUGINS
-" MatchParen
 set showmatch
 set mps+=<:>
-" DoMatchParen " WHY DONT THIS WORK :( 
-hi MatchParen ctermbg=blue
 
-" PATHOGEN(   )
-" https://github.com/tpope/vim-pathogen
+" PATHOGEN
 execute pathogen#infect()
 
-" NERDTREE"
-" https://github.com/scrooloose/nerdtree
+" NERDTree
 let g:NERDTreeWinPos = "left"
+let g:NERDTreeMapOpenSplit = "s"
+let g:NERDTreeMapOpenVSplit = "v"
 map <C-n> :NERDTreeToggle<CR>
 
 " SOLARIZED
-" https://github.com/altercation/vim-colors-solarized
-" https://github.com/altercation/solarized/tree/master/osx-terminal.app-colors-solarized
-" https://github.com/timmfin/terminalcolours
-" syntax on
 syntax enable
 set background=dark
 let g:solarized_termcolors=256
@@ -44,18 +34,21 @@ let g:solarized_termtrans=1
 
 " CTRLP
 let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_custom_ignore = {
+\ 'dir': 'node_modules',
+\ }
 
-" SYNTASTIC
-" https://github.com/vim-syntastic/syntastic#introduction
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_javascript_checkers = ['eslint']
+" ALE
+let g:ale_fixers = {
+\ 'javascript': ['eslint'],
+\ }
+
+" LIGHTLINE
+set laststatus=2
+
+" SILVER SEARCHER | ACK | AG
+let g:ackprg = 'ag --nogroup --nocolor --column'
 
 " FUGITIVE
 " https://github.com/tpope/vim-fugitive
@@ -64,14 +57,3 @@ let g:syntastic_javascript_checkers = ['eslint']
 " COMMENTARY
 " git://github.com/tpope/vim-commentary.git
 "set commentstring=//\ %s
-
-
-" VIM INSTANT MARKDOWN
-" https://github.com/suan/vim-instant-markdown
-" filetype plugin on
-" set shell=bash\ -i
-" let g:instant_markdown_autostart = 0
-
-" LIGHTLINE
-" https://github.com/itchyny/lightline.vim
-set laststatus=2

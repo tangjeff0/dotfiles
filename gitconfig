@@ -1,0 +1,17 @@
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
+[user]
+	name = jeff
+	email = tangj1122@gmail.com
+[core]
+	editor = /usr/bin/vim
+	excludesfile = /Users/jefftang/.gitignore_global
+[push]
+	default = current
+[alias]
+  co = checkout
+  br = branch
+  p = push
+  f = fetch
