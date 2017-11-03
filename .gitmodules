@@ -19,3 +19,6 @@
 [submodule "zsh-git-prompt"]
 	path = zsh-git-prompt
 	url = git@github.com:olivierverdier/zsh-git-prompt.git
+[submodule "vim/bundle/vim-surround"]
+	path = vim/bundle/vim-surround
+	url = git@github.com:tpope/vim-surround.git
