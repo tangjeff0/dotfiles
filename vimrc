@@ -1,15 +1,23 @@
 " commands im tryna use
 " :g/pattern/z#.5|echo "=========="
-" <c-6>
-" 2J join two lines... holy tits
-" { motion
+" <c-6> or <c-^> to open last edited file
+" 2J join two lines... whats the opposite?
+" motions:
+  " g; g, to move between jumps
+  " gm to go to middle of whole line
+  " gj or gk to move one line down char-wise
+" marks:
+  " ma to leave a local mark. go to this mark with `m (exact) or 'm (line)
+  " mA to leave a global mark. go there wherever and whenever!
+  " ]' next line with lowercase mark
+  " `. to move to last edit
 
 set shellpipe=>
 set invnumber
 set pastetoggle=<F1>
 map <F2> :set invnumber<CR>
 map <F3> :NERDTreeMirror<CR>
-set autoindent
+map <F4> :IndentLinesToggle<CR>
 set undofile
 set tabstop=2 softtabstop=0 expandtab shiftwidth=2 expandtab
 set backspace=indent,eol,start
@@ -53,7 +61,3 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 " FUGITIVE
 " https://github.com/tpope/vim-fugitive
 " to be integrated into my workflow
-
-" COMMENTARY
-" git://github.com/tpope/vim-commentary.git
-"set commentstring=//\ %s
