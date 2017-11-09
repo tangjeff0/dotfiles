@@ -4,8 +4,6 @@
 " 2J join two lines... whats the opposite?
 " motions:
   " g; g, to move between jumps
-  " gm to go to middle of whole line
-  " gj or gk to move one line down char-wise
 " marks:
   " ma to leave a local mark. go to this mark with `m (exact) or 'm (line)
   " mA to leave a global mark. go there wherever and whenever!
@@ -42,7 +40,7 @@ let g:solarized_termtrans=1
 
 " CTRLP
 let g:ctrlp_map = '<c-p>'
-let g:ctrlp_map = '<c-p>'
+let g:ctrlp_open_new_file = 'h'
 let g:ctrlp_custom_ignore = {
 \ 'dir': 'node_modules',
 \ }
@@ -61,3 +59,64 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 " FUGITIVE
 " https://github.com/tpope/vim-fugitive
 " to be integrated into my workflow
+
+" Tmux-like window resizing - the greatest of all time: https://stackoverflow.com/questions/27265490/vim-window-resizing-repetitively#36653470
+function! IsEdgeWindowSelected(direction)
+    let l:curwindow = winnr()
+    exec "wincmd ".a:direction
+    let l:result = l:curwindow == winnr()
+
+    if (!l:result)
+        " Go back to the previous window
+        exec l:curwindow."wincmd w"
+    endif
+
+    return l:result
+endfunction
+
+function! GetAction(direction)
+    let l:keys = ['h', 'j', 'k', 'l']
+    let l:actions = ['vertical resize -', 'resize +', 'resize -', 'vertical resize +']
+    return get(l:actions, index(l:keys, a:direction))
+endfunction
+
+function! GetOpposite(direction)
+    let l:keys = ['h', 'j', 'k', 'l']
+    let l:opposites = ['l', 'k', 'j', 'h']
+    return get(l:opposites, index(l:keys, a:direction))
+endfunction
+
+function! TmuxResize(direction, amount)
+    " v >
+    if (a:direction == 'j' || a:direction == 'l')
+        if IsEdgeWindowSelected(a:direction)
+            let l:opposite = GetOpposite(a:direction)
+            let l:curwindow = winnr()
+            exec 'wincmd '.l:opposite
+            let l:action = GetAction(a:direction)
+            exec l:action.a:amount
+            exec l:curwindow.'wincmd w'
+            return
+        endif
+    " < ^
+    elseif (a:direction == 'h' || a:direction == 'k')
+        let l:opposite = GetOpposite(a:direction)
+        if IsEdgeWindowSelected(l:opposite)
+            let l:curwindow = winnr()
+            exec 'wincmd '.a:direction
+            let l:action = GetAction(a:direction)
+            exec l:action.a:amount
+            exec l:curwindow.'wincmd w'
+            return
+        endif
+    endif
+
+    let l:action = GetAction(a:direction)
+    exec l:action.a:amount
+endfunction
+
+" Map to buttons
+nnoremap <S-h> :call TmuxResize('h', 5)<CR>
+nnoremap <S-j> :call TmuxResize('j', 5)<CR>
+nnoremap <S-k> :call TmuxResize('k', 5)<CR>
+nnoremap <S-l> :call TmuxResize('l', 5)<CR>
