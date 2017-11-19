@@ -9,18 +9,32 @@
   " mA to leave a global mark. go there wherever and whenever!
   " ]' next line with lowercase mark
   " `. to move to last edit
+" more `key-codes`
 
 set shellpipe=>
-set invnumber
+set number
 set pastetoggle=<F1>
 map <F2> :set invnumber<CR>
-map <F3> :NERDTreeMirror<CR>
-map <F4> :IndentLinesToggle<CR>
+map <F3> :IndentLinesToggle<CR>
+map <F4> :NERDTreeMirror<CR>
+map ® :source ~/.vimrc<CR>
+
+map <Tab> >>
+nnoremap <S-Tab> <<
+" insert mode <C-d> only works if I source vim once it has already been opened 
+" upon source, my syntax also turns brighter. this suggests that some commands are not run :/
+imap <S-Tab> <C-d>
+
+imap cl console.log();<Esc>==f(a
+vmap cl yocll<Esc>p
+nmap cl yiwocll<Esc>p 
+
 set undofile
 set tabstop=2 softtabstop=0 expandtab shiftwidth=2 expandtab
 set backspace=indent,eol,start
 set showmatch
 set mps+=<:>
+set mps+=`:`
 
 " PATHOGEN
 execute pathogen#infect()
@@ -46,7 +60,7 @@ let g:ctrlp_custom_ignore = {
 \ }
 
 " ALE
-let g:ale_fixers = {
+let g:ale_linters = {
 \ 'javascript': ['eslint'],
 \ }
 
@@ -60,63 +74,18 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 " https://github.com/tpope/vim-fugitive
 " to be integrated into my workflow
 
+nnoremap ∆ :m .1<CR>==
+nnoremap ˚ :m .-2<CR>==
+inoremap ∆ <Esc>:m .+1<CR>==gi
+inoremap ˚ <Esc>:m .-2<CR>==gi
+vnoremap ∆ :m '>+1<CR>gv=gv
+vnoremap ˚ :m '<-2<CR>gv=gv
+
 " Tmux-like window resizing - the greatest of all time: https://stackoverflow.com/questions/27265490/vim-window-resizing-repetitively#36653470
-function! IsEdgeWindowSelected(direction)
-    let l:curwindow = winnr()
-    exec "wincmd ".a:direction
-    let l:result = l:curwindow == winnr()
-
-    if (!l:result)
-        " Go back to the previous window
-        exec l:curwindow."wincmd w"
-    endif
-
-    return l:result
-endfunction
-
-function! GetAction(direction)
-    let l:keys = ['h', 'j', 'k', 'l']
-    let l:actions = ['vertical resize -', 'resize +', 'resize -', 'vertical resize +']
-    return get(l:actions, index(l:keys, a:direction))
-endfunction
-
-function! GetOpposite(direction)
-    let l:keys = ['h', 'j', 'k', 'l']
-    let l:opposites = ['l', 'k', 'j', 'h']
-    return get(l:opposites, index(l:keys, a:direction))
-endfunction
-
-function! TmuxResize(direction, amount)
-    " v >
-    if (a:direction == 'j' || a:direction == 'l')
-        if IsEdgeWindowSelected(a:direction)
-            let l:opposite = GetOpposite(a:direction)
-            let l:curwindow = winnr()
-            exec 'wincmd '.l:opposite
-            let l:action = GetAction(a:direction)
-            exec l:action.a:amount
-            exec l:curwindow.'wincmd w'
-            return
-        endif
-    " < ^
-    elseif (a:direction == 'h' || a:direction == 'k')
-        let l:opposite = GetOpposite(a:direction)
-        if IsEdgeWindowSelected(l:opposite)
-            let l:curwindow = winnr()
-            exec 'wincmd '.a:direction
-            let l:action = GetAction(a:direction)
-            exec l:action.a:amount
-            exec l:curwindow.'wincmd w'
-            return
-        endif
-    endif
-
-    let l:action = GetAction(a:direction)
-    exec l:action.a:amount
-endfunction
-
 " Map to buttons
-nnoremap <S-h> :call TmuxResize('h', 5)<CR>
-nnoremap <S-j> :call TmuxResize('j', 5)<CR>
-nnoremap <S-k> :call TmuxResize('k', 5)<CR>
-nnoremap <S-l> :call TmuxResize('l', 5)<CR>
+source ~/.vim/bundle/tmux-resize/tmux-resize.vim
+nnoremap <Left> :call TmuxResize('h', 5)<CR>
+nnoremap <Up> :call TmuxResize('k', 5)<CR>
+nnoremap <Down> :call TmuxResize('j', 5)<CR>
+nnoremap <Right> :call TmuxResize('l', 5)<CR>
+
