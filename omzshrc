@@ -66,7 +66,6 @@ plugins=(
   git
   osx
   tmux
-  web-search
   wd
   yarn
 )
@@ -101,3 +100,10 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+export EDITOR='vim'
+export PATH=/Applications/Postgres.app/Contents/Versions/9.6/bin:$PATH
+alias soz='source ~/.zshrc'
+alias soe='source env.sh'
+alias vi='vim'
+alias gitAm="git add -A && git commit -m"

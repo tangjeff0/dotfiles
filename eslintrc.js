@@ -1,36 +1,39 @@
 module.exports = {
-  "env": {
-    "browser": true,
-    "es6": true,
-    "node": true
+  'env': {
+    'browser': true,
+    'es6': true,
+    'node': true,
   },
-  "extends": "eslint:recommended",
-  "parserOptions": {
-    "ecmaFeatures": {
-      "experimentalObjectRestSpread": true,
-      "jsx": true
+  'extends': 'eslint:recommended',
+  'parserOptions': {
+    'ecmaFeatures': {
+      'experimentalObjectRestSpread': true,
+      'jsx': true,
     },
-    "sourceType": "module"
+    'sourceType': 'module',
+    'ecmaVersion': 8,
   },
-  "plugins": [
-    "react"
+  'plugins': [
+    'react',
   ],
-  "rules": {
-    "indent": [
-      "error",
-      2
-    ],
-    "linebreak-style": [
-      "error",
-      "unix"
-    ],
-    "quotes": [
-      1,
-      "double",
-    ],
-    "semi": [
-      1,
-      "never"
-    ]
-  }
-}
+  'globals': {
+    'global': false,
+    'describe': false,
+    'expect': false,
+    'before': false,
+    '$': false,
+    'it': false,
+  },
+  'rules': {
+    'comma-dangle': [0, 'always-multiline'],
+    'indent': [0, {'SwitchCase': 1}],
+    'linebreak-style': ['error', 'unix'],
+    'quotes': [1, 'single'],
+    'react/jsx-filename-extension': [1, {'extensions': ['.js', '.jsx']}],
+    'semi': [1, 'always'],
+    'no-debugger': [0],
+    'no-underscore-dangle': [1, { 'allow' : ['_id'] }],
+    'no-unused-vars': [1, {'vars': 'all', 'args': 'after-used', 'ignoreRestSiblings': false}],
+    'no-console': ['error', {allow: ['log']}],
+  },
+};
