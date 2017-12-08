@@ -12,6 +12,7 @@
 	default = current
 [alias]
   co = checkout
-  br = branch
+  b = branch
   p = push
   f = fetch
+  phm = push heroku master
