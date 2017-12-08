@@ -103,6 +103,7 @@ source $ZSH/oh-my-zsh.sh
 
 export EDITOR='vim'
 export PATH=/Applications/Postgres.app/Contents/Versions/9.6/bin:$PATH
+export PATH=/Applications/Dev:$PATH
 alias soz='source ~/.zshrc'
 alias soe='source env.sh'
 alias vi='vim'
