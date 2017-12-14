@@ -1,14 +1,8 @@
-" comment
 " commands im tryna use
 " :g/pattern/z#.5|echo "=========="
 " motions:
   " g; g, to move between jumps
-" marks:
-  " ma to leave a local mark. go to this mark with `m (exact) or 'm (line)
-  " mA to leave a global mark. go there wherever and whenever!
-  " ]' next line with lowercase mark
   " `. to move to last edit
-" more `key-codes`
 
 set nocp
 set shellpipe=>
@@ -17,27 +11,30 @@ set pastetoggle=<F1>
 map <F2> :set invnumber<CR>
 map <F3> :IndentLinesToggle<CR>
 map <F4> :NERDTreeMirror<CR>
-map ® :source ~/.vim/vimrc<CR>
-
 map <Tab> >>
-nnoremap <S-Tab> <<
-" insert mode <C-d> only works if I source vim once it has already been opened 
-" upon source, my syntax also turns brighter. this suggests that some commands are not run :/
+map <S-Tab> <<
 imap <S-Tab> <C-d>
+" upon source, my syntax changes. the grey because lighter and the blue becomes less saturated. weird!
+map ® :source ~/.vim/vimrc<CR>
 
 imap cll console.log();<Esc>==f(a
 vmap cll yocll<Esc>p
 nmap cll yiwocll<Esc>p 
 
 set undofile
+set undodir=~/.vim/undodir
 set tabstop=2 softtabstop=0 expandtab shiftwidth=2 expandtab
 set backspace=indent,eol,start
+set autoindent
 set showmatch
 set mps+=<:>
 set mps+=`:`
 
 " PATHOGEN
 execute pathogen#infect()
+
+" VimCompletesMe enter
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " NERDTree
 let g:NERDTreeWinPos = "left"
@@ -47,10 +44,10 @@ map <C-n> :NERDTreeToggle<CR>
 
 " SOLARIZED
 syntax on
+colorscheme brogrammer
 set background=dark
-let g:solarized_termcolors=256
-colorscheme solarized
-let g:solarized_termtrans=1
+" let g:solarized_termcolors=256
+" let g:solarized_termtrans=1
 
 " CTRLP
 let g:ctrlp_map = '<c-p>'
@@ -63,16 +60,11 @@ let g:ctrlp_custom_ignore = {
 let g:ale_linters = {
 \ 'javascript': ['eslint'],
 \ }
-
-" LIGHTLINE
-set laststatus=2
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 " SILVER SEARCHER | ACK | AG
 let g:ackprg = 'ag --nogroup --nocolor --column'
-
-" FUGITIVE
-" https://github.com/tpope/vim-fugitive
-" to be integrated into my workflow
 
 nnoremap ∆ :m .1<CR>==
 nnoremap ˚ :m .-2<CR>==
