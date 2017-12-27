@@ -1,8 +1,10 @@
 " commands im tryna use
+" TODO: better alt-up and tab completion
 " :g/pattern/z#.5|echo "=========="
 " motions:
   " g; g, to move between jumps
   " `. to move to last edit
+  " gv takes u to last visually selected block
 
 set nocp
 set shellpipe=>
@@ -11,15 +13,17 @@ set pastetoggle=<F1>
 map <F2> :set invnumber<CR>
 map <F3> :IndentLinesToggle<CR>
 map <F4> :NERDTreeMirror<CR>
-map <Tab> >>
-map <S-Tab> <<
-imap <S-Tab> <C-d>
-" upon source, my syntax changes. the grey because lighter and the blue becomes less saturated. weird!
 map ® :source ~/.vim/vimrc<CR>
+map ç :set cursorcolumn! cursorline!<CR>
 
-imap cll console.log();<Esc>==f(a
+imap cll console.log();<Esc>$F(a
 vmap cll yocll<Esc>p
 nmap cll yiwocll<Esc>p 
+nmap <S-y> y$
+
+autocmd BufWinLeave *.* mkview
+autocmd BufWinEnter *.* silent loadview 
+set viewoptions-=options
 
 set undofile
 set undodir=~/.vim/undodir
@@ -34,7 +38,9 @@ set mps+=`:`
 execute pathogen#infect()
 
 " VimCompletesMe enter
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" vim-mucomplete
+set completeopt+=menuone
 
 " NERDTree
 let g:NERDTreeWinPos = "left"
@@ -46,8 +52,6 @@ map <C-n> :NERDTreeToggle<CR>
 syntax on
 colorscheme brogrammer
 set background=dark
-" let g:solarized_termcolors=256
-" let g:solarized_termtrans=1
 
 " CTRLP
 let g:ctrlp_map = '<c-p>'
