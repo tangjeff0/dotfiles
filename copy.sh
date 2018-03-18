@@ -5,3 +5,4 @@ cp ~/.gitconfig gitconfig
 cp ~/.gitignore_global gitignore_global
 cp ~/.vim/vimrc vimrc
 cp ~/.tmux.conf tmux.conf
+cp ~/.zshrc zshrc

@@ -102,9 +102,21 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 export EDITOR='vim'
-export PATH=/Applications/Postgres.app/Contents/Versions/9.6/bin:$PATH
-export PATH=/Applications/Dev:$PATH
+export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.6/bin
+export PATH=$PATH:/Applications/Dev
+export GOPATH=/Users/jefftang/go/bin
+export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin
+
 alias soz='source ~/.zshrc'
 alias soe='source env.sh'
 alias vi='vim'
 alias gitAm="git add -A && git commit -m"
+alias jcj='f() { javac $1 && java ${1%.*} }; f'
+alias py2='python'
+alias py3='python3'
+
+# lightning network tutorial
+alias lncli1="lncli --rpcserver=localhost:10009 --no-macaroons" # peerport=9735, restport=8080
+alias lncli2="lncli --rpcserver=localhost:10010 --no-macaroons" # peerport=9736, restport=8081
+export LNDPATH=/Users/jefftang/Library/Application\ Support/Lnd
