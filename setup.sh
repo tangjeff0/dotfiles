@@ -1,3 +1,5 @@
+# TODO
+  # take care of vim and tmux folders properly
 # git clone --recurse-submodules git@github.com:tangsauce/dotfiles.git
 
 sudo nvram SystemAudioVolume=" "
@@ -19,11 +21,16 @@ brew install yarn
 
 brew cleanup
 
-# make sure to install submodules
-
 brew cask install google-chrome
 brew cask install opera
 brew cask install postico
 brew cask install spectacle
 brew cask install postman
 brew cask install evernote
+
+cp gitconfig ~/.gitconfig
+cp gitignore_global ~/.gitignore_global
+mkdir ~/.vim/
+# cp vimrc ~/.vim/vimrc
+cp tmux.conf ~/.tmux.conf
+cp zshrc ~/.zshrc
