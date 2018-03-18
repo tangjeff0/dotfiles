@@ -1,6 +1,7 @@
 #! /bin/bash
 # script to copy in dotfiles from jeff's macbook to `dotfiles` repo
 
+cp ~/.eslintrc.js eslintrc.js
 cp ~/.gitconfig gitconfig
 cp ~/.gitignore_global gitignore_global
 cp ~/.vim/vimrc vimrc
@@ -19,3 +20,4 @@ cp ~/.zshrc zshrc
   # Delete the now untracked submodule files
   # rm -rf path_to_submodule
   # https://stackoverflow.com/questions/1260748/how-do-i-remove-a-submodule#1260982
+  # wtf...

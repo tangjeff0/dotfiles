@@ -4,6 +4,9 @@
 
 sudo nvram SystemAudioVolume=" "
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+xcode-select --install
+
+sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew update
@@ -14,7 +17,6 @@ brew install vim --with-override-system-vi
 brew install tmux
 brew install grep
 brew install ag
-brew install git
 brew install tree
 brew install node
 brew install yarn
@@ -28,9 +30,10 @@ brew cask install spectacle
 brew cask install postman
 brew cask install evernote
 
+cp eslintrc.js ~/.eslintrc.js
 cp gitconfig ~/.gitconfig
 cp gitignore_global ~/.gitignore_global
-mkdir ~/.vim/
-# cp vimrc ~/.vim/vimrc
 cp tmux.conf ~/.tmux.conf
+cp tmux/ ~/.tmux
+cp .vim/ ~/.vim/
 cp zshrc ~/.zshrc
