@@ -1,5 +1,3 @@
-# TODO
-  # take care of vim and tmux folders properly
 # git clone --recurse-submodules git@github.com:tangsauce/dotfiles.git
 
 sudo nvram SystemAudioVolume=" "
