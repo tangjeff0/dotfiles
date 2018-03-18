@@ -1,20 +1,27 @@
-" commands im tryna use
-" TODO: better alt-up and tab completion
-" :g/pattern/z#.5|echo "=========="
-" motions:
-  " g; g, to move between jumps
-  " `. to move to last edit
-  " gv takes u to last visually selected block
+" filetype plugin on
+" set omnifunc=syntaxcomplete#Complete
+
+" XXX: better alt-up and tab completion
+" XXX learning
+" g; g, to move between jumps
+" :w !pbcopy
+  " copy selected part when in V-Mode
+" :%w !pbcopy
+  " copy the whole file
+" :r !pbpaste
+  " paste from the clipboard
 
 set nocp
 set shellpipe=>
 set number
 set pastetoggle=<F1>
-map <F2> :set invnumber<CR>
-map <F3> :IndentLinesToggle<CR>
-map <F4> :NERDTreeMirror<CR>
-map ® :source ~/.vim/vimrc<CR>
-map ç :set cursorcolumn! cursorline!<CR>
+noremap <F2> :set invnumber<CR>
+noremap <F3> :IndentGuidesToggle<CR>
+noremap <F4> :NERDTreeMirror<CR>
+noremap <F5> :CtrlPClearCache<CR>
+noremap <F6> :UndotreeToggle<CR>
+noremap ® :source ~/.vim/vimrc<CR>
+noremap ç :set cursorcolumn! cursorline!<CR>
 
 imap cll console.log();<Esc>$F(a
 vmap cll yocll<Esc>p
@@ -23,11 +30,13 @@ nmap <S-y> y$
 
 autocmd BufWinLeave *.* mkview
 autocmd BufWinEnter *.* silent loadview 
+autocmd BufRead,BufNewFIle *.md setlocal spell
 set viewoptions-=options
 
 set undofile
 set undodir=~/.vim/undodir
-set tabstop=2 softtabstop=0 expandtab shiftwidth=2 expandtab
+set shiftwidth=2 tabstop=2 softtabstop=0 expandtab
+autocmd BufRead,BufNewFile   *.rs set tabstop=4 softtabstop=4 expandtab shiftwidth=4 smarttab
 set backspace=indent,eol,start
 set autoindent
 set showmatch
@@ -37,10 +46,18 @@ set mps+=`:`
 " PATHOGEN
 execute pathogen#infect()
 
+
+
 " VimCompletesMe enter
 " inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 " vim-mucomplete
 set completeopt+=menuone
+
+" Vim Indent Guides
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_auto_colors = 0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=black ctermbg=7
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=green ctermbg=8
 
 " NERDTree
 let g:NERDTreeWinPos = "left"
@@ -48,17 +65,26 @@ let g:NERDTreeMapOpenSplit = "s"
 let g:NERDTreeMapOpenVSplit = "v"
 map <C-n> :NERDTreeToggle<CR>
 
-" SOLARIZED
+" syntax highlighting
 syntax on
-colorscheme brogrammer
+" colorscheme brogrammer
+colorscheme seoul256
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
 set background=dark
+
+" lightline
+set laststatus=2
+set noshowmode
 
 " CTRLP
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_open_new_file = 'h'
+let g:ctrlp_show_hidden = 1
 let g:ctrlp_custom_ignore = {
-\ 'dir': 'node_modules',
+\ 'dir': '\v[\/](node_modules|android|ios)',
 \ }
+
 
 " ALE
 let g:ale_linters = {
@@ -69,13 +95,6 @@ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 " SILVER SEARCHER | ACK | AG
 let g:ackprg = 'ag --nogroup --nocolor --column'
-
-nnoremap ∆ :m .1<CR>==
-nnoremap ˚ :m .-2<CR>==
-inoremap ∆ <Esc>:m .+1<CR>==gi
-inoremap ˚ <Esc>:m .-2<CR>==gi
-vnoremap ∆ :m '>+1<CR>gv=gv
-vnoremap ˚ :m '<-2<CR>gv=gv
 
 " Tmux-like window resizing - the greatest of all time: https://stackoverflow.com/questions/27265490/vim-window-resizing-repetitively#36653470
 " Map to buttons

@@ -11,7 +11,9 @@
 [push]
 	default = current
 [alias]
+  u = !git branch --set-upstream-to=origin/`git symbolic-ref --short HEAD`
   co = checkout
+  s = status
   b = branch
   p = push
   f = fetch
