@@ -1,8 +1,9 @@
+# xcode-select --install
 # git clone --recurse-submodules git@github.com:tangsauce/dotfiles.git
+# install pathogen
 
 sudo nvram SystemAudioVolume=" "
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
-xcode-select --install
 
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
@@ -32,6 +33,6 @@ cp eslintrc.js ~/.eslintrc.js
 cp gitconfig ~/.gitconfig
 cp gitignore_global ~/.gitignore_global
 cp tmux.conf ~/.tmux.conf
-cp tmux/ ~/.tmux
-cp .vim/ ~/.vim/
+cp -R tmux/ ~/.tmux
+cp -R .vim/ ~/.vim/
 cp zshrc ~/.zshrc
