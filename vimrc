@@ -1,42 +1,39 @@
-" filetype plugin on
-" set omnifunc=syntaxcomplete#Complete
-
-" XXX: better alt-up and tab completion
-" XXX learning
-" g; g, to move between jumps
-" :w !pbcopy
-  " copy selected part when in V-Mode
-" :%w !pbcopy
-  " copy the whole file
-" :r !pbpaste
-  " paste from the clipboard
+" commands im tryna use
+" TODO: better alt-up and tab completion
+" :g/pattern/z#.5|echo "=========="
+" motions:
+  " g; g, to move between jumps
+  " :w !pbcopy - copy selected part: visually select text(type v or V in normal mode) and type
+  " :%w !pbcopy - copy the whole file 
+  " :r !pbpaste - paste from the clipboard 
 
 set nocp
 set shellpipe=>
 set number
 set pastetoggle=<F1>
-noremap <F2> :set invnumber<CR>
-noremap <F3> :IndentGuidesToggle<CR>
-noremap <F4> :NERDTreeMirror<CR>
-noremap <F5> :CtrlPClearCache<CR>
-noremap <F6> :UndotreeToggle<CR>
-noremap ® :source ~/.vim/vimrc<CR>
-noremap ç :set cursorcolumn! cursorline!<CR>
+map <F2> :set invnumber<CR>
+map <F3> :IndentLinesToggle<CR>
+map <F4> :NERDTreeMirror<CR>
+map <F5> :CtrlPClearCache<CR>
+map <F6> :UndotreeToggle<CR>
+map ® :source ~/.vim/vimrc<CR>
+map ç :w !pbcopy<CR>
+map ‘ :tabn<CR>
+map “ :tabp<CR>
 
-imap cll console.log();<Esc>$F(a
+imap cll console.log()<Esc>$F(a
 vmap cll yocll<Esc>p
 nmap cll yiwocll<Esc>p 
 nmap <S-y> y$
 
 autocmd BufWinLeave *.* mkview
 autocmd BufWinEnter *.* silent loadview 
-autocmd BufRead,BufNewFIle *.md setlocal spell
 set viewoptions-=options
 
 set undofile
 set undodir=~/.vim/undodir
 set shiftwidth=2 tabstop=2 softtabstop=0 expandtab
-autocmd BufRead,BufNewFile   *.rs set tabstop=4 softtabstop=4 expandtab shiftwidth=4 smarttab
+set shiftwidth=4 tabstop=4 softtabstop=0 expandtab
 set backspace=indent,eol,start
 set autoindent
 set showmatch
@@ -46,18 +43,34 @@ set mps+=`:`
 " PATHOGEN
 execute pathogen#infect()
 
+set laststatus=2
+set noshowmode
+let g:lightline = {
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'gitbranch#name'
+      \ },
+      \ }
 
+" Replace filename component of Lightline statusline
+let g:lightline = {
+      \ 'component_function': {
+      \   'filename': 'FilenameForLightline'
+      \ }
+      \ }
+ 
+" Show full path of filename
+function! FilenameForLightline()
+    return expand('%')
+endfunction
 
 " VimCompletesMe enter
 " inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 " vim-mucomplete
 set completeopt+=menuone
-
-" Vim Indent Guides
-let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_auto_colors = 0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=black ctermbg=7
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=green ctermbg=8
 
 " NERDTree
 let g:NERDTreeWinPos = "left"
@@ -65,26 +78,18 @@ let g:NERDTreeMapOpenSplit = "s"
 let g:NERDTreeMapOpenVSplit = "v"
 map <C-n> :NERDTreeToggle<CR>
 
-" syntax highlighting
+" SOLARIZED
 syntax on
-" colorscheme brogrammer
 colorscheme seoul256
-autocmd! User GoyoEnter Limelight
-autocmd! User GoyoLeave Limelight!
 set background=dark
 
-" lightline
-set laststatus=2
-set noshowmode
 
 " CTRLP
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_open_new_file = 'h'
-let g:ctrlp_show_hidden = 1
 let g:ctrlp_custom_ignore = {
-\ 'dir': '\v[\/](node_modules|android|ios)',
+\ 'dir': 'node_modules',
 \ }
-
 
 " ALE
 let g:ale_linters = {

@@ -4,7 +4,6 @@ module.exports = {
     'es6': true,
     'node': true,
   },
-  'extends': 'eslint:recommended',
   'parserOptions': {
     'ecmaFeatures': {
       'experimentalObjectRestSpread': true,
@@ -31,10 +30,10 @@ module.exports = {
     'linebreak-style': ['error', 'unix'],
     'quotes': [0],
     'react/jsx-filename-extension': [1, {'extensions': ['.js', '.jsx']}],
-    'semi': [1, 'always'],
+    'semi': [1, 'never'],
     'no-debugger': [0],
     'no-underscore-dangle': [1, { 'allow' : ['_id'] }],
     'no-unused-vars': [1, {'vars': 'all', 'args': 'after-used', 'ignoreRestSiblings': false}],
-    'no-console': ['error', {allow: ['log']}],
+    'no-console': 0,
   },
 };

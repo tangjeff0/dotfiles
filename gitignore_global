@@ -80,3 +80,4 @@ Thumbs.db
 *.swp
 sessions/*
 node_modules
+env.sh

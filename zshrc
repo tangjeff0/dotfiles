@@ -5,7 +5,7 @@ export EDITOR='vim'
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/jefftang/.oh-my-zsh
+export ZSH=~/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -104,19 +104,19 @@ source $ZSH/oh-my-zsh.sh
 export EDITOR='vim'
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.6/bin
 export PATH=$PATH:/Applications/Dev
-export GOPATH=/Users/jefftang/go/bin
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin
 
 alias soz='source ~/.zshrc'
-alias soe='source env.sh'
+alias soe='source .env'
 alias vi='vim'
 alias gitAm="git add -A && git commit -m"
 alias jcj='f() { javac $1 && java ${1%.*} }; f'
 alias py2='python'
 alias py3='python3'
 
-# lightning network tutorial
-alias lncli1="lncli --rpcserver=localhost:10009 --no-macaroons" # peerport=9735, restport=8080
-alias lncli2="lncli --rpcserver=localhost:10010 --no-macaroons" # peerport=9736, restport=8081
-export LNDPATH=/Users/jefftang/Library/Application\ Support/Lnd
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/admin/Downloads/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/admin/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/admin/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/admin/Downloads/google-cloud-sdk/completion.zsh.inc'; fi

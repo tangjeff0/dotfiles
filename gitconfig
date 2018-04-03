@@ -7,7 +7,7 @@
 	email = tangj1122@gmail.com
 [core]
 	editor = /usr/bin/vim
-	excludesfile = /Users/jefftang/.gitignore_global
+	excludesfile = ~/.gitignore_global
 [push]
 	default = current
 [alias]
