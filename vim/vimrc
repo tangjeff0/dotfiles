@@ -14,7 +14,8 @@ map <F2> :set invnumber<CR>
 map <F3> :IndentLinesToggle<CR>
 map <F4> :NERDTreeMirror<CR>
 map ® :source ~/.vim/vimrc<CR>
-map ç :set cursorcolumn! cursorline!<CR>
+map ç !tee >(pbcopy) <CR>
+
 
 imap cll console.log();<Esc>$F(a
 vmap cll yocll<Esc>p
