@@ -34,5 +34,5 @@ cp gitconfig ~/.gitconfig
 cp gitignore_global ~/.gitignore_global
 cp tmux.conf ~/.tmux.conf
 cp -R tmux/ ~/.tmux
-cp -R .vim/ ~/.vim/
+cp -R vim/ ~/.vim/
 cp zshrc ~/.zshrc

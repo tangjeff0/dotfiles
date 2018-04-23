@@ -55,3 +55,6 @@
 [submodule "vim/bundle/vim-vue"]
 	path = vim/bundle/vim-vue
 	url = git@github.com:posva/vim-vue.git
+[submodule "vim/bundle/matchit"]
+	path = vim/bundle/matchit
+	url = https://github.com/tmhedberg/matchit.git
