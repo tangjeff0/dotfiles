@@ -50,7 +50,7 @@ map <C-n> :NERDTreeToggle<CR>
 
 " SOLARIZED
 syntax on
-colorscheme brogrammer
+colo seoul256
 set background=dark
 
 " CTRLP
