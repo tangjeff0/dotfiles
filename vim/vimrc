@@ -1,11 +1,9 @@
-" commands im tryna use
-" TODO: better alt-up and tab completion
-" :g/pattern/z#.5|echo "=========="
-" motions:
+" notes
   " g; g, to move between jumps
   " "*y to copy to Mac clipboard
 
-" vanilla vim commands
+
+"""""""""" VANILLA VIM SETTINGS
 filetype plugin on 
 set nocp
 set shellpipe=>
@@ -13,10 +11,9 @@ set number
 set dir=~/.vim/swap
 set undofile
 set undodir=~/.vim/undodir
-set tabstop=2 softtabstop=0 expandtab shiftwidth=2 expandtab
-set shiftwidth=4 tabstop=4 softtabstop=0 expandtab
+set tabstop=2 softtabstop=0 expandtab shiftwidth=2
+set tabstop=4 softtabstop=0 expandtab shiftwidth=4
 set autoindent
-set backspace=indent,eol,start
 set showmatch
 set mps+=<:>
 
@@ -25,36 +22,41 @@ autocmd BufWinLeave *.* mkview
 autocmd BufWinEnter *.* silent loadview 
 set viewoptions-=options
 
-" KEYMAPPINGS
+" theme
+syntax on
+colo seoul256
+set background=dark
+
+"""""""""""" KEYMAPPINGS
 " remap Y so similar to D or C
 nnoremap <S-y> y$
 
-" javascript king
-imap cll console.log();<Esc>$F(a
-vmap cll yocll<Esc>p
-nmap cll yiwocll<Esc>p 
+" MacOS `option` keymappings
+" ∫ ~ b - opens buffer list
+" ® ~ r - source vimrc
+" “ and ‘ ~ [ and ] - cycle thru tabpages - gT and gt
+nnoremap ∫ :ls<CR>:b<Space>
+nnoremap ® :source ~/.vim/vimrc<CR>
+nnoremap ‘ :tabn<CR>
+nnoremap “ :tabp<CR>
 
-" fn keymappings
+" fn
 set pastetoggle=<F1>
 nnoremap <F2> :NERDTreeMirror<CR>
 nnoremap <F3> :CtrlPClearCache<CR>
 nnoremap <F4> :UndotreeToggle<CR>
 
-" MacOS `option` keymappings
-" b - opens buffer list - equivalent to :b
-nnoremap ∫ :ls<CR>:b<Space>
-" r - source vimrc
-nnoremap ® :source ~/.vim/vimrc<CR>
-" [ - previous tabpage - equivalent to gT
-nnoremap ‘ :tabn<CR>
-" ] - next tabpage - equivalent to gt
-nnoremap “ :tabp<CR>
+" one language to rule them all
+imap cll console.log();<Esc>$F(a
+vmap cll yocll<Esc>p
+nmap cll yiwocll<Esc>p 
 
-" PLUGINS
-" PATHOGEN
+
+""""""""""" PLUGINS
+" Pathogen
 execute pathogen#infect()
 
-" LIGHTLINE
+" Lightline
 " show current Git branch
 " show entire path for file
 let g:lightline = {
@@ -74,10 +76,7 @@ endfunction
 set laststatus=2
 set noshowmode
 
-" not happy with this completion yet
-" VimCompletesMe enter
-" inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-" vim-mucomplete
+" VimCompletesMe
 set completeopt+=menuone
 
 " NERDTree
@@ -86,12 +85,7 @@ let g:NERDTreeMapOpenSplit = "s"
 let g:NERDTreeMapOpenVSplit = "v"
 map <C-n> :NERDTreeToggle<CR>
 
-" Theme
-syntax on
-colo seoul256
-set background=dark
-
-" CTRLP
+" CtrlP
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_open_new_file = 'h'
 let g:ctrlp_custom_ignore = {
@@ -106,11 +100,11 @@ let g:ale_linters = {
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
-" SILVER SEARCHER | ACK | AG
+" Silver Searcher
+" must have ack and ag installed on system i think
 let g:ackprg = 'ag --nogroup --nocolor --column'
 
-" Tmux-like window resizing - the greatest of all time: https://stackoverflow.com/questions/27265490/vim-window-resizing-repetitively#36653470
-" Map to buttons
+" Tmux-like window resizing https://stackoverflow.com/questions/27265490/vim-window-resizing-repetitively#36653470
 source ~/.vim/tmux-resize.vim
 nnoremap <Left> :call TmuxResize('h', 5)<CR>
 nnoremap <Up> :call TmuxResize('k', 5)<CR>
