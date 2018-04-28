@@ -22,11 +22,6 @@ autocmd BufWinLeave *.* mkview
 autocmd BufWinEnter *.* silent loadview 
 set viewoptions-=options
 
-" theme
-syntax on
-colo seoul256
-set background=dark
-
 """""""""""" KEYMAPPINGS
 " remap Y so similar to D or C
 nnoremap <S-y> y$
@@ -55,6 +50,11 @@ nmap cll yiwocll<Esc>p
 """"""""""" PLUGINS
 " Pathogen
 execute pathogen#infect()
+
+" theme
+syntax on
+colo seoul256
+set background=dark
 
 " Lightline
 " show current Git branch
@@ -104,8 +104,7 @@ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 " must have ack and ag installed on system i think
 let g:ackprg = 'ag --nogroup --nocolor --column'
 
-" Tmux-like window resizing https://stackoverflow.com/questions/27265490/vim-window-resizing-repetitively#36653470
-source ~/.vim/tmux-resize.vim
+" Tmux-Resize
 nnoremap <Left> :call TmuxResize('h', 5)<CR>
 nnoremap <Up> :call TmuxResize('k', 5)<CR>
 nnoremap <Down> :call TmuxResize('j', 5)<CR>
