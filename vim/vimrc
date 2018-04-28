@@ -3,40 +3,78 @@
 " :g/pattern/z#.5|echo "=========="
 " motions:
   " g; g, to move between jumps
-  " `. to move to last edit
-  " gv takes u to last visually selected block
+  " "*y to copy to Mac clipboard
 
+" vanilla vim commands
+filetype plugin on 
 set nocp
 set shellpipe=>
 set number
-set pastetoggle=<F1>
-map <F2> :set invnumber<CR>
-map <F3> :IndentLinesToggle<CR>
-map <F4> :NERDTreeMirror<CR>
-map ® :source ~/.vim/vimrc<CR>
-map ç :set cursorcolumn! cursorline!<CR>
+set dir=~/.vim/swap
+set undofile
+set undodir=~/.vim/undodir
+set tabstop=2 softtabstop=0 expandtab shiftwidth=2 expandtab
+set shiftwidth=4 tabstop=4 softtabstop=0 expandtab
+set autoindent
+set backspace=indent,eol,start
+set showmatch
+set mps+=<:>
 
-imap cll console.log();<Esc>$F(a
-vmap cll yocll<Esc>p
-nmap cll yiwocll<Esc>p 
-nmap <S-y> y$
-
+" remember folds
 autocmd BufWinLeave *.* mkview
 autocmd BufWinEnter *.* silent loadview 
 set viewoptions-=options
 
-set undofile
-set undodir=~/.vim/undodir
-set tabstop=2 softtabstop=0 expandtab shiftwidth=2 expandtab
-set backspace=indent,eol,start
-set autoindent
-set showmatch
-set mps+=<:>
-set mps+=`:`
+" KEYMAPPINGS
+" remap Y so similar to D or C
+nnoremap <S-y> y$
 
+" javascript king
+imap cll console.log();<Esc>$F(a
+vmap cll yocll<Esc>p
+nmap cll yiwocll<Esc>p 
+
+" fn keymappings
+set pastetoggle=<F1>
+nnoremap <F2> :NERDTreeMirror<CR>
+nnoremap <F3> :CtrlPClearCache<CR>
+nnoremap <F4> :UndotreeToggle<CR>
+
+" MacOS `option` keymappings
+" b - opens buffer list - equivalent to :b
+nnoremap ∫ :ls<CR>:b<Space>
+" r - source vimrc
+nnoremap ® :source ~/.vim/vimrc<CR>
+" [ - previous tabpage - equivalent to gT
+nnoremap ‘ :tabn<CR>
+" ] - next tabpage - equivalent to gt
+nnoremap “ :tabp<CR>
+
+" PLUGINS
 " PATHOGEN
 execute pathogen#infect()
 
+" LIGHTLINE
+" show current Git branch
+" show entire path for file
+let g:lightline = {
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'gitbranch#name',
+      \   'filename': 'FilenameForLightline'
+      \ },
+      \ }
+function! FilenameForLightline()
+    return expand('%')
+endfunction
+" other status bar stuff
+set laststatus=2
+set noshowmode
+
+" not happy with this completion yet
 " VimCompletesMe enter
 " inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 " vim-mucomplete
@@ -48,9 +86,9 @@ let g:NERDTreeMapOpenSplit = "s"
 let g:NERDTreeMapOpenVSplit = "v"
 map <C-n> :NERDTreeToggle<CR>
 
-" SOLARIZED
+" Theme
 syntax on
-colorscheme brogrammer
+colo seoul256
 set background=dark
 
 " CTRLP
@@ -64,18 +102,12 @@ let g:ctrlp_custom_ignore = {
 let g:ale_linters = {
 \ 'javascript': ['eslint'],
 \ }
+" jump to next lint error/warning
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 " SILVER SEARCHER | ACK | AG
 let g:ackprg = 'ag --nogroup --nocolor --column'
-
-nnoremap ∆ :m .1<CR>==
-nnoremap ˚ :m .-2<CR>==
-inoremap ∆ <Esc>:m .+1<CR>==gi
-inoremap ˚ <Esc>:m .-2<CR>==gi
-vnoremap ∆ :m '>+1<CR>gv=gv
-vnoremap ˚ :m '<-2<CR>gv=gv
 
 " Tmux-like window resizing - the greatest of all time: https://stackoverflow.com/questions/27265490/vim-window-resizing-repetitively#36653470
 " Map to buttons
