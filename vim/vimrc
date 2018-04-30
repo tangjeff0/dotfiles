@@ -31,6 +31,7 @@ nnoremap <S-y> y$
 " ® ~ r - source vimrc
 " “ and ‘ ~ [ and ] - cycle thru tabpages - gT and gt
 nnoremap ∫ :ls<CR>:b<Space>
+map ç :w !pbcopy<CR><CR>
 nnoremap ® :source ~/.vim/vimrc<CR>
 nnoremap ‘ :tabn<CR>
 nnoremap “ :tabp<CR>
