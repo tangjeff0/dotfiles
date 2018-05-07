@@ -106,17 +106,18 @@ export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.6/bin
 export PATH=$PATH:/Applications/Dev
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin
+export PY=/usr/local/lib/python2.7/site-packages
 
 alias soz='source ~/.zshrc'
 alias soe='source .env'
 alias vi='vim'
 alias gitAm="git add -A && git commit -m"
 alias jcj='f() { javac $1 && java ${1%.*} }; f'
-alias py2='python'
+alias py='python'
 alias py3='python3'
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/admin/Downloads/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/admin/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f '/Users/admin/Util/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/admin/Util/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/admin/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/admin/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f '/Users/admin/Util/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/admin/Util/google-cloud-sdk/completion.zsh.inc'; fi

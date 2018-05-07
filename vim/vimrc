@@ -1,6 +1,9 @@
 " notes
-  " g; g, to move between jumps
   " "*y to copy to Mac clipboard
+  " gD
+  " gE
+  " gJ
+  " gu / gU
 
 
 """""""""" VANILLA VIM SETTINGS

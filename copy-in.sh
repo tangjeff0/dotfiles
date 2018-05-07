@@ -4,7 +4,7 @@
 cp ~/.eslintrc.js eslintrc.js
 cp ~/.gitconfig gitconfig
 cp ~/.gitignore_global gitignore_global
-cp ~/.vim/vimrc vimrc
+cp ~/.vim/vimrc vim/vimrc # only copies config file, not entire directory, because directory has submodules
 cp ~/.tmux.conf tmux.conf
 cp ~/.zshrc zshrc
 

@@ -1,7 +1,8 @@
 [filter "lfs"]
-	clean = git-lfs clean %f
-	smudge = git-lfs smudge %f
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
 	required = true
+	process = git-lfs filter-process
 [user]
 	name = jeff
 	email = tangj1122@gmail.com
@@ -16,5 +17,7 @@
   s = status
   b = branch
   p = push
+  d = diff
   f = fetch
+  l = log
   phm = push heroku master
