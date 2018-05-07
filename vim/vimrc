@@ -14,6 +14,7 @@ set undodir=~/.vim/undodir
 set tabstop=2 softtabstop=0 expandtab shiftwidth=2
 set tabstop=4 softtabstop=0 expandtab shiftwidth=4
 set autoindent
+set backspace=indent,eol,start
 set showmatch
 set mps+=<:>
 
@@ -43,7 +44,7 @@ nnoremap <F3> :CtrlPClearCache<CR>
 nnoremap <F4> :UndotreeToggle<CR>
 
 " one language to rule them all
-imap cll console.log();<Esc>$F(a
+imap cll console.log()<Esc>$F(a
 vmap cll yocll<Esc>p
 nmap cll yiwocll<Esc>p 
 
