@@ -107,6 +107,7 @@ export PATH=$PATH:/Applications/Dev
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin
 export PY=/usr/local/lib/python2.7/site-packages
+export IGNITER_ROOT=~/Desktop/code/core
 
 alias soz='source ~/.zshrc'
 alias soe='source .env'

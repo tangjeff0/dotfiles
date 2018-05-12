@@ -61,3 +61,6 @@
 [submodule "vim/bundle/tmux-resize.vim"]
 	path = vim/bundle/tmux-resize.vim
 	url = git@github.com:tangsauce/tmux-resize.vim.git
+[submodule "vim/bundle/tagbar"]
+	path = vim/bundle/tagbar
+	url = git@github.com:majutsushi/tagbar.git

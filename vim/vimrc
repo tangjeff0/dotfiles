@@ -10,7 +10,6 @@
 filetype plugin on 
 set nocp
 set shellpipe=>
-set number
 set dir=~/.vim/swap
 set undofile
 set undodir=~/.vim/undodir
@@ -20,6 +19,13 @@ set autoindent
 set backspace=indent,eol,start
 set showmatch
 set mps+=<:>
+set number relativenumber
+" only show relative when in normal mode and focused
+augroup numbertoggle
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+augroup END
 
 " remember folds
 autocmd BufWinLeave *.* mkview
@@ -45,6 +51,7 @@ set pastetoggle=<F1>
 nnoremap <F2> :NERDTreeMirror<CR>
 nnoremap <F3> :CtrlPClearCache<CR>
 nnoremap <F4> :UndotreeToggle<CR>
+nnoremap <silent>† :TagbarToggle<CR>
 
 " one language to rule them all
 imap cll console.log()<Esc>$F(a
@@ -84,6 +91,9 @@ set noshowmode
 " VimCompletesMe
 set completeopt+=menuone
 
+" Vinegar/Netrw
+let g:netrw_liststyle=3
+
 " NERDTree
 let g:NERDTreeWinPos = "left"
 let g:NERDTreeMapOpenSplit = "s"
@@ -93,6 +103,7 @@ map <C-n> :NERDTreeToggle<CR>
 " CtrlP
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_open_new_file = 'h'
+nnoremap π :CtrlPTag<CR>
 let g:ctrlp_custom_ignore = {
 \ 'dir': 'node_modules',
 \ }
