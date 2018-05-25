@@ -141,9 +141,6 @@ export DOCKER_ID_USER='tangsauce'
 export IGNITER_ROOT='~/Desktop/code/liftigniter/core'
 source ~/Desktop/code/liftigniter/env.sh
 
-export AWS_ACCESS_KEY="AKIAIO5K56CGLH7M4PBA"
-export AWS_SECERT_KEY="Yc0j6Zew0g2+uWjDJuJO7cVxj2gkc2wHPZhFrLaa"
-
 alias soz='source ~/.zshrc'
 alias soe='source .env'
 alias vi='vim'
