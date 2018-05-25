@@ -7,15 +7,18 @@
 
 
 """""""""" VANILLA VIM SETTINGS
-filetype plugin on 
+filetype plugin indent on
+set autoindent
+set smartindent
 set nocp
 set shellpipe=>
 set dir=~/.vim/swap
 set undofile
 set undodir=~/.vim/undodir
-set tabstop=2 softtabstop=0 expandtab shiftwidth=2
-set tabstop=4 softtabstop=0 expandtab shiftwidth=4
-set autoindent
+set tabstop=4 shiftwidth=4 softtabstop=0 expandtab
+set tabstop=2 shiftwidth=2 softtabstop=0 expandtab
+map ™ :set tabstop=2 shiftwidth=2 softtabstop=0 expandtab<CR>
+map ¢ :set tabstop=4 shiftwidth=4 softtabstop=0 expandtab<CR>
 set backspace=indent,eol,start
 set showmatch
 set mps+=<:>
@@ -125,3 +128,10 @@ nnoremap <Left> :call TmuxResize('h', 5)<CR>
 nnoremap <Up> :call TmuxResize('k', 5)<CR>
 nnoremap <Down> :call TmuxResize('j', 5)<CR>
 nnoremap <Right> :call TmuxResize('l', 5)<CR>
+
+let delimitMate_matchpairs = "(:),[:],{:},<:>"
+
+" set clipboard=unnamed,unnamedplus
+" let g:EasyClipUseSubstituteDefaults = 1
+" nnoremap gm m
+" nmap M <Plug>MoveMotionEndOfLinePlug

@@ -101,13 +101,48 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+setopt AUTO_CD
+
+# bindkey -L
+# vim keybindings for zsh
+# bindkey -v
+# export KEYTIMEOUT=1
+# function zle-line-init zle-keymap-select {
+#     VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]% %{$reset_color%}"
+#     RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/} $EPS1"
+#     zle reset-prompt
+# }
+# zle -N zle-line-init
+# zle -N zle-keymap-select
+# Use vim cli mode
+# bindkey '^P' up-history
+# bindkey '^N' down-history
+#
+# # backspace and ^h working even after
+# # returning from command mode
+# bindkey '^?' backward-delete-char
+# bindkey '^h' backward-delete-char
+#
+# # ctrl-w removed word backwards
+# bindkey '^w' backward-kill-word
+#
+# # ctrl-r starts searching history backward
+# bindkey '^r' history-incremental-search-backward
+
 export EDITOR='vim'
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.6/bin
 export PATH=$PATH:/Applications/Dev
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin
 export PY=/usr/local/lib/python2.7/site-packages
-export IGNITER_ROOT=~/Desktop/code/core
+
+export DOCKER_ID_USER='tangsauce'
+
+export IGNITER_ROOT='~/Desktop/code/liftigniter/core'
+source ~/Desktop/code/liftigniter/env.sh
+
+export AWS_ACCESS_KEY="AKIAIO5K56CGLH7M4PBA"
+export AWS_SECERT_KEY="Yc0j6Zew0g2+uWjDJuJO7cVxj2gkc2wHPZhFrLaa"
 
 alias soz='source ~/.zshrc'
 alias soe='source .env'
@@ -122,3 +157,10 @@ if [ -f '/Users/admin/Util/google-cloud-sdk/path.zsh.inc' ]; then source '/Users
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/admin/Util/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/admin/Util/google-cloud-sdk/completion.zsh.inc'; fi
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh

@@ -81,4 +81,8 @@ Thumbs.db
 sessions/*
 node_modules
 env.sh
+.env
 tags
+idea*
+terraform*
+.terraform*

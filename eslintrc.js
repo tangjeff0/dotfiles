@@ -26,11 +26,11 @@ module.exports = {
   'rules': {
     'comma-dangle': [0, 'always-multiline'],
     // 'indent': [1, 2],
-    'indent': [1, 2, {'SwitchCase': 1}],
+    // 'indent': [1, 2, {'SwitchCase': 1}],
     'linebreak-style': ['error', 'unix'],
     'quotes': [0],
     'react/jsx-filename-extension': [1, {'extensions': ['.js', '.jsx']}],
-    'semi': [1, 'never'],
+    'semi': [0, 'never'],
     'no-debugger': [0],
     'no-underscore-dangle': [1, { 'allow' : ['_id'] }],
     'no-unused-vars': [1, {'vars': 'all', 'args': 'after-used', 'ignoreRestSiblings': false}],
