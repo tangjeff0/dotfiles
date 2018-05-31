@@ -1,53 +1,72 @@
 " notes
+" Can't open file /Users/admin/.local/share/nvim/view/~=+Desktop=+code=+dotfiles=+installer.sh=
   " "*y to copy to Mac clipboard
   " gD
   " gE
   " gJ
   " gu / gU
-
+  " find . -name "*.sbt" | xargs grep s3resolver
+  " git grep s3resolver
+  " :scriptnames
 
 """""""""" VANILLA VIM SETTINGS
 filetype plugin indent on
-set autoindent
-set smartindent
 set nocp
 set shellpipe=>
 set dir=~/.vim/swap
 set undofile
 set undodir=~/.vim/undodir
-set tabstop=4 shiftwidth=4 softtabstop=0 expandtab
-set tabstop=2 shiftwidth=2 softtabstop=0 expandtab
-map ™ :set tabstop=2 shiftwidth=2 softtabstop=0 expandtab<CR>
-map ¢ :set tabstop=4 shiftwidth=4 softtabstop=0 expandtab<CR>
+set tabstop=4 shiftwidth=4
+set tabstop=2 shiftwidth=2
+set softtabstop=0 expandtab
 set backspace=indent,eol,start
 set showmatch
 set mps+=<:>
 set number relativenumber
-" only show relative when in normal mode and focused
-augroup numbertoggle
-  autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
-augroup END
+set smartindent
+set autoindent
+set complete+=k
+
+" " only show relative when in normal mode and focused
+" augroup numbertoggle
+"   autocmd!
+"   autocmd BufEnter,FocusGained,InsertLeave *.* set relativenumber
+"   autocmd BufLeave,FocusLost,InsertEnter   *.* set norelativenumber
+" augroup END
+
+autocmd User GoyoEnter Limelight
+autocmd User GoyoLeave Limelight!
 
 " remember folds
-autocmd BufWinLeave *.* mkview
-autocmd BufWinEnter *.* silent loadview 
+augroup remember_folds
+  autocmd!
+  autocmd BufWinLeave *.* mkview
+  autocmd BufWinEnter *.* silent! loadview
+augroup END
 set viewoptions-=options
+
+augroup markdownSettings
+    autocmd!
+    autocmd FileType markdown setlocal spell
+    autocmd BufRead,BufNewFile *.md setlocal spell
+    autocmd BufRead,BufNewFile *.md setlocal textwidth=80
+augroup END
 
 """""""""""" KEYMAPPINGS
 " remap Y so similar to D or C
 nnoremap <S-y> y$
-
 " MacOS `option` keymappings
 " ∫ ~ b - opens buffer list
 " ® ~ r - source vimrc
 " “ and ‘ ~ [ and ] - cycle thru tabpages - gT and gt
+" ™ and ¢ ~ 2 and 4 - tabstops 2 or 4
 nnoremap ∫ :ls<CR>:b<Space>
 map ç :w !pbcopy<CR><CR>
 nnoremap ® :source ~/.vim/vimrc<CR>
 nnoremap ‘ :tabn<CR>
 nnoremap “ :tabp<CR>
+map ™ :set tabstop=2 shiftwidth=2<CR>
+map ¢ :set tabstop=4 shiftwidth=4<CR>
 
 " fn
 set pastetoggle=<F1>
@@ -61,26 +80,69 @@ imap cll console.log()<Esc>$F(a
 vmap cll yocll<Esc>p
 nmap cll yiwocll<Esc>p 
 
+"dein Scripts-----------------------------
+if &compatible
+  set nocompatible               " Be iMproved
+endif
+" Required:
+set runtimepath+=/Users/admin/.cache/dein/repos/github.com/Shougo/dein.vim
+" Required:
+if dein#load_state('/Users/admin/.cache/dein')
+  call dein#begin('/Users/admin/.cache/dein')
+  " Let dein manage dein
+  " Required:
+  call dein#add('/Users/admin/.cache/dein/repos/github.com/Shougo/dein.vim')
+  " Add or remove your plugins here:
+  call dein#add('Shougo/neosnippet.vim')
+  call dein#add('Shougo/neosnippet-snippets')
+  call dein#add('ctrlpvim/ctrlp.vim')
+  call dein#add('scrooloose/nerdtree')
+  call dein#add('Xuyuanp/nerdtree-git-plugin')
+  call dein#add('tpope/vim-vinegar')
+  call dein#add('tpope/vim-commentary')
+  call dein#add('tpope/vim-fugitive')
+  call dein#add('tpope/vim-repeat')
+  call dein#add('tpope/vim-surround')
+  call dein#add('tmhedberg/matchit')
+  call dein#add('Raimondi/delimitMate')
+  call dein#add('majutsushi/tagbar')
+  call dein#add('itchyny/lightline.vim')
+  call dein#add('Yggdroot/indentLine')
+  call dein#add('w0rp/ale')
+  call dein#add('mattn/emmet-vim')
+  call dein#add('pangloss/vim-javascript')
+  call dein#add('mxw/vim-jsx')
+  call dein#add('posva/vim-vue')
+  call dein#add('mbbill/undotree')
+  call dein#add('tangsauce/tmux-resize.vim')
+  call dein#add('reedes/vim-pencil')
+  call dein#add('Shougo/deol.nvim', { 'rev': 'a1b5108fd' }) " You can specify revision/branch/tag.
+  call dein#add('suan/vim-instant-markdown')
+  call dein#add('junegunn/goyo.vim')
+  call dein#add('junegunn/limelight.vim')
 
-""""""""""" PLUGINS
-" Pathogen
-execute pathogen#infect()
+  " Required:
+  call dein#end()
+  call dein#save_state()
+endif
+" Required:
+filetype plugin indent on
+syntax enable
+" If you want to install not installed plugins on startup.
+if dein#check_install()
+  call dein#install()
+endif
+"End dein Scripts-------------------------
 
-" theme
-syntax on
 colo seoul256
-set background=dark
 
-" Lightline
-" show current Git branch
-" show entire path for file
 let g:lightline = {
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
       \ },
       \ 'component_function': {
-      \   'gitbranch': 'gitbranch#name',
+      \   'gitbranch': 'fugitive#head',
       \   'filename': 'FilenameForLightline'
       \ },
       \ }
@@ -90,9 +152,6 @@ endfunction
 " other status bar stuff
 set laststatus=2
 set noshowmode
-
-" VimCompletesMe
-set completeopt+=menuone
 
 " Vinegar/Netrw
 let g:netrw_liststyle=3
@@ -119,9 +178,9 @@ let g:ale_linters = {
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
-" Silver Searcher
-" must have ack and ag installed on system i think
-let g:ackprg = 'ag --nogroup --nocolor --column'
+" " Silver Searcher
+" " must have ack and ag installed on system i think
+" let g:ackprg = 'ag --nogroup --nocolor --column'
 
 " Tmux-Resize
 nnoremap <Left> :call TmuxResize('h', 5)<CR>
@@ -130,8 +189,3 @@ nnoremap <Down> :call TmuxResize('j', 5)<CR>
 nnoremap <Right> :call TmuxResize('l', 5)<CR>
 
 let delimitMate_matchpairs = "(:),[:],{:},<:>"
-
-" set clipboard=unnamed,unnamedplus
-" let g:EasyClipUseSubstituteDefaults = 1
-" nnoremap gm m
-" nmap M <Plug>MoveMotionEndOfLinePlug
