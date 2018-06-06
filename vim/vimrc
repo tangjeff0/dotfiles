@@ -49,7 +49,6 @@ augroup markdownSettings
     autocmd!
     autocmd FileType markdown setlocal spell
     autocmd BufRead,BufNewFile *.md setlocal spell
-    autocmd BufRead,BufNewFile *.md setlocal textwidth=80
 augroup END
 
 """""""""""" KEYMAPPINGS
@@ -120,11 +119,15 @@ if dein#load_state('/Users/admin/.cache/dein')
   call dein#add('suan/vim-instant-markdown')
   call dein#add('junegunn/goyo.vim')
   call dein#add('junegunn/limelight.vim')
+  call dein#add('ervandew/supertab')
+  call dein#add('SirVer/ultisnips')
+  call dein#add('honza/vim-snippets')
 
   " Required:
   call dein#end()
   call dein#save_state()
 endif
+
 " Required:
 filetype plugin indent on
 syntax enable
@@ -134,7 +137,12 @@ if dein#check_install()
 endif
 "End dein Scripts-------------------------
 
+set t_Co=256
+" colo pyte
+" colo lucario
+" colo seoul256-light
 colo seoul256
+" colo brogrammer
 
 let g:lightline = {
       \ 'active': {
@@ -149,6 +157,7 @@ let g:lightline = {
 function! FilenameForLightline()
     return expand('%')
 endfunction
+let g:lightline.colorscheme = 'wombat'
 " other status bar stuff
 set laststatus=2
 set noshowmode
