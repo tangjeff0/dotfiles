@@ -40,6 +40,7 @@ brew cask install postico
 brew cask install spectacle
 brew cask install postman
 brew cask install evernote
+brew cask install docker
 
 # copy dotfiles
 ./copy-out.sh

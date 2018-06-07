@@ -134,29 +134,18 @@ export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.6/bin
 export PATH=$PATH:/Applications/Dev
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin
+export DOCKER_ID_USER='tangsauce'
 
 export PY=/usr/local/lib/python2.7/site-packages
 alias py='python2'
 alias py3='python3'
-# alias python='python2'
-
-export DOCKER_ID_USER='tangsauce'
-
-export IGNITER_ROOT='~/Desktop/code/liftigniter/core'
-source ~/Desktop/code/liftigniter/env.sh
-
+alias dc='~/Desktop/code'
 alias soz='source ~/.zshrc'
 alias soe='source .env'
+alias soe='source .env'
 alias v='vim'
-alias n='nvim'
 alias gitAm="git add -A && git commit -m"
 alias jcj='f() { javac $1 && java ${1%.*} }; f'
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/admin/Util/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/admin/Util/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/admin/Util/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/admin/Util/google-cloud-sdk/completion.zsh.inc'; fi
 
 # tabtab source for serverless package
 # uninstall by removing these lines or running `tabtab uninstall serverless`
@@ -165,7 +154,4 @@ if [ -f '/Users/admin/Util/google-cloud-sdk/completion.zsh.inc' ]; then source '
 # uninstall by removing these lines or running `tabtab uninstall sls`
 [[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
 
-
-export PATH="/Users/admin/.pyenv/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+export TERM=xterm-256color
