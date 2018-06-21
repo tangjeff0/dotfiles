@@ -4,7 +4,7 @@
 	required = true
 	process = git-lfs filter-process
 [user]
-	name = jeff
+	username = tangsauce
 	email = tangj1122@gmail.com
 [core]
 	editor = /usr/bin/vim
@@ -16,6 +16,8 @@
   co = checkout
   s = status
   b = branch
+  a = add
+  c = commit
   p = push
   d = diff
   f = fetch

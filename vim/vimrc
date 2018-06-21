@@ -90,6 +90,7 @@ Plugin 'w0rp/ale'
 Plugin 'mattn/emmet-vim'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
+Plugin 'ianks/vim-tsx'
 Plugin 'posva/vim-vue'
 Plugin 'mbbill/undotree'
 Plugin 'tangsauce/tmux-resize.vim'
@@ -101,6 +102,7 @@ Plugin 'ervandew/supertab'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'godlygeek/csapprox'
+Plugin 'rizzatti/dash.vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -112,7 +114,6 @@ set t_Co=256
 " colo lucario
 " colo seoul256-light
 colo seoul256
-" colo strawberry-light
 " colo brogrammer
 
 let g:lightline = {
@@ -128,7 +129,13 @@ let g:lightline = {
 function! FilenameForLightline()
     return expand('%')
 endfunction
-let g:lightline.colorscheme = 'wombat'
+let g:lightline.colorscheme = 'solarized'
+" let g:lightline.colorscheme = 'OldHope'
+" let g:lightline.colorscheme = 'seoul256'
+" dark
+" let g:lightline.colorscheme = 'materia'
+" let g:lightline.colorscheme = 'molokai'
+" let g:lightline.colorscheme = 'darcula'
 " other status bar stuff
 set laststatus=2
 set noshowmode

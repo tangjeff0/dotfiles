@@ -7,6 +7,7 @@ cp ~/.gitignore_global gitignore_global
 cp ~/.vim/vimrc vim/vimrc # only copies config file, not entire directory, because directory has submodules
 cp ~/.tmux.conf tmux.conf
 cp ~/.zshrc zshrc
+cp ~/.zpreztorc zpreztorc
 
 # to add submodule
   # git submodule add <repo> <path>
