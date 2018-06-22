@@ -1,27 +1,18 @@
-# xcode-select --install
+echo "did you `xcode-select --install` before running this script?"
 
-# git clone --recurse-submodules git@github.com:tangsauce/dotfiles.git
-
-# show dotfiles
+echo "show dotfiles"
 defaults write com.apple.finder AppleShowAllFiles NO
 killall -KILL Finder
 
-# press and hold to repeat keys (don't show those accent chars!)
+echo "press and hold to repeat keys (rather than showing accent chars!)"
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
-# install pathogen
-mkdir -p ~/.vim/autoload ~/.vim/bundle && \
-curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
-
-# install zsh
-sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-
-# install homebrew
+echo "download homebrew"
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew update
 brew upgrade
 
-# install command line apps
+echo "brew install command line apps"
 brew install coreutils
 brew install vim --with-override-system-vi
 brew install tmux
@@ -31,9 +22,10 @@ brew install tree
 brew install node
 brew install yarn
 
+echo "brew cleanup"
 brew cleanup
 
-# install gui apps stuff
+echo "brew cask install gui apps"
 brew cask install google-chrome
 brew cask install opera
 brew cask install postico
@@ -42,5 +34,10 @@ brew cask install postman
 brew cask install evernote
 brew cask install docker
 
-# copy dotfiles
-./copy-out.sh
+echo "install zsh"
+brew install zsh
+git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+chsh -s /bin/zsh
+
+echo "copy dotfiles out"
+./scripts/copy-out.sh
