@@ -49,25 +49,35 @@ augroup markdownSettings
     autocmd BufRead,BufNewFile *.md setlocal spell
 augroup END
 
-"""""""""""" KEYMAPPINGS
-nnoremap <S-y> y$
-nnoremap ∫ :ls<CR>:b<Space>
-map ç :w !pbcopy<CR><CR>
-nnoremap ® :source ~/.vim/vimrc<CR>
-nnoremap ‘ :tabn<CR>
-nnoremap “ :tabp<CR>
-map ™ :set tabstop=2 shiftwidth=2<CR>
-map ¢ :set tabstop=4 shiftwidth=4<CR>
-
+"""""""""""" KEYMAPPINGS native
 set pastetoggle=<F1>
 nnoremap <F2> :NERDTreeMirror<CR>
 nnoremap <F3> :CtrlPClearCache<CR>
 nnoremap <F4> :UndotreeToggle<CR>
-nnoremap <silent>† :TagbarToggle<CR>
-
+nnoremap <S-y> y$
 imap cll console.log()<Esc>$F(a
 vmap cll yocll<Esc>p
-nmap cll yiwocll<Esc>p 
+nmap cll yiwocll<Esc>p
+
+"""""""""""" KEYMAPPINGS mac
+nnoremap ∫ :ls<CR>:b<Space>
+map ç :w !pbcopy<CR><CR>
+nnoremap ® :source ~/.vim/vimrc<CR>
+nnoremap “ :tabp<CR>
+nnoremap ‘ :tabn<CR>
+map ™ :set tabstop=2 shiftwidth=2<CR>
+map ¢ :set tabstop=4 shiftwidth=4<CR>
+nnoremap <silent>† :TagbarToggle<CR>
+
+"""""""""""" KEYMAPPINGS ubuntu
+nnoremap r :source ~/.vim/vimrc<CR>
+nnoremap b :ls<CR>:b<Space>
+map c :w !pbcopy<CR><CR>
+nnoremap o :tabp<CR>
+nnoremap p :tabn<CR><CR>
+map 2 :set tabstop=2 shiftwidth=2<CR>
+map 4 :set tabstop=4 shiftwidth=4<CR>
+nnoremap <silent>t :TagbarToggle<CR>
 
 """""""""" PLUGINS
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -103,17 +113,15 @@ Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'godlygeek/csapprox'
 Plugin 'rizzatti/dash.vim'
+Plugin 'junegunn/seoul256.vim' " colors
+Plugin 'marciomazza/vim-brogrammer-theme'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
 
-highlight Normal ctermbg=NONE
-highlight nonText ctermbg=NONE
 set t_Co=256
-" colo pyte
-" colo lucario
-colo seoul256-light
-" colo seoul256
+" colo seoul256-light
+colo seoul256
 " colo brogrammer
 
 let g:lightline = {

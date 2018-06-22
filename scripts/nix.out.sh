@@ -7,4 +7,4 @@ cp tmux.conf ~/.tmux.conf
 cp -R tmux/ ~/.tmux
 cp -R vim/ ~/.vim/
 cp zshrc ~/.zshrc
-cp zprestorc ~/.zprestorc
+cp zpreztorc ~/.zpreztorc
