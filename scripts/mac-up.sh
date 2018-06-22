@@ -40,4 +40,4 @@ git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$H
 chsh -s /bin/zsh
 
 echo "copy dotfiles out"
-./scripts/copy-out.sh
+./scripts/nix-out.sh

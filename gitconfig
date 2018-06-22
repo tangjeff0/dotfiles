@@ -22,4 +22,5 @@
   d = diff
   f = fetch
   l = log
+  ll = pull
   phm = push heroku master
