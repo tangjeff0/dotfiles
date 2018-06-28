@@ -24,3 +24,4 @@
   l = log
   ll = pull
   phm = push heroku master
+  r = remote
