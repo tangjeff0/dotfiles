@@ -9,6 +9,8 @@ export PATH=$PATH:/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/
 export PATH=$PATH:~/.yarn/bin
 export PATH=$PATH:/usr/java/jre1.8.0_171/bin
 
+alias v='vim'
+alias o='xdg-open'
 alias g='git'
 alias h='heroku'
 alias py='python2'
@@ -16,7 +18,6 @@ alias py3='python3'
 alias dc='~/Desktop/code'
 alias soz='source ~/.zshrc'
 alias soe='source .env && echo "sourced .env"; source env.sh && echo sourced env.sh'
-alias v='vim'
 alias gitAm="git add -A && git commit -m"
 alias jcj='f() { javac $1 && java ${1%.*} }; f'
 alias pbcopy='xclip -selection clipboard'
@@ -31,12 +32,5 @@ alias tkss='tmux kill-session -t'
 setopt AUTO_CD
 source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 unalias cp
-
-# tabtab source for serverless package
-# uninstall by removing these lines or running `tabtab uninstall serverless`
-[[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
-# tabtab source for sls package
-# uninstall by removing these lines or running `tabtab uninstall sls`
-[[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
 
 eval $(thefuck --alias)

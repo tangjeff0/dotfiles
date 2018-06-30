@@ -79,8 +79,6 @@ nnoremap p :tabn<CR><CR>
 map 2 :set tabstop=2 shiftwidth=2<CR>
 map 4 :set tabstop=4 shiftwidth=4<CR>
 nnoremap <silent>t :TagbarToggle<CR>
-nnoremap l :colo seoul256-light<CR>
-nnoremap d :colo seoul256<CR>
 
 """""""""" PLUGINS
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -123,7 +121,9 @@ call vundle#end()            " required
 filetype plugin indent on    " required
 
 set t_Co=256
-colo seoul256-light
+nnoremap l :colo seoul256-light<CR>
+nnoremap d :colo seoul256<CR>
+" colo seoul256-light
 colo seoul256
 " colo brogrammer
 
