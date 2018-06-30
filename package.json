@@ -1,0 +1,20 @@
+{
+  "name": "dotfiles",
+  "version": "1.0.0",
+  "description": "![bill gates dab](https://media.giphy.com/media/l0K4mbH4lKBhAPFU4/giphy.gif)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tangsauce/dotfiles.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tangsauce/dotfiles/issues"
+  },
+  "homepage": "https://github.com/tangsauce/dotfiles#readme"
+}
