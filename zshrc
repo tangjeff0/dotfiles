@@ -8,6 +8,11 @@ export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin
 export PATH=$PATH:~/.yarn/bin
 export PATH=$PATH:/usr/java/jre1.8.0_171/bin
+export STK_INSTALL_DIR=~/Desktop/code/STK/stk11.4.0
+export STK_CONFIG_DIR=$STK_INSTALL_DIR/conf
+export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
+export PATH=$PATH:/usr/lib/jvm/java-1.8.0-openjdk-amd64/bin
+
 
 alias v='vim'
 alias o='xdg-open'
@@ -21,6 +26,7 @@ alias soe='source .env && echo "sourced .env"; source env.sh && echo sourced env
 alias gitAm="git add -A && git commit -m"
 alias jcj='f() { javac $1 && java ${1%.*} }; f'
 alias pbcopy='xclip -selection clipboard'
+alias matlab='~/MATLAB/bin/matlab -nosplash'
 
 alias ta='tmux attach -t'
 alias tad='tmux attach -d -t'

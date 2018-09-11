@@ -5,7 +5,8 @@
 	process = git-lfs filter-process
 [user]
 	username = tangsauce
-	email = tangj1122@gmail.com
+	email = jt26@rice.edu
+	name = Jeff Tang
 [core]
 	editor = /usr/bin/vim
 	excludesfile = ~/.gitignore_global
@@ -24,4 +25,4 @@
   l = log
   ll = pull
   phm = push heroku master
-  r = remote
+  r = remote -v

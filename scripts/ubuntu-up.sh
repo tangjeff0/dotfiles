@@ -25,6 +25,9 @@ allowed=true
 system=false
 users=" >> /etc/geoclue/geoclue.conf
 sudo apt-get install postgres postgresql-contrib pgadmin3 -y # setup: https://help.ubuntu.com/community/PostgreSQL
+sudo apt-get install dockerio
+sudo systemctl start docker
+sudo systemctl enable docker
 
 echo "\nYARN\n"
 sudo apt-get remove cmdtest
@@ -34,7 +37,7 @@ sudo apt-get install yarn
 
 npm init -y
 yarn global add nodemon 
-yarn global add eslint eslint-plugin-react
+yarn global add eslint eslint-plugin-react babel-eslint
 
 echo "\nTHEFUCK\n"
 sudo apt update

@@ -5,7 +5,12 @@ module.exports = {
     "es6": true,
     "node": true
   },
+  'globals': {
+    "@": true,
+    "$": true,
+  },
   "extends": "eslint:recommended",
+  "parser": "babel-eslint",
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
@@ -14,11 +19,13 @@ module.exports = {
     "sourceType": "module"
   },
   "plugins": [
-    "react"
+    "react",
   ],
   "rules": {
+    "react/jsx-uses-vars": 1,
+    "react/jsx-uses-react": 1,
     "indent": [
-      "error",
+      1,
       2
     ],
     "linebreak-style": [
@@ -32,6 +39,8 @@ module.exports = {
     "semi": [
       "error",
       "never"
-    ]
+    ],
+    "no-console": 1,
+    "no-unused-vars": 1,
   }
 };

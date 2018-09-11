@@ -1,8 +1,6 @@
 " notes
-" Can't open file /Users/admin/.local/share/nvim/view/~=+Desktop=+code=+dotfiles=+installer.sh=
-  " "*y to copy to Mac clipboard
+  " git@github.com:tangsauce/full-stack-starter-pack.git
   " gD
-  " find . -name "*.sbt" | xargs grep s3resolver
   " git grep s3resolver
   " :scriptnames
 
@@ -14,7 +12,7 @@ set shellpipe=>
 set dir=~/.vim/swap
 set undofile
 set undodir=~/.vim/undodir
-set tabstop=4 shiftwidth=4
+" set tabstop=4 shiftwidth=4
 set tabstop=2 shiftwidth=2
 set softtabstop=0 expandtab
 set backspace=indent,eol,start
@@ -24,6 +22,8 @@ set number relativenumber
 set autoindent
 set smartindent
 set complete+=k
+set cc=80
+set so=10
 
 " only show relative when in normal mode and focused
 augroup numbertoggle
@@ -55,6 +55,7 @@ set pastetoggle=<F1>
 nnoremap <F2> :NERDTreeMirror<CR>
 nnoremap <F3> :CtrlPClearCache<CR>
 nnoremap <F4> :UndotreeToggle<CR>
+nnoremap <F9> :TagbarToggle<CR>
 nnoremap <S-y> y$
 imap cll console.log()<Esc>$F(a
 vmap cll yocll<Esc>p
@@ -79,6 +80,8 @@ nnoremap p :tabn<CR><CR>
 map 2 :set tabstop=2 shiftwidth=2<CR>
 map 4 :set tabstop=4 shiftwidth=4<CR>
 nnoremap <silent>t :TagbarToggle<CR>
+map m :vert term ../bin/matlab -nodesktop -nosplash<CR>
+map q <C-w>:quit!
 
 """""""""" PLUGINS
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -92,7 +95,6 @@ Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
-Plugin 'tmhedberg/matchit'
 Plugin 'Raimondi/delimitMate'
 Plugin 'majutsushi/tagbar'
 Plugin 'itchyny/lightline.vim'
@@ -116,6 +118,9 @@ Plugin 'godlygeek/csapprox'
 Plugin 'rizzatti/dash.vim'
 Plugin 'junegunn/seoul256.vim' " colors
 Plugin 'marciomazza/vim-brogrammer-theme'
+Plugin 'python-mode/python-mode'
+Plugin 'mileszs/ack.vim'
+
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -183,3 +188,4 @@ nnoremap <Down> :call TmuxResize('j', 5)<CR>
 nnoremap <Right> :call TmuxResize('l', 5)<CR>
 
 let delimitMate_matchpairs = "(:),[:],{:}"
+let delimitMate_quotes = "\" ' `"
