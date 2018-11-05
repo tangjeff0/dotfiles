@@ -2,14 +2,14 @@ module.exports = {
   "env": {
     "browser": true,
     "commonjs": true,
-    "es6": true,
+    "es9": true,
     "node": true
   },
   'globals': {
     "@": true,
     "$": true,
   },
-  "extends": "eslint:recommended",
+  "extends": ["eslint:recommended", 'plugin:react/recommended'],
   "parser": "babel-eslint",
   "parserOptions": {
     "ecmaFeatures": {
