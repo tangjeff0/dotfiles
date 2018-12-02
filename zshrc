@@ -8,6 +8,7 @@ export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin
 export PATH=$PATH:~/.yarn/bin
 export PATH=$PATH:/usr/java/jre1.8.0_171/bin
+export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 export STK_INSTALL_DIR=~/Desktop/code/STK/stk11.4.0
 export STK_CONFIG_DIR=$STK_INSTALL_DIR/conf
 export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
@@ -40,3 +41,5 @@ source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 unalias cp
 
 eval $(thefuck --alias)
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

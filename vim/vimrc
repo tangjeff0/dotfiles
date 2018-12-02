@@ -1,6 +1,5 @@
 " notes
   " git@github.com:tangsauce/full-stack-starter-pack.git
-  " gD
   " :scriptnames
   " create tags
     " vanilla vim settings
@@ -9,8 +8,60 @@
     " vundle
     " plugins
 
-"""""""""" VANILLA VIM SETTINGS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                  PLUGINS                                   "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set rtp+=~/.vim/bundle/Vundle.vim
+set nocp
+filetype off
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'tpope/vim-vinegar'
+Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-surround'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'benjifisher/matchit.zip'
+Plugin 'majutsushi/tagbar'
+Plugin 'xolox/vim-easytags'
+Plugin 'xolox/vim-misc'
+Plugin 'itchyny/lightline.vim'
+Plugin 'Yggdroot/indentLine'
+Plugin 'w0rp/ale'
+Plugin 'mattn/emmet-vim'
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
+" Plugin 'othree/yaus.vim'
+Plugin 'valloric/matchtagalways'
+Plugin 'mbbill/undotree'
+Plugin 'tangsauce/tmux-resize.vim'
+Plugin 'reedes/vim-pencil'
+Plugin 'suan/vim-instant-markdown'
+Plugin 'junegunn/goyo.vim'
+Plugin 'junegunn/limelight.vim'
+Plugin 'ervandew/supertab'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+Plugin 'godlygeek/csapprox'
+Plugin 'rizzatti/dash.vim'
+Plugin 'junegunn/seoul256.vim'
+Plugin 'marciomazza/vim-brogrammer-theme'
+Plugin 'mileszs/ack.vim'
+Plugin 'python-mode/python-mode'
+Plugin 'dkarter/bullets.vim'
+Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plugin 'junegunn/fzf.vim'
+
+call vundle#end()
 filetype plugin indent on
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                            VANILLA VIM SETTINGS                            "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax enable
 set nocp
 set shellpipe=>
@@ -18,30 +69,45 @@ set dir=~/.vim/swap
 set undofile
 set undodir=~/.vim/undodir
 set tabstop=2 shiftwidth=2
-set softtabstop=0 expandtab
+set softtabstop=2 expandtab
+set autoindent
+set wrap
+set smartindent
 set backspace=indent,eol,start
 set showmatch
-" set mps+=<:>
+set showcmd
 set number relativenumber
-set autoindent
-set smartindent
 set complete+=k
 set cc=80
 set so=10
 set timeout timeoutlen=3000 ttimeoutlen=100
+set vb
+set laststatus=2
+set showmode
+set mousehide
+set wildmenu
+set tw=0
+set hlsearch
+set incsearch
+set autoread
+set t_Co=256
+set lcs=eol:$,trail:-,tab:>-
 
-"""""""""""" KEYMAPPINGS native
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                KEYMAPPINGS                                 "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""
+"  F Keys  "
+""""""""""""
 set pastetoggle=<F1>
-nnoremap <F2> :NERDTreeMirror<CR>
-nnoremap <F3> :CtrlPClearCache<CR>
-nnoremap <F4> :UndotreeToggle<CR>
+nnoremap <F2> :CtrlPClearCache<CR>
+nnoremap <F3> :UndotreeToggle<CR>
 nnoremap <F9> :TagbarToggle<CR>
 nnoremap <S-y> y$
-imap cll console.log()<Esc>$F(a
-vmap cll yocll<Esc>p
-nmap cll yiwocll<Esc>p
-
-" Go to tab by number
+nnoremap z= z=1<CR><CR>
+"""""""""
+"  Tab  "
+"""""""""
 let mapleader= " "
 noremap <leader>1 1gt
 noremap <leader>2 2gt
@@ -52,25 +118,37 @@ noremap <leader>6 6gt
 noremap <leader>7 7gt
 noremap <leader>8 8gt
 noremap <leader>9 9gt
-noremap <leader>9 9gt
-noremap <leader>9 9gt
 nnoremap <leader>p :tabprevious<CR>
 nnoremap <leader>n :tabnext<CR>
-
+"""""""""""
+"  Remap  "
+"""""""""""
+map <leader>c "+y
 nnoremap <leader>r :source ~/.vim/vimrc<CR>
 nnoremap <leader>b :ls<CR>:b<Space>
-map <leader>c "+y
-nnoremap <leader>2 :set tabstop=2 shiftwidth=2<CR>
-nnoremap <leader>4 :set tabstop=4 shiftwidth=4<CR>
+nnoremap <leader>h :noh<CR>
+nnoremap <leader>l :colo seoul256-light<CR>
+nnoremap <leader>d :colo seoul256<CR>
+
+" nnoremap <leader>2 :set tabstop=2 shiftwidth=2<CR>
+" nnoremap <leader>4 :set tabstop=4 shiftwidth=4<CR>
 " nnoremap <silent>t :TagbarToggle<CR>
 " map <leader>m :vert term ../bin/matlab -nodesktop -nosplash<CR>
 " map <leader>q <C-w>:quit!
+" imap cll console.log()<Esc>$F(a
+" vmap cll yocll<Esc>p
+" nmap cll yiwocll<Esc>p
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                             AUTOGROUPS                              "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 augroup numbertoggle
   autocmd!
   autocmd BufEnter,InsertLeave,FocusGained * set relativenumber
-  autocmd BufLeave,InsertEnter,FocusLost   * set norelativenumber
-  autocmd BufEnter,FocusGained */doc/*.txt set nonumber norelativenumber
+  autocmd BufLeave,InsertEnter * set norelativenumber
+  autocmd InsertLeave *.md set norelativenumber
+  autocmd FocusLost *.txt set relativenumber
 augroup END
 
 autocmd User GoyoEnter set nonumber norelativenumber
@@ -87,13 +165,13 @@ set viewoptions-=options
 
 augroup PyToggle
   autocmd!
-  autocmd FileType python PymodeLintToggle
-  autocmd FileType python set tabstop=4 shiftwidth=4
+  " autocmd FileType python PymodeLintToggle
+  autocmd FileType python setlocal tabstop=4 shiftwidth=4
 augroup END
 
 augroup markdownSettings
   autocmd!
-  autocmd FileType markdown setlocal spell
+  autocmd FileType markdown setlocal spell nonumber norelativenumber
   autocmd BufRead,BufNewFile */vim-anywhere/* setlocal spell
 augroup END
 
@@ -103,77 +181,14 @@ augroup commentary
 augroup end
 
 
-"""""""""""" KEYMAPPINGS mac
-" nnoremap ∫ :ls<CR>:b<Space>
-" map ç :w !pbcopy<CR><CR>
-" nnoremap ® :source ~/.vim/vimrc<CR>
-" nnoremap “ :tabp<CR>
-" nnoremap ‘ :tabn<CR>
-" map ™ :set tabstop=2 shiftwidth=2<CR>
-" map ¢ :set tabstop=4 shiftwidth=4<CR>
-" nnoremap <silent>† :TagbarToggle<CR>
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                           PLUGIN OPTIONS                            "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-"""""""""""" KEYMAPPINGS ubuntu
-" nnoremap r :source ~/.vim/vimrc<CR>
-" nnoremap b :ls<CR>:b<Space>
-" map c "+y
-" nnoremap o :tabp<CR>
-" nnoremap p :tabn<CR><CR>
-" map 2 :set tabstop=2 shiftwidth=2<CR>
-" map 4 :set tabstop=4 shiftwidth=4<CR>
-" nnoremap <silent>t :TagbarToggle<CR>
-" map m :vert term ../bin/matlab -nodesktop -nosplash<CR>
-" map q <C-w>:quit!
-
-"""""""""" PLUGINS
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
-Plugin 'tpope/vim-vinegar'
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-surround'
-Plugin 'Raimondi/delimitMate'
-Plugin 'benjifisher/matchit.zip'
-Plugin 'majutsushi/tagbar'
-Plugin 'itchyny/lightline.vim'
-Plugin 'Yggdroot/indentLine'
-Plugin 'w0rp/ale'
-Plugin 'mattn/emmet-vim'
-" Plugin 'pangloss/vim-javascript'
-Plugin 'othree/yajs.vim'
-Plugin 'mxw/vim-jsx'
-Plugin 'mbbill/undotree'
-Plugin 'tangsauce/tmux-resize.vim'
-Plugin 'reedes/vim-pencil'
-Plugin 'suan/vim-instant-markdown'
-Plugin 'junegunn/goyo.vim'
-Plugin 'junegunn/limelight.vim'
-Plugin 'ervandew/supertab'
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
-Plugin 'godlygeek/csapprox'
-Plugin 'rizzatti/dash.vim'
-Plugin 'junegunn/seoul256.vim' " colors
-Plugin 'marciomazza/vim-brogrammer-theme'
-Plugin 'mileszs/ack.vim'
-Plugin 'python-mode/python-mode'
-
-
-call vundle#end()            " required
-filetype plugin indent on    " required
-
-set t_Co=256
-nnoremap l :colo seoul256-light<CR>
-nnoremap d :colo seoul256<CR>
-" colo seoul256-light
+"""""""""""""""
+"  LIGHTLINE  "
+"""""""""""""""
 colo seoul256
-" colo brogrammer
-
 let g:lightline = {
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
@@ -188,34 +203,27 @@ function! FilenameForLightline()
     return expand('%')
 endfunction
 let g:lightline.colorscheme = 'solarized'
-" let g:lightline.colorscheme = 'OldHope'
-" let g:lightline.colorscheme = 'seoul256'
-" dark
-" let g:lightline.colorscheme = 'materia'
-" let g:lightline.colorscheme = 'molokai'
-" let g:lightline.colorscheme = 'darcula'
-" other status bar stuff
-set laststatus=2
-set noshowmode
 
-" Vinegar/Netrw
+"""""""""""""""""""
+"  Vinegar/Netrw  "
+"""""""""""""""""""
 let g:netrw_liststyle=3
-
-" NERDTree
 let g:NERDTreeWinPos = "left"
 let g:NERDTreeMapOpenSplit = "s"
 let g:NERDTreeMapOpenVSplit = "v"
-map <C-n> :NERDTreeToggle<CR>
+nnoremap <C-n> :NERDTreeToggle<CR>
 
 " CtrlP
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_open_new_file = 'h'
-nnoremap π :CtrlPTag<CR>
+" nnoremap π :CtrlPTag<CR>
 let g:ctrlp_custom_ignore = {
 \ 'dir': 'node_modules',
 \ }
 
-" ALE
+"""""""""
+"  ALE  "
+"""""""""
 let g:ale_linters = {
 \ 'javascript': ['eslint'],
 \ }
@@ -229,17 +237,25 @@ nnoremap <Up> :call TmuxResize('k', 5)<CR>
 nnoremap <Down> :call TmuxResize('j', 5)<CR>
 nnoremap <Right> :call TmuxResize('l', 5)<CR>
 
-let delimitMate_matchpairs = "(:),[:],{:}"
-let delimitMate_quotes = "\" ' `"
-
+"""""""""""""""
+"  UltiSnips  "
+"""""""""""""""
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsListSnippets="<c-l>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 let g:UltiSnipsEditSplit='vertical'
 let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips', $HOME.'/.vim/bundle/vim-snippets/UltiSnips']
-" let g:snips_author
+let g:snips_author = 'Jeff Tang'
+let g:ultisnips_javascript = {
+\ 'keyword-spacing': 'always',
+\ 'semi': 'never',
+\ }
 
-let g:jsx_ext_required=0
-autocmd FileType jsx let b:match_words = '<\(\w\w*\):</\1,{:}'
-packadd! matchit
+""""""""""""""""""""
+"  MatchTagAlways  "
+""""""""""""""""""""
+let g:mta_filetypes = {
+\ 'javascript.jsx' : 1,
+\}
+
