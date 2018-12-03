@@ -1,22 +1,24 @@
 " notes
-  " git@github.com:tangsauce/full-stack-starter-pack.git
-  " :scriptnames
-  " create tags
-    " vanilla vim settings
-    " keymappings
-    " autocommands
-    " vundle
-    " plugins
+" :scriptnames
+" cmdwin q/ q? q: or CTRL_F
+" Practical Vim
+
+" INDEX
+" VUNDLE
+" VANILLA
+" KEYMAPPINGS
+" AUTOGROUPS
+" OPTIONS
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                  PLUGINS                                   "
+"                                  VUNDLE                                    "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set rtp+=~/.vim/bundle/Vundle.vim
 set nocp
 filetype off
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'tpope/vim-vinegar'
@@ -24,10 +26,11 @@ Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-unimpaired'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'benjifisher/matchit.zip'
 Plugin 'majutsushi/tagbar'
-Plugin 'xolox/vim-easytags'
+" Plugin 'xolox/vim-easytags'
 Plugin 'xolox/vim-misc'
 Plugin 'itchyny/lightline.vim'
 Plugin 'Yggdroot/indentLine'
@@ -50,12 +53,11 @@ Plugin 'godlygeek/csapprox'
 Plugin 'rizzatti/dash.vim'
 Plugin 'junegunn/seoul256.vim'
 Plugin 'marciomazza/vim-brogrammer-theme'
-Plugin 'mileszs/ack.vim'
 Plugin 'python-mode/python-mode'
 Plugin 'dkarter/bullets.vim'
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
-
+Plugin 'mileszs/ack.vim'
 call vundle#end()
 filetype plugin indent on
 
@@ -91,44 +93,39 @@ set hlsearch
 set incsearch
 set autoread
 set t_Co=256
-set lcs=eol:$,trail:-,tab:>-
+set list lcs=eol:↩,trail:·,tab:>-
+match Exception /$/
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                KEYMAPPINGS                                 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""""""""""""
-"  F Keys  "
-""""""""""""
+nnoremap <S-y> y$
+nnoremap z= z=1<CR><CR>
 set pastetoggle=<F1>
 nnoremap <F2> :CtrlPClearCache<CR>
 nnoremap <F3> :UndotreeToggle<CR>
 nnoremap <F9> :TagbarToggle<CR>
-nnoremap <S-y> y$
-nnoremap z= z=1<CR><CR>
-"""""""""
-"  Tab  "
-"""""""""
+xnoremap * :<C-u>call <SID>VSetSearch()<CR>/<C-R>=@/<CR><CR>
+xnoremap # :<C-u>call <SID>VSetSearch()<CR>?<C-R>=@/<CR><CR>
+function! s:VSetSearch()
+    let temp = @s
+    norm! gv"sy
+    let @/ = '\V' . substitute(escape(@s, '/\'), '\n', '\\n','g')
+    let @s = temp
+endfunction
+
+""""""""""""
+"  leader  "
+""""""""""""
 let mapleader= " "
-noremap <leader>1 1gt
-noremap <leader>2 2gt
-noremap <leader>3 3gt
-noremap <leader>4 4gt
-noremap <leader>5 5gt
-noremap <leader>6 6gt
-noremap <leader>7 7gt
-noremap <leader>8 8gt
-noremap <leader>9 9gt
+noremap <leader>c "+y
+nnoremap <leader>r :source ~/.vim/vimrc<CR>
 nnoremap <leader>p :tabprevious<CR>
 nnoremap <leader>n :tabnext<CR>
-"""""""""""
-"  Remap  "
-"""""""""""
-map <leader>c "+y
-nnoremap <leader>r :source ~/.vim/vimrc<CR>
-nnoremap <leader>b :ls<CR>:b<Space>
-nnoremap <leader>h :noh<CR>
-nnoremap <leader>l :colo seoul256-light<CR>
-nnoremap <leader>d :colo seoul256<CR>
+nnoremap <leader>b :Buffers<CR>
+nnoremap <c-p> :Files<CR>
+command! VI source ~/.vim/vimrc | VundleInstall
+command! VC source ~/.vim/vimrc | VundleClean<
 
 " nnoremap <leader>2 :set tabstop=2 shiftwidth=2<CR>
 " nnoremap <leader>4 :set tabstop=4 shiftwidth=4<CR>
@@ -180,11 +177,9 @@ augroup commentary
   autocmd FileType javascript setlocal commentstring=/*\ %s\ */
 augroup end
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                           PLUGIN OPTIONS                            "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 """""""""""""""
 "  LIGHTLINE  "
 """""""""""""""
@@ -203,7 +198,6 @@ function! FilenameForLightline()
     return expand('%')
 endfunction
 let g:lightline.colorscheme = 'solarized'
-
 """""""""""""""""""
 "  Vinegar/Netrw  "
 """""""""""""""""""
@@ -212,14 +206,6 @@ let g:NERDTreeWinPos = "left"
 let g:NERDTreeMapOpenSplit = "s"
 let g:NERDTreeMapOpenVSplit = "v"
 nnoremap <C-n> :NERDTreeToggle<CR>
-
-" CtrlP
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_open_new_file = 'h'
-" nnoremap π :CtrlPTag<CR>
-let g:ctrlp_custom_ignore = {
-\ 'dir': 'node_modules',
-\ }
 
 """""""""
 "  ALE  "
@@ -259,3 +245,4 @@ let g:mta_filetypes = {
 \ 'javascript.jsx' : 1,
 \}
 
+let g:ackprg = "ag --vimgrep"
