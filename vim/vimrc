@@ -1,4 +1,4 @@
-" notes
+" Notes {{{1
 " :scriptnames
 " cmdwin q/ q? q: or CTRL_F
 " Practical Vim
@@ -61,9 +61,9 @@
   " 117: chain <c-x><c-p> to keep on adding words
   " 123: <C-x>s spell autocompletion
 
-"                                  VUNDLE                                    "
+" Vundle {{{1
 set rtp+=~/.vim/bundle/Vundle.vim
-set nocp
+set nocompatible
 filetype off
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
@@ -110,10 +110,12 @@ Plugin 'junegunn/fzf.vim'
 Plugin 'mileszs/ack.vim'
 call vundle#end()
 filetype plugin indent on
-"                            VANILLA VIM SETTINGS                            "
+
+" Vanilla Vim {{{1
 syntax enable
 set nocompatible
 " set shellpipe=>
+colo seoul256
 set directory=~/.vim/swap
 set undofile undodir=~/.vim/undodir
 set tabstop=2 shiftwidth=2
@@ -138,37 +140,38 @@ set autoread
 set t_Co=256
 set list listchars=eol:↩,trail:·,tab:>-
 set infercase
-set viewoptions-=options
-"                                KEYMAPPINGS                                 "
-nnoremap <S-y> y$
-nnoremap z= z=1<CR><CR>
+" set viewoptions-=options
+set foldmethod=marker
+set encoding=utf-8
+set fileencoding=utf-8
+set noequalalways
+set nojoinspaces
+set shiftround
+
+" Mappings {{{1
+" FMap {{{2
 set pastetoggle=<F1>
 nnoremap <F2> :CtrlPClearCache<CR>
-nnoremap <F3> :UndotreeToggle<CR>
-nnoremap <F9> :TagbarToggle<CR>
-" nnoremap [t :tabp<CR>
-" nnoremap ]t :tabn<CR>
-command! VI source ~/.vim/vimrc | VundleInstall
-command! VC source ~/.vim/vimrc | VundleClean<
+nnoremap <F2> :UndotreeToggle<CR>
+nnoremap <F4> :TagbarToggle<CR>
+" Remap {{{2
+nnoremap <S-y> y$
+nnoremap z= z=1<CR><CR>
 nnoremap & :&&<CR>
 xnoremap & :&&<CR>
 cnoremap <expr> %%  getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 xnoremap * :<C-u>call <SID>VSetSearch('/')<CR>/<C-R>=@/<CR><CR>
 xnoremap # :<C-u>call <SID>VSetSearch('?')<CR>?<C-R>=@/<CR><CR>
-function! s:VSetSearch(cmdtype)
-  let temp = @s
-  norm! gv"sy
-  let @/ = '\V' . substitute(escape(@s, a:cmdtype.'\'), '\n', '\\n', 'g')
-  let @s = temp
-endfunction
-""""""""""""
-"  leader  "
-""""""""""""
+" Command {{{2
+command! VI source ~/.vim/vimrc | VundleInstall
+command! VC source ~/.vim/vimrc | VundleClean<
+" Leader {{{2
 let mapleader= " "
 noremap <leader>c "+y
 nnoremap <leader>r :source ~/.vim/vimrc<CR>
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>G :Goyo<CR>
+nnoremap <leader>d "_d
 nnoremap <c-p> :Files<CR>
 " nnoremap <leader>2 :set tabstop=2 shiftwidth=2<CR>
 " nnoremap <leader>4 :set tabstop=4 shiftwidth=4<CR>
@@ -178,7 +181,8 @@ nnoremap <c-p> :Files<CR>
 " imap cll console.log()<Esc>$F(a
 " vmap cll yocll<Esc>p
 " nmap cll yiwocll<Esc>p
-"                             AUTOGROUPS                              "
+
+" Autogroups {{{1
 augroup config
   autocmd!
   autocmd FileType javascript setlocal commentstring=/*\ %s\ */
@@ -188,22 +192,20 @@ augroup config
   autocmd BufEnter,InsertLeave *? set relativenumber
   autocmd BufLeave,InsertEnter *? set norelativenumber
 augroup end
+autocmd User GoyoEnter Limelight
+autocmd User GoyoLeave Limelight!
 " autocmd BufEnter,InsertLeave *.txt *.md set relativenumber
 " autocmd BufLeave,InsertEnter *.txt *.md set norelativenumber
 " autocmd FileType text set nonumber norelativenumber
 " autocmd FocusLost *.txt set relativenumber
 " autocmd User GoyoEnter set nonumber norelativenumber
 " autocmd User GoyoLeave set number relativenumber
-autocmd User GoyoEnter Limelight
-autocmd User GoyoLeave Limelight!
 " autocmd BufRead,BufNewFile *.md setlocal nonumber norelativenumber
 " autocmd BufRead,BufNewFile *.md setlocal spell
 " autocmd BufRead,BufNewFile *.md set complete+=k
-"                           PLUGIN OPTIONS                            "
-"""""""""""""""
-"  LIGHTLINE  "
-"""""""""""""""
-colo seoul256
+
+" Plugin options {{{1
+" Lightline {{{2
 let g:lightline = {
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
@@ -214,63 +216,50 @@ let g:lightline = {
       \   'filename': 'FilenameForLightline'
       \ },
       \ }
-function! FilenameForLightline()
-    return expand('%')
-endfunction
 let g:lightline.colorscheme = 'solarized'
-"
-"""""""""""""""""""
-"  Vinegar/Netrw  "
-"""""""""""""""""""
-let g:netrw_liststyle=3
+" NerdTree {{{2
+" let g:netrw_liststyle=3
+nnoremap <C-n> :NERDTreeToggle<CR>
 let g:NERDTreeWinPos = "left"
 let g:NERDTreeMapOpenSplit = "s"
 let g:NERDTreeMapOpenVSplit = "v"
 let g:NERDTreeCreatePrefix = "silent keepalt keepjumps"
-nnoremap <C-n> :NERDTreeToggle<CR>
 
-"""""""""
-"  ALE  "
-"""""""""
+" ALE {{{2
 let g:ale_linters = {
 \ 'javascript': ['eslint'],
 \ }
-" jump to next lint error/warning
 " nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 " nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
-""""""""""""""""
-"  TmuxResize  "
-""""""""""""""""
+" TmuxResize {{{2
 nnoremap <Left> :call TmuxResize('h', 5)<CR>
 nnoremap <Up> :call TmuxResize('k', 5)<CR>
 nnoremap <Down> :call TmuxResize('j', 5)<CR>
 nnoremap <Right> :call TmuxResize('l', 5)<CR>
 
-"""""""""""""""
-"  UltiSnips  "
-"""""""""""""""
+" UltiSnips {{{2
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsListSnippets="<c-l>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 let g:UltiSnipsEditSplit='vertical'
 let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips', $HOME.'/.vim/bundle/vim-snippets/UltiSnips']
-let g:snips_author = 'Jeff Tang'
 let g:ultisnips_javascript = {
 \ 'keyword-spacing': 'always',
 \ 'semi': 'never',
 \ }
+let g:snips_author = 'Jeff Tang'
 
-""""""""""""""""""""
-"  MatchTagAlways  "
-""""""""""""""""""""
+" MatchTagAlways {{{2
 let g:mta_filetypes = {
 \ 'javascript.jsx' : 1,
 \}
 
+" Ack {{{2
 let g:ackprg = "ag --vimgrep"
 
+" FZF {{{2
 let g:fzf_colors =
 \ { 'fg':      ['fg', 'Normal'],
   \ 'bg':      ['bg', 'Normal'],
@@ -287,3 +276,13 @@ let g:fzf_colors =
   \ 'header':  ['fg', 'Comment'] }
 
 " let g:pymode_lint = 0
+" Functions {{{1
+function! s:VSetSearch(cmdtype)
+  let temp = @s
+  norm! gv"sy
+  let @/ = '\V' . substitute(escape(@s, a:cmdtype.'\'), '\n', '\\n', 'g')
+  let @s = temp
+endfunction
+function! FilenameForLightline()
+    return expand('%')
+endfunction
