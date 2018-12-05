@@ -61,19 +61,7 @@
   " 117: chain <c-x><c-p> to keep on adding words
   " 123: <C-x>s spell autocompletion
 
-"""""""""""
-"  index  "
-"""""""""""
-" VUNDLE
-" VANILLA
-" KEYMAPPINGS
-" AUTOGROUPS
-" OPTIONS
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                  VUNDLE                                    "
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set rtp+=~/.vim/bundle/Vundle.vim
 set nocp
 filetype off
@@ -122,54 +110,46 @@ Plugin 'junegunn/fzf.vim'
 Plugin 'mileszs/ack.vim'
 call vundle#end()
 filetype plugin indent on
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                            VANILLA VIM SETTINGS                            "
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax enable
-set nocp
-set shellpipe=>
-set dir=~/.vim/swap
-set undofile
-set undodir=~/.vim/undodir
+set nocompatible
+" set shellpipe=>
+set directory=~/.vim/swap
+set undofile undodir=~/.vim/undodir
 set tabstop=2 shiftwidth=2
 set softtabstop=2 expandtab
-set autoindent
+set autoindent smartindent
 set wrap
-set smartindent
 set backspace=indent,eol,start
 set showmatch
 set showcmd
 set number relativenumber
-set complete+=k
-set cc=80
-set so=10
+set colorcolumn=80
+set scrolloff=10
 set timeout timeoutlen=3000 ttimeoutlen=100
-set vb
 set laststatus=2
 set showmode
 set mousehide
 set wildmenu
-set tw=0
+set textwidth=0
 set hlsearch
 set incsearch
 set autoread
 set t_Co=256
-set list lcs=eol:↩,trail:·,tab:>-
+set list listchars=eol:↩,trail:·,tab:>-
 set infercase
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set viewoptions-=options
 "                                KEYMAPPINGS                                 "
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <S-y> y$
 nnoremap z= z=1<CR><CR>
 set pastetoggle=<F1>
 nnoremap <F2> :CtrlPClearCache<CR>
 nnoremap <F3> :UndotreeToggle<CR>
 nnoremap <F9> :TagbarToggle<CR>
-nnoremap [t :tabp<CR>
-nnoremap ]t :tabn<CR>
+" nnoremap [t :tabp<CR>
+" nnoremap ]t :tabn<CR>
+command! VI source ~/.vim/vimrc | VundleInstall
+command! VC source ~/.vim/vimrc | VundleClean<
 nnoremap & :&&<CR>
 xnoremap & :&&<CR>
 cnoremap <expr> %%  getcmdtype() == ':' ? expand('%:h').'/' : '%%'
@@ -181,7 +161,6 @@ function! s:VSetSearch(cmdtype)
   let @/ = '\V' . substitute(escape(@s, a:cmdtype.'\'), '\n', '\\n', 'g')
   let @s = temp
 endfunction
-
 """"""""""""
 "  leader  "
 """"""""""""
@@ -189,10 +168,8 @@ let mapleader= " "
 noremap <leader>c "+y
 nnoremap <leader>r :source ~/.vim/vimrc<CR>
 nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>G :Goyo<CR>
 nnoremap <c-p> :Files<CR>
-command! VI source ~/.vim/vimrc | VundleInstall
-command! VC source ~/.vim/vimrc | VundleClean<
-
 " nnoremap <leader>2 :set tabstop=2 shiftwidth=2<CR>
 " nnoremap <leader>4 :set tabstop=4 shiftwidth=4<CR>
 " nnoremap <silent>t :TagbarToggle<CR>
@@ -201,52 +178,28 @@ command! VC source ~/.vim/vimrc | VundleClean<
 " imap cll console.log()<Esc>$F(a
 " vmap cll yocll<Esc>p
 " nmap cll yiwocll<Esc>p
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                             AUTOGROUPS                              "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-augroup numbertoggle
-  autocmd!
-  autocmd BufEnter,InsertLeave,FocusGained * set relativenumber
-  autocmd BufLeave,InsertEnter * set norelativenumber
-  autocmd InsertLeave *.md set norelativenumber
-  autocmd FocusLost *.txt set relativenumber
-augroup END
-
-autocmd User GoyoEnter set nonumber norelativenumber
-autocmd User GoyoEnter Limelight
-autocmd User GoyoLeave set number relativenumber
-autocmd User GoyoLeave Limelight!
-
-augroup remember_folds
-  autocmd!
-  autocmd BufWinLeave *.*,*rc mkview
-  autocmd BufWinEnter *.*,*rc silent! loadview
-augroup END
-set viewoptions-=options
-
-augroup PyToggle
-  autocmd!
-  " autocmd FileType python PymodeLintToggle
-  autocmd FileType python setlocal tabstop=4 shiftwidth=4
-augroup END
-
-augroup markdownSettings
-  autocmd!
-  autocmd FileType markdown setlocal spell nonumber norelativenumber
-  autocmd FileType text setlocal spell
-  autocmd BufRead,BufNewFile */vim-anywhere/* setlocal spell
-augroup END
-
-augroup commentary
+augroup config
   autocmd!
   autocmd FileType javascript setlocal commentstring=/*\ %s\ */
-augroup END
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  autocmd FileType python setlocal tabstop=4 shiftwidth=4
+  autocmd BufWinEnter *? loadview | normal! zM
+  autocmd BufWinLeave *? mkview
+  autocmd BufEnter,InsertLeave *? set relativenumber
+  autocmd BufLeave,InsertEnter *? set norelativenumber
+augroup end
+" autocmd BufEnter,InsertLeave *.txt *.md set relativenumber
+" autocmd BufLeave,InsertEnter *.txt *.md set norelativenumber
+" autocmd FileType text set nonumber norelativenumber
+" autocmd FocusLost *.txt set relativenumber
+" autocmd User GoyoEnter set nonumber norelativenumber
+" autocmd User GoyoLeave set number relativenumber
+autocmd User GoyoEnter Limelight
+autocmd User GoyoLeave Limelight!
+" autocmd BufRead,BufNewFile *.md setlocal nonumber norelativenumber
+" autocmd BufRead,BufNewFile *.md setlocal spell
+" autocmd BufRead,BufNewFile *.md set complete+=k
 "                           PLUGIN OPTIONS                            "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""
 "  LIGHTLINE  "
 """""""""""""""
@@ -265,6 +218,7 @@ function! FilenameForLightline()
     return expand('%')
 endfunction
 let g:lightline.colorscheme = 'solarized'
+"
 """""""""""""""""""
 "  Vinegar/Netrw  "
 """""""""""""""""""
@@ -282,10 +236,12 @@ let g:ale_linters = {
 \ 'javascript': ['eslint'],
 \ }
 " jump to next lint error/warning
-nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-nmap <silent> <C-j> <Plug>(ale_next_wrap)
+" nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+" nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
-" Tmux-Resize
+""""""""""""""""
+"  TmuxResize  "
+""""""""""""""""
 nnoremap <Left> :call TmuxResize('h', 5)<CR>
 nnoremap <Up> :call TmuxResize('k', 5)<CR>
 nnoremap <Down> :call TmuxResize('j', 5)<CR>
@@ -329,3 +285,5 @@ let g:fzf_colors =
   \ 'marker':  ['fg', 'Keyword'],
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
+
+" let g:pymode_lint = 0
