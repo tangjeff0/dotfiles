@@ -104,10 +104,11 @@ Plugin 'rizzatti/dash.vim'
 Plugin 'junegunn/seoul256.vim'
 Plugin 'marciomazza/vim-brogrammer-theme'
 Plugin 'python-mode/python-mode'
-Plugin 'dkarter/bullets.vim'
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
 Plugin 'mileszs/ack.vim'
+Plugin 'xolox/vim-notes'
+Plugin 'dkarter/bullets.vim'
 call vundle#end()
 filetype plugin indent on
 
@@ -156,7 +157,6 @@ nnoremap <F2> :UndotreeToggle<CR>
 nnoremap <F4> :TagbarToggle<CR>
 " Remap {{{2
 nnoremap <S-y> y$
-nnoremap z= z=1<CR><CR>
 nnoremap & :&&<CR>
 xnoremap & :&&<CR>
 cnoremap <expr> %%  getcmdtype() == ':' ? expand('%:h').'/' : '%%'
@@ -165,6 +165,7 @@ xnoremap # :<C-u>call <SID>VSetSearch('?')<CR>?<C-R>=@/<CR><CR>
 " Command {{{2
 command! VI source ~/.vim/vimrc | VundleInstall
 command! VC source ~/.vim/vimrc | VundleClean<
+command! Revise setlocal number! relativenumber! spell!
 " Leader {{{2
 let mapleader= " "
 noremap <leader>c "+y
@@ -187,23 +188,32 @@ augroup config
   autocmd!
   autocmd FileType javascript setlocal commentstring=/*\ %s\ */
   autocmd FileType python setlocal tabstop=4 shiftwidth=4
-  autocmd BufWinEnter *? loadview | normal! zM
-  autocmd BufWinLeave *? mkview
+  " autocmd BufWinEnter *? loadview | normal! zM
+  " autocmd BufWinLeave *? mkview
+  autocmd BufWinEnter *? normal! zM
   autocmd BufEnter,InsertLeave *? set relativenumber
   autocmd BufLeave,InsertEnter *? set norelativenumber
+  autocmd FileType markdown setlocal nospell
+  autocmd BufLeave,InsertEnter *.txt,*.md set nonumber norelativenumber
+  autocmd BufEnter,InsertLeave *.txt,*.md set nonumber norelativenumber
 augroup end
 autocmd User GoyoEnter Limelight
 autocmd User GoyoLeave Limelight!
-" autocmd BufEnter,InsertLeave *.txt *.md set relativenumber
-" autocmd BufLeave,InsertEnter *.txt *.md set norelativenumber
-" autocmd FileType text set nonumber norelativenumber
-" autocmd FocusLost *.txt set relativenumber
-" autocmd User GoyoEnter set nonumber norelativenumber
-" autocmd User GoyoLeave set number relativenumber
-" autocmd BufRead,BufNewFile *.md setlocal nonumber norelativenumber
-" autocmd BufRead,BufNewFile *.md setlocal spell
-" autocmd BufRead,BufNewFile *.md set complete+=k
 
+" autocmd BufRead,BufNewFile *.md 
+" autocmd BufRead,BufNewFile *.md 
+" nnoremap z= z=1<CR><CR>
+
+" Functions {{{1
+function! s:VSetSearch(cmdtype)
+  let temp = @s
+  norm! gv"sy
+  let @/ = '\V' . substitute(escape(@s, a:cmdtype.'\'), '\n', '\\n', 'g')
+  let @s = temp
+endfunction
+function! FilenameForLightline()
+    return expand('%')
+endfunction
 " Plugin options {{{1
 " Lightline {{{2
 let g:lightline = {
@@ -276,13 +286,9 @@ let g:fzf_colors =
   \ 'header':  ['fg', 'Comment'] }
 
 " let g:pymode_lint = 0
-" Functions {{{1
-function! s:VSetSearch(cmdtype)
-  let temp = @s
-  norm! gv"sy
-  let @/ = '\V' . substitute(escape(@s, a:cmdtype.'\'), '\n', '\\n', 'g')
-  let @s = temp
-endfunction
-function! FilenameForLightline()
-    return expand('%')
-endfunction
+
+" vim-notes {{{2
+let g:notes_directories=['~/Dropbox/notes']
+let g:notes_suffix='.md'
+let g:notes_title_sync='rename_file'
+

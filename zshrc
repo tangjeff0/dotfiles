@@ -38,7 +38,7 @@ alias tkss='tmux kill-session -t'
 
 setopt AUTO_CD
 source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
-unalias cp
+# unalias cp
 
 eval $(thefuck --alias)
 
