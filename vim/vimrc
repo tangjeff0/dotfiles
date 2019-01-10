@@ -109,6 +109,8 @@ Plugin 'junegunn/fzf.vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'xolox/vim-notes'
 Plugin 'dkarter/bullets.vim'
+Plugin 'unblevable/quick-scope'
+Plugin 'easymotion/vim-easymotion'
 call vundle#end()
 filetype plugin indent on
 
@@ -291,4 +293,6 @@ let g:fzf_colors =
 let g:notes_directories=['~/Dropbox/notes']
 let g:notes_suffix='.md'
 let g:notes_title_sync='rename_file'
-
+" quick-scope {{{2
+highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
+highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
