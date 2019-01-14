@@ -4,7 +4,8 @@
 # .config folder
 
 cp ~/.eslintrc.js eslintrc.js
-cp ~/.emacs emacs
+cp ~/.emacs.d/init.el init.el
+cp ~/Dropbox/org/myinit.org myinit.org
 cp ~/.gitconfig gitconfig
 cp ~/.gitignore_global gitignore_global
 cp ~/.vim/vimrc vim/vimrc

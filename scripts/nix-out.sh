@@ -4,7 +4,7 @@
 # i shold realy be able to make my config file now lol
 
 cp eslintrc.js ~/.eslintrc.js
-cp emacs ~/.emacs
+cp init.el ~/.emacs.d/init.el
 cp gitconfig ~/.gitconfig
 cp gitignore_global ~/.gitignore_global
 cp tmux.conf ~/.tmux.conf

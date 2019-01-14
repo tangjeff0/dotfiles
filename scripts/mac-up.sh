@@ -15,6 +15,7 @@ brew upgrade
 echo "brew install command line apps"
 brew install coreutils
 brew install vim --with-override-system-vi
+brew install emacs
 brew install tmux
 brew install grep
 brew install ag
@@ -27,12 +28,14 @@ brew cleanup
 
 echo "brew cask install gui apps"
 brew cask install google-chrome
-brew cask install opera
 brew cask install postico
 brew cask install spectacle
 brew cask install postman
 brew cask install evernote
 brew cask install docker
+brew cask install kubernetes
+brew cask install dropbox
+brew cask install spotify
 
 echo "install zsh"
 brew install zsh
