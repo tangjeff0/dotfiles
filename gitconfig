@@ -26,3 +26,5 @@
   ll = pull
   phm = push heroku master
   r = remote -v
+[merge]
+	conflictStyle = diff3

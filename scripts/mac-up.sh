@@ -22,6 +22,10 @@ brew install ag
 brew install tree
 brew install node
 brew install yarn
+brew install thefuck
+brew install python
+brew install jq
+brew install the_silver_searcher
 
 echo "brew cleanup"
 brew cleanup
@@ -33,9 +37,12 @@ brew cask install spectacle
 brew cask install postman
 brew cask install evernote
 brew cask install docker
-brew cask install kubernetes
+brew cask install minikube
 brew cask install dropbox
 brew cask install spotify
+brew cask install virtualbox
+brew cask install macvim
+brew cask install iterm2
 
 echo "install zsh"
 brew install zsh

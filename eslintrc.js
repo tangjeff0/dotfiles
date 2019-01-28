@@ -2,7 +2,7 @@ module.exports = {
   "env": {
     "browser": true,
     "commonjs": true,
-    "es9": true,
+    // "es9": true,
     "node": true
   },
   'globals': {
@@ -10,7 +10,10 @@ module.exports = {
     "$": true,
   },
   "extends": ["eslint:recommended", 'plugin:react/recommended'],
-  "parser": "babel-eslint",
+  // "parser": "babel-eslint",
+  // "plugins": [ "react", ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
@@ -18,9 +21,6 @@ module.exports = {
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "plugins": [
-    "react",
-  ],
   "rules": {
     "react/jsx-uses-vars": 1,
     "react/jsx-uses-react": 1,

@@ -88,6 +88,7 @@ Plugin 'w0rp/ale'
 Plugin 'mattn/emmet-vim'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
+Plugin 'leafgarland/typescript-vim'
 " Plugin 'othree/yaus.vim'
 Plugin 'valloric/matchtagalways'
 Plugin 'mbbill/undotree'
@@ -120,7 +121,7 @@ set nocompatible
 " set shellpipe=>
 colo seoul256
 set directory=~/.vim/swap
-set undofile undodir=~/.vim/undodir
+set undofile undodir=~/.vim/undo
 set tabstop=2 shiftwidth=2
 set softtabstop=2 expandtab
 set autoindent smartindent
@@ -269,9 +270,14 @@ let g:mta_filetypes = {
 \}
 
 " Ack {{{2
-let g:ackprg = "ag --vimgrep"
+let g:ackprg = "ag --vimgrep --ignore-dir .git"
 
 " FZF {{{2
+" let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-h': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
 let g:fzf_colors =
 \ { 'fg':      ['fg', 'Normal'],
   \ 'bg':      ['bg', 'Normal'],
