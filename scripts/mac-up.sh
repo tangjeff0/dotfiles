@@ -50,4 +50,7 @@ git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$H
 chsh -s /bin/zsh
 
 echo "copy dotfiles out"
-source ./scripts/nix-out.sh
+./scripts/nix-out.sh
+
+echo "npm install global packages"
+./scripts/npm.sh
