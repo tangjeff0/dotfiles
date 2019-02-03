@@ -2,6 +2,7 @@ echo "did you `xcode-select --install` before running this script?"
 
 echo "show dotfiles"
 defaults write com.apple.finder AppleShowAllFiles NO
+defaults write com.apple.screencapture location /Users/jefftang/Desktop/screenshots
 killall -KILL Finder
 
 echo "press and hold to repeat keys (rather than showing accent chars!)"
