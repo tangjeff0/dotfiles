@@ -196,9 +196,9 @@ augroup config
   autocmd BufWinEnter *? normal! zM
   autocmd BufEnter,InsertLeave *? set relativenumber
   autocmd BufLeave,InsertEnter *? set norelativenumber
-  autocmd FileType markdown setlocal nospell
-  autocmd BufLeave,InsertEnter *.txt,*.md set nonumber norelativenumber
-  autocmd BufEnter,InsertLeave *.txt,*.md set nonumber norelativenumber
+  " autocmd FileType markdown setlocal nospell
+  " autocmd BufLeave,InsertEnter *.txt,*.md set nonumber norelativenumber
+  " autocmd BufEnter,InsertLeave *.txt,*.md set nonumber norelativenumber
 augroup end
 autocmd User GoyoEnter Limelight
 autocmd User GoyoLeave Limelight!

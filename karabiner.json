@@ -13,7 +13,46 @@
                     "basic.to_if_alone_timeout_milliseconds": 1000,
                     "basic.to_if_held_down_threshold_milliseconds": 500
                 },
-                "rules": []
+                "rules": [
+                    {
+                      "description": "button5 to forward page",
+                      "manipulators": [
+                        {
+                          "from": {
+                            "pointing_button": "button5"
+                          },
+                          "to": [
+                            {
+                              "key_code": "close_bracket",
+                              "modifiers": [
+                                "left_command"
+                              ]
+                            }
+                          ] ,
+                          "type": "basic"
+                        }
+                      ]
+                    },
+                    {
+                      "description": "button4 to back page",
+                      "manipulators": [
+                        {
+                          "from": {
+                            "pointing_button": "button4"
+                          },
+                          "to": [
+                            {
+                              "key_code": "open_bracket",
+                              "modifiers": [
+                                "left_command"
+                              ]
+                            }
+                          ] ,
+                          "type": "basic"
+                        }
+                      ]
+                    }
+                ]
             },
             "devices": [
                 {
@@ -245,22 +284,6 @@
                     },
                     "to": {
                         "key_code": "escape"
-                    }
-                },
-                {
-                    "from": {
-                        "pointing_button": "button4"
-                    },
-                    "to": {
-                        "key_code": "left_arrow"
-                    }
-                },
-                {
-                    "from": {
-                        "pointing_button": "button5"
-                    },
-                    "to": {
-                        "key_code": "right_arrow"
                     }
                 }
             ],

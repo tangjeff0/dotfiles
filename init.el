@@ -11,8 +11,9 @@
 ;; load package manager module
 (require 'package)
 (setq package-enable-at-startup nil)
-(add-to-list 'package-archives
-'("melpa" . "https://melpa.org/packages/"))
+(setq package-archives '(("melpa" . "https://melpa.org/packages/")
+                         ("gnu" . "http://elpa.gnu.org/packages/")
+                         ("marmalade" . "http://marmalade-repo.org/packages/")))
 (package-initialize)
 
 ;; Bootstrap `use-package'
@@ -23,12 +24,12 @@
 
 (require 'org)
 
-;; (use-package evil
-;;     :ensure t
-;;     :init
-;;     (setq evil-want-keybinding nil)
-;;     :config
-;;     (evil-mode 1))
+(use-package evil
+    :ensure t
+    :init
+    (setq evil-want-keybinding nil)
+    :config
+    (evil-mode 1))
 
 
 (org-babel-load-file (expand-file-name "~/Dropbox/org/myinit.org"))
@@ -68,11 +69,11 @@ Unscheduled TODO")
                  (quote todo)
                  (quote
                   ("DONE"))))))))
-      nil))) t)
+      nil))))
  '(org-archive-location "~/Dropbox/org/idx.org::* Archives")
  '(package-selected-packages
    (quote
-    (org-cliplink highlight-indentation yaml-mode org-download magi exec-path-from-shell workgroups kubernetes-evil kubernetes terraform-mode docker powerline-evil autopair discover-my-major discover company-tern tern yasnippet-snippets smartparens beacon rainbow-delimiters evil-collection all-the-icons neotree emacs-neotree expand-region js2-refactor js2-mode counsel evil-org evil-visualstar evil-surround org-gcal org-bullets linum-relative nlinum-relative evil-numbers evil-magit evil-matchit evil-commentary magit company auto-complete seoul256-theme which-key use-package try)))
+    (projectile hydra helpful flycheck go-mode gnugo gnu-go org-cliplink highlight-indentation yaml-mode org-download magi exec-path-from-shell workgroups kubernetes-evil kubernetes terraform-mode docker powerline-evil autopair discover-my-major discover company-tern tern yasnippet-snippets smartparens beacon rainbow-delimiters evil-collection all-the-icons neotree emacs-neotree expand-region js2-refactor js2-mode counsel evil-org evil-visualstar evil-surround org-gcal org-bullets linum-relative nlinum-relative evil-numbers evil-magit evil-matchit evil-commentary magit company auto-complete seoul256-theme which-key use-package try)))
  '(undo-tree-auto-save-history t)
  '(undo-tree-history-directory-alist (quote (("" . "~/.emacs.d/undo")))))
 (custom-set-faces

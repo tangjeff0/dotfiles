@@ -2,20 +2,21 @@ export EDITOR='vim'
 export DOCKER_ID_USER='tangsauce'
 export TERM=xterm-256color
 export PY=/usr/local/lib/python2.7/site-packages
-export STK_INSTALL_DIR=~/Desktop/code/STK/stk11.4.0
-export STK_CONFIG_DIR=$STK_INSTALL_DIR/conf
-export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
-export PATH=$PATH:/usr/lib/jvm/java-1.8.0-openjdk-amd64/bin
+
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-11.0.2.jdk/Contents/Home
+export PATH=$PATH:$JAVA_HOME
+
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.6/bin
 export PATH=$PATH:/Applications/Dev
 export PATH=$PATH:$GOPATH/bin
-export PATH=$PATH:/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin
 export PATH=$PATH:~/.yarn/bin
-export PATH=$PATH:/usr/java/jre1.8.0_171/bin
-export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+# export PATH=$PATH:/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin
+# export PATH=$PATH:/usr/java/jre1.8.0_171/bin
+# export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 
 
 alias v='vim'
+alias ec='emacsclient'
 alias o='xdg-open'
 alias g='git'
 alias h='heroku'
@@ -26,7 +27,7 @@ alias soz='source ~/.zshrc'
 alias soe='source .env && echo "sourced .env"; source env.sh && echo sourced env.sh'
 alias gAm="git add -A && git commit -m"
 alias jcj='f() { javac $1 && java ${1%.*} }; f'
-alias pbcopy='xclip -selection clipboard'
+# alias pbcopy='xclip -selection clipboard'
 alias matlab='~/MATLAB/bin/matlab -nosplash'
 
 # tmux
@@ -56,6 +57,8 @@ export XRP_PRIVATE="sniJNebJrWA3rSkxwdejFBG75YyW7"
 export XRP_PUBILC="rEqgt54AqWG6RVFCkSY68e46qmrmtiFCfr"
 export XRP_NET="wss://s.altnet.rippletest.net:51233"
 
+export GOPATH=$HOME/code/go
+
 
 # kubectl switch context
 ks() {
@@ -84,3 +87,5 @@ if [ -f '/Users/jefftang/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/jeffta
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/jefftang/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/jefftang/google-cloud-sdk/completion.zsh.inc'; fi
+
+source ~/code/strata/env.sh

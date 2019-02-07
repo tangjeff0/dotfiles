@@ -10,10 +10,10 @@ module.exports = {
     "$": true,
   },
   "extends": ["eslint:recommended", 'plugin:react/recommended'],
-  // "parser": "babel-eslint",
-  // "plugins": [ "react", ],
-  "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint"],
+  "parser": "babel-eslint",
+  "plugins": [ "react", ],
+  // "parser": "@typescript-eslint/parser",
+  // "plugins": ["@typescript-eslint"],
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
@@ -37,8 +37,7 @@ module.exports = {
       "single"
     ],
     "semi": [
-      "error",
-      "never"
+      0,
     ],
     "no-console": 1,
     "no-unused-vars": 1,
