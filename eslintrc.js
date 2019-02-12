@@ -3,7 +3,8 @@ module.exports = {
     "browser": true,
     "commonjs": true,
     // "es9": true,
-    "node": true
+    "node": true,
+    "jest": true
   },
   'globals': {
     "@": true,
@@ -33,13 +34,14 @@ module.exports = {
       "unix"
     ],
     "quotes": [
-      "error",
+      0,
       "single"
     ],
     "semi": [
-      0,
+      1,
+      "never"
     ],
-    "no-console": 1,
+    "no-console": 0,
     "no-unused-vars": 1,
   }
 };

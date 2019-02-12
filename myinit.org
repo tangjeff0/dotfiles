@@ -1,13 +1,15 @@
-* Org Mode Restart
 for some reason, if i `find-file` in my `init.el` on .org files, any org files that are not the last found file do not have org bullets
 #+BEGIN_SRC emacs-lisp
-;; (org-mode-restart)
+(org-mode-restart)
 #+END_SRC
+
+#+RESULTS:
+: org-mode restarted
+
 * GUI
 ** Theme
    #+BEGIN_SRC emacs-lisp
      (use-package seoul256-theme
- :ensure t
  :config (load-theme 'seoul256 t))
    #+END_SRC
 ** Word Wrap
@@ -21,8 +23,7 @@ for some reason, if i `find-file` in my `init.el` on .org files, any org files t
 #+END_SRC
 *** Icons
     #+BEGIN_SRC emacs-lisp
-      (use-package all-the-icons
-	:ensure t)
+      (use-package all-the-icons)
     #+END_SRC
 ** Cursor
    Adaptive cursor width shows width of character, e.g. TAB. Via [[http://pragmaticemacs.com/emacs/adaptive-cursor-width/][Pragmatic Emacs]].
@@ -60,6 +61,7 @@ for some reason, if i `find-file` in my `init.el` on .org files, any org files t
 
 #+END_SRC
 ** Beacon
+   A light that follows your cursor around so you don't lose it!
 #+BEGIN_SRC emacs-lisp
   (use-package beacon
     :ensure t
@@ -67,11 +69,13 @@ for some reason, if i `find-file` in my `init.el` on .org files, any org files t
 
 #+END_SRC
 ** Indent
+  make indentation commands use space only (never tab character)
 #+BEGIN_SRC emacs-lisp
-  ;; make indentation commands use space only (never tab character)
   (progn
     (setq-default indent-tabs-mode nil))
   (setq-default tab-width 2)
+  (setq js-indent-level 2)
+
 #+END_SRC
 
 ** Scroll Margin
@@ -82,23 +86,89 @@ for some reason, if i `find-file` in my `init.el` on .org files, any org files t
    #+BEGIN_SRC emacs-lisp
    (toggle-frame-maximized)
    #+END_SRC
-* Async
+* System
+** Server
+   #+BEGIN_SRC emacs-lisp
+   (load "server")
+   (unless (server-running-p) (server-start))
+   #+END_SRC
+** Path
+   #+BEGIN_SRC emacs-lisp
+     (use-package exec-path-from-shell
+       :config (when (memq window-system '(mac ns x))
+       (exec-path-from-shell-initialize)))
+   #+END_SRC
+** Backups
+   [[https://ogbe.net/emacsconfig.html][This tweak saves autosave files in one location, rather than in the same directory as the file that is being edited.]]
+
+   #+BEGIN_SRC emacs-lisp
+     (defvar backup-dir (expand-file-name "~/.emacs.d/backup/"))
+     (defvar autosave-dir (expand-file-name "~/.emacs.d/autosave/"))
+     (setq backup-directory-alist (list (cons ".*" backup-dir))
+	   auto-save-list-file-prefix autosave-dir
+	   auto-save-file-name-transforms `((".*" ,autosave-dir t))
+	   tramp-backup-directory-alist backup-directory-alist
+	   tramp-auto-save-directory autosave-dir)
+   #+END_SRC
+   #+BEGIN_SRC emacs-lisp
+   (global-undo-tree-mode)
+ (setq undo-tree-auto-save-history t)
+ (setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
+ (undo-tree-load-history-hook)
+   #+END_SRC
+
+   #+RESULTS:
+* Utilities
+** Try
  #+BEGIN_SRC emacs-lisp
-   (use-package async
-     :init
-     (autoload 'dired-async-mode "dired-async.el" nil t)
-     (dired-async-mode 1)
-     (async-bytecomp-package-mode 1)
-     (autoload 'dired-async-mode "dired-async.el" nil t)
-     (async-bytecomp-package-mode 1)
-     (dired-async-mode 1)
-     (require 'smtpmail-async)
-     (setq send-mail-function 'async-smtpmail-send-it))
+   (use-package try)
  #+END_SRC
-* Dired-X
-#+BEGIN_SRC emacs-lisp
-(require 'dired-x)
-#+END_SRC
+** Which Key
+    Brings up some help
+    #+BEGIN_SRC emacs-lisp
+    (use-package which-key
+	  :ensure t 
+	  :config
+	  (which-key-mode))
+    #+END_SRC
+** Async
+  #+BEGIN_SRC emacs-lisp
+    (use-package async
+      :init
+      (autoload 'dired-async-mode "dired-async.el" nil t)
+      (dired-async-mode 1)
+      (async-bytecomp-package-mode 1)
+      (autoload 'dired-async-mode "dired-async.el" nil t)
+      (async-bytecomp-package-mode 1)
+      (dired-async-mode 1)
+      (require 'smtpmail-async)
+      (setq send-mail-function 'async-smtpmail-send-it))
+  #+END_SRC
+** Discover
+*** Discover.el
+ #+BEGIN_SRC emacs-lisp
+     (use-package discover
+       :ensure t
+       :config )
+ #+END_SRC
+
+*** Discover Major
+ #+BEGIN_SRC emacs-lisp
+   (use-package discover-my-major
+     :ensure t
+     :config
+     (global-set-key (kbd "C-h C-m") 'discover-my-major)
+     (global-set-key (kbd "C-h M-m") 'discover-my-mode))
+ #+END_SRC
+** Helpful
+   #+BEGIN_SRC emacs-lisp
+     (use-package helpful)
+   #+END_SRC
+** Expand Region
+   #+BEGIN_SRC emacs-lisp
+     (use-package expand-region
+       :config (global-set-key (kbd "C-=") 'er/expand-region))
+   #+END_SRC
 * Org Mode
 ** Settings
 #+BEGIN_SRC emacs-lisp
@@ -107,6 +177,8 @@ for some reason, if i `find-file` in my `init.el` on .org files, any org files t
 (setq org-mobile-directory "~/Dropbox/Apps/MobileOrg")
 (setq org-startup-with-inline-images t)
 #+END_SRC
+** Structure Templates / Tempo
+
 ** Time
 #+BEGIN_SRC emacs-lisp
 (setq org-log-done 'time)
@@ -128,7 +200,6 @@ for some reason, if i `find-file` in my `init.el` on .org files, any org files t
 ** Bullets
 #+BEGIN_SRC emacs-lisp
     (use-package org-bullets
-    :ensure t
     :config
     (require 'org-bullets)
     (custom-set-faces
@@ -200,28 +271,24 @@ for some reason, if i `find-file` in my `init.el` on .org files, any org files t
 #+END_SRC
 ** TODO Export
 *** Presentation
-* Imenu
-#+BEGIN_SRC emacs-lisp
-(global-set-key (kbd "M-i") 'imenu)
-#+END_SRC
-* Mu4e
-#+BEGIN_SRC emacs-lisp
-  ;; (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu/mu4e")
-  ;; (require 'mu4e)
-  ;; (setq
-  ;;   mu4e-maildir "~/Maildir/tangj1122")
-#+END_SRC
 * Evil
-  #+BEGIN_SRC emacs-lisp
-       (use-package powerline
-         :ensure t
-         :config
-         (require 'powerline)
-         (powerline-default-theme))
-       ;; (use-package powerline-evil
-       ;;   :ensure t
-       ;;   :config (require 'powerline-evil)))
-  #+END_SRC
+** Use Evil
+   #+BEGIN_SRC emacs-lisp
+(use-package evil
+    :init
+    (setq evil-want-keybinding nil)
+    :config
+    (evil-mode 1))
+   #+END_SRC
+** Evil Powerline
+   #+BEGIN_SRC emacs-lisp
+        (use-package powerline
+          :config
+          (require 'powerline)
+          (powerline-default-theme))
+        ;; (use-package powerline-evil
+        ;;   :config (require 'powerline-evil)))
+   #+END_SRC
 ** Evil Initial State
 #+BEGIN_SRC emacs-lisp
 (evil-set-initial-state 'dired-mode 'emacs)
@@ -233,12 +300,8 @@ for some reason, if i `find-file` in my `init.el` on .org files, any org files t
    #+BEGIN_SRC emacs-lisp
        (use-package evil-collection
      :after evil
-     :ensure t
      :config
      (evil-collection-init))
-   #+END_SRC
-** Evil Powerline
-   #+BEGIN_SRC emacs-lisp
    #+END_SRC
 ** Keymaps
 =C-u= is bound to a scroll up command in Vim, in Emacs however it's
@@ -264,28 +327,19 @@ command by default which I most definitely will not miss.
 ** Commentary
    #+BEGIN_SRC emacs-lisp
      (use-package evil-commentary
- :ensure t
  :config (evil-commentary-mode))
    #+END_SRC
 ** Matchit
    #+BEGIN_SRC emacs-lisp
      (use-package evil-matchit
- :ensure t
  :config
  (require 'evil-matchit)
  (global-evil-matchit-mode 1)
  )
    #+END_SRC
-** Magit
-   #+BEGIN_SRC emacs-lisp
-     (use-package magit
-       :bind ("C-c g" . magit-status))
-     ;; (use-package evil-magit)
-   #+END_SRC
 ** Numbers
    #+BEGIN_SRC emacs-lisp
      (use-package evil-numbers
- :ensure t
  :config
  (define-key evil-normal-state-map (kbd "-") 'evil-numbers/dec-at-pt)
  (define-key evil-normal-state-map (kbd "+") 'evil-numbers/inc-at-pt))
@@ -293,14 +347,12 @@ command by default which I most definitely will not miss.
 ** Surround
 #+BEGIN_SRC emacs-lisp
 (use-package evil-surround
-  :ensure t
   :config
   (global-evil-surround-mode 1))
 #+END_SRC
 ** Visualstar
 #+BEGIN_SRC emacs-lisp
 (use-package evil-visualstar
-  :ensure t
   :config
   (global-evil-visualstar-mode))
 #+END_SRC
@@ -308,7 +360,6 @@ command by default which I most definitely will not miss.
    - https://github.com/Somelauw/evil-org-mode/blob/master/doc/keythemes.org
    #+BEGIN_SRC emacs-lisp
      ;;     (use-package evil-org
-     ;;       :ensure t
      ;;       :after org
      ;;       :config
      ;;       (add-hook 'org-mode-hook 'evil-org-mode)
@@ -319,11 +370,10 @@ command by default which I most definitely will not miss.
      ;;       (evil-org-agenda-set-keys)
      ;; (evil-org-set-key-theme '(textobjects insert navigation additional shift todo heading)))
    #+END_SRC
-* Completion
+* Navigation
 ** Company
    #+BEGIN_SRC emacs-lisp
      (use-package company
- :ensure t
  :bind (:map company-active-map
 		   ("C-n" . company-select-next)
 		   ("C-p" . company-select-previous)
@@ -345,12 +395,10 @@ command by default which I most definitely will not miss.
 *** Counsel
    #+BEGIN_SRC emacs-lisp
      (use-package counsel
- :ensure t
  :config
  (counsel-mode t)
  (global-set-key (kbd "C-c C-r") 'ivy-resume))
      ;; (use-package counsel
-     ;; :ensure t
      ;;     :bind (("C-x C-f" . counsel-find-file)
      ;; 	   ("M-x" . counsel-M-x)
      ;; 	   ("C-h f" . counsel-describe-function)
@@ -381,38 +429,273 @@ command by default which I most definitely will not miss.
      ;; (setq ido-enable-flex-matching t
      ;;       ido-everywhere t)
    #+END_SRC
-* Projectile
-  #+BEGIN_SRC emacs-lisp
-    (use-package projectile
-      :config
-      (projectile-mode +1)
-      (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-      (setq projectile-project-search-path '("~/Dropbox/org" "~/code/"))
-      (setq projectile-completion-system 'ivy)
-      (setq projectile-switch-project-action #'projectile-dired)
+** IMenu
+   #+BEGIN_SRC emacs-lisp
+   (use-package imenu-list
+   :config
+ (global-set-key (kbd "M-i") 'imenu)
+ (global-set-key (kbd "C-c C-'") #'imenu-list-smart-toggle)
+ (setq imenu-list-focus-after-activation t)
+ (setq imenu-list-auto-resize t)
+ )
+   #+END_SRC
 
-      )
-  #+END_SRC
+   #+RESULTS:
+   : t
 
-  #+RESULTS:
-  : t
+** Projectile
+   #+BEGIN_SRC emacs-lisp
+     (use-package projectile
+       :config
+       (projectile-mode +1)
+       ;; (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+       (setq projectile-project-search-path '("~/Dropbox/org" "~/code/"))
+       (setq projectile-completion-system 'ivy)
+       (setq projectile-switch-project-action #'projectile-dired)
 
+       )
+   #+END_SRC
+
+   #+RESULTS:
+   : t
+** Dired-X
+ #+BEGIN_SRC emacs-lisp
+ (require 'dired-x)
+ #+END_SRC
 * Hydra and Unbindings
-** Use Hydra
+** Use
    #+BEGIN_SRC emacs-lisp
    (use-package hydra)
    #+END_SRC
-** Window
-*** TODO Hydra
+** C-h
+*** Hydra
+**** Helpful
+     #+BEGIN_SRC emacs-lisp
+       (defhydra hydra-helpful (:color blue)
+         "Helpful"
+         ("a" apropos "apropos")
+         ("c" helpful-callable "call")
+         ("d" apropos-documentation "doc")
+         ("v" helpful-variable "var")
+         ("k" helpful-key "key")
+         ("p" helpful-at-point "point")
+         ;; ("F" helpful-function "func")
+         ;; ("c" helpful-command "command")
+         ("q" nil "quit")
+       )
+       (bind-keys ("C-h h" . hydra-helpful/body))
+
+     #+END_SRC
+
+     #+RESULTS:
+     : hydra-helpful/body
+**** Apropos
+     #+BEGIN_SRC emacs-lisp
+     (defhydra hydra-apropos (:color blue)
+     "Apropos"
+     ("a" apropos "apropos")
+     ("c" apropos-command "cmd")
+     ("d" apropos-documentation "doc")
+     ("e" apropos-value "val")
+     ("l" apropos-library "lib")
+     ("o" apropos-user-option "option")
+     ("v" apropos-variable "var")
+     ("i" info-apropos "info")
+     ("t" tags-apropos "tags")
+     ("z" hydra-customize-apropos/body "customize"))
+
+   (defhydra hydra-customize-apropos (:color blue)
+     "Apropos (customize)"
+     ("a" customize-apropos "apropos")
+     ("f" customize-apropos-faces "faces")
+     ("g" customize-apropos-groups "groups")
+     ("o" customize-apropos-options "options"))
+
+   (bind-keys ("C-h a" . hydra-apropos/body))
+     #+END_SRC
+
+     #+RESULTS:
+     : hydra-apropos/body
+
+**** Describe
+    Don't really need this anymore because of Helpful
+     #+BEGIN_SRC emacs-lisp
+       ;; (defhydra hydra-describe (:color blue)
+       ;;   "Describe"
+       ;;   ("b" describe-bindings "bindings")
+       ;;   ("m" describe-mode "mode")
+       ;;   ("o" describe-symbol "symbol")
+       ;;   ("p" describe-package "package")
+       ;;   ("s" describe-syntax "syntax")
+       ;; )
+       ;; (bind-keys ("C-h d" . hydra-describe/body))
+     #+END_SRC
+
+     #+RESULTS:
+     : hydra-describe/body
+**** View
+     Will never use this
+     #+BEGIN_SRC emacs-lisp
+       ;; (defhydra hydra-view (:color blue)
+       ;;   "View"
+       ;;   ("e" view-echo-area-messages "echo")
+       ;;   ("n" view-emacs-news "news")
+       ;;   ("p" view-emacs-problems "problems")
+       ;;   ("f" view-emacs-FAQ "todo")
+       ;;   ("x" view-external-packages "external packages")
+       ;;   ("q" nil "quit" :color blue)
+       ;; )
+       ;; (bind-keys ("C-h v" . hydra-view/body))
+     #+END_SRC
+
+     #+RESULTS:
+     : hydra-view/body
+*** Unbind
+**** Apropos
+     #+BEGIN_SRC emacs-lisp
+     (global-unset-key (kbd "C-h a")) ;; apropos-command
+     (global-unset-key (kbd "C-h d")) ;; apropos-documentation
+     #+END_SRC
+**** View
+     #+BEGIN_SRC emacs-lisp
+      (global-unset-key (kbd "C-h e")) ;; view-echo-area-messages
+      (global-unset-key (kbd "C-h l")) ;; view-echo-area-messages
+      (global-unset-key (kbd "C-h n")) ;; view-emacs-news
+      (global-unset-key (kbd "C-h C-n")) ;; view-emacs-news
+      (global-unset-key (kbd "C-h C-e")) ;; view-external-packages
+      (global-unset-key (kbd "C-h C-p")) ;; view-emacs-problems
+      (global-unset-key (kbd "C-h C-t")) ;; view-emacs-todo
+      (global-unset-key (kbd "C-h C-f")) ;; view-emacs-FAQ
+     #+END_SRC
+**** Describe
+     #+BEGIN_SRC emacs-lisp
+       (global-unset-key (kbd "C-h f")) ;; describe-function
+       (global-unset-key (kbd "C-h v")) ;; describe-variable
+       (global-unset-key (kbd "C-h k")) ;; describe-key
+       (global-unset-key (kbd "C-h C")) ;; describe-coding-system
+       (global-unset-key (kbd "C-h P")) ;; describe-package
+       (global-unset-key (kbd "C-h c")) ;; describe-key-briefly
+       (global-unset-key (kbd "C-h g")) ;; describe-gnu-project
+       (global-unset-key (kbd "C-h C-w")) ;; describe-no-warranty
+       (global-unset-key (kbd "C-h C-o")) ;; describe-distribution
+       (global-unset-key (kbd "C-h C-c")) ;; describe-copying
+       (global-unset-key (kbd "C-h C-\\")) ;; describe-input-method
+       (global-unset-key (kbd "C-h I")) ;; describe-input-method
+       (global-unset-key (kbd "C-h L")) ;; describe-language-environment
+       (global-unset-key (kbd "C-h o")) ;; describe-symbol
+       (global-unset-key (kbd "C-h b")) ;; describe-bindings
+       (global-unset-key (kbd "C-h s")) ;; describe-syntax
+       (global-unset-key (kbd "C-h m")) ;; describe-mode
+     #+END_SRC
+
+     #+RESULTS:
+
+     #+BEGIN_SRC emacs-lisp
+       (global-unset-key (kbd "C-h C-d")) ;; view-emacs-debugging
+       (global-unset-key (kbd "C-h F")) ;; Info-goto-emacs-key-command
+     #+END_SRC
+**** Everything else
+     #+BEGIN_SRC emacs-lisp
+       (global-unset-key (kbd "C-h r")) ;; info-emacs-manual
+       (global-unset-key (kbd "C-h t")) ;; help-with-tutorial
+       (global-unset-key (kbd "C-h C-a")) ;; about-emacs
+       (global-unset-key (kbd "C-h K")) ;; info-goto-emacs-key-command-node
+       (global-unset-key (kbd "C-h S")) ;; info-lookup-symbol
+     #+END_SRC
+
+     #+RESULTS:
+** C-x
+*** Unbindings
     #+BEGIN_SRC emacs-lisp
-        (defhydra hydra-window ()
-            "Window"
-        ("k" evil-window-increase-height "h+")
-        ("j" evil-window-decrease-height "h-")
-        ("l" evil-window-increase-width "w+")
-        ("h" evil-window-decrease-width "w-")
-        ("=" balance-windows "balance"))
-           (bind-keys ("C-x w" . hydra-window/body))
+      (global-unset-key (kbd "C-x C-l")) ;; downcase-region
+      (global-unset-key (kbd "C-x C-u")) ;; upcase-region
+      (global-unset-key (kbd "C-x C-t")) ;; tranpose-lines
+      (global-unset-key (kbd "C-x C-<left>")) ;; prev-buffer
+      (global-unset-key (kbd "C-x C-<right>")) ;; next-buffer
+      (global-unset-key (kbd "C-x C-<right>")) ;; next-buffer
+      (global-unset-key (kbd "C-x C-<right>")) ;; next-buffer
+    #+END_SRC
+
+    #+RESULTS:
+** Projectile
+    #+BEGIN_SRC emacs-lisp
+
+      ;; C        projectile-configure-project
+      ;; P        projectile-test-project
+
+      ;; R        projectile-regenerate-tags
+      ;; j        projectile-find-tag
+
+      ;; S        projectile-save-project-buffers
+      ;; V        projectile-browse-dirty-projects
+      ;; c        projectile-compile-project
+
+      ;; m        projectile-commander
+      ;; o        projectile-multi-occur
+      ;; r        projectile-replace
+      ;; s g      projectile-grep
+      ;; s r      projectile-ripgrep
+      ;; s s      projectile-ag
+      ;; t        projectile-toggle-between-implementation-and-test
+
+      ;; !        projectile-run-shell-command-in-root
+      ;; &        projectile-run-async-shell-command-in-root
+      ;; u        projectile-run-project
+      ;; x e      projectile-run-eshell
+      ;; x i      projectile-run-ielm
+      ;; x s      projectile-run-shell
+      ;; x t      projectile-run-term
+
+      ;; i        projectile-invalidate-cache
+      ;; z        projectile-cache-current-file
+
+      (defhydra hydra-projectile (:color teal :hint nil)
+        "Projectile"
+
+        ("l"        projectile-project-buffers-other-buffer "Last Buffer" :column "Buffer")
+        ("b"        projectile-switch-to-buffer "Switch Buffer")
+        ("i"        projectile-ibuffer "IBuffer")
+
+        ("f"        projectile-find-file-dwim "Find File" :column "File System")
+        ("-"        projectile-dired "Dired")
+        ("d"        projectile-find-dir "Find Dir")
+
+        ("ps"       projectile-switch-open-project "Switch Project" :column "Project")
+        ("pf"       projectile-switch-project "Find Project")
+        ("g"        projectile-vc "Git")
+
+        ("q"        nil "quit" :color blue :column "Quit"))
+
+        ;; ("<left>"   projectile-previous-project-buffer "Prev Buf" :color red)
+        ;; ("<right>"  projectile-next-project-buffer "Next Buf" :color red :column "Buffer")
+
+        ;; ("a"        projectile-find-other-file "Find Alternate File")
+        ;; ("F"        projectile-find-file-in-known-projects "Dired")
+        ;; ("t"        projectile-find-test-file "Dired")
+        ;; ("l"        projectile-find-file-in-directory "Dired")
+        ;; ("r"        projectile-recentf "Recent File")
+      (bind-keys ("C-c p" . hydra-projectile/body))
+    #+END_SRC
+
+    #+RESULTS:
+    : hydra-projectile/body
+
+** Window
+*** Hydra
+    #+BEGIN_SRC emacs-lisp
+      (defhydra hydra-window ()
+        "Window"
+      ("u" enlarge-window "h+")
+      ("j" shrink-window "h-")
+      ("e" enlarge-window-horizontally "w+")
+      ("d" shrink-window-horizontally "w-")
+      ("s" split-window-below "horizontal")
+      ("v" split-window-right "vertical")
+      ("0" delete-window :color "delete")
+      ("o" delete-other-windows :color "only")
+      ("=" balance-windows "balance")
+      ("q" nil "exit" :color blue))
+         (bind-keys ("C-x w" . hydra-window/body))
     #+END_SRC
 
     #+RESULTS:
@@ -421,7 +704,7 @@ command by default which I most definitely will not miss.
 *** Unbindings
     #+BEGIN_SRC emacs-lisp
     (global-unset-key (kbd "C-x 0")) ;; delete-window
-    (global-unset-key (kbd "C-x 1")) ;; delete-other-window
+    (global-unset-key (kbd "C-x 1")) ;; delete-other-windows
     (global-unset-key (kbd "C-x 2")) ;; split-window-below
     (global-unset-key (kbd "C-x 3")) ;; split-window-right
     (global-unset-key (kbd "C-x 5")) ;; +ctl-x-5-prefix ; operate on other frames
@@ -432,7 +715,6 @@ command by default which I most definitely will not miss.
     #+END_SRC
 
     #+RESULTS:
-
 ** Zoom
 *** Hydra
   #+BEGIN_SRC emacs-lisp
@@ -456,133 +738,6 @@ command by default which I most definitely will not miss.
     #+END_SRC
 
     #+RESULTS:
-** Apropos
-*** Unbindings
-    #+BEGIN_SRC emacs-lisp
-    (global-unset-key (kbd "C-h a")) ;; apropos-command
-    (global-unset-key (kbd "C-h d")) ;; apropos-documentation
-    #+END_SRC
-
-    #+RESULTS:
-*** Hydra
-    #+BEGIN_SRC emacs-lisp
-    (defhydra hydra-apropos (:color blue)
-    "Apropos"
-    ("a" apropos "apropos")
-    ("c" apropos-command "cmd")
-    ("d" apropos-documentation "doc")
-    ("e" apropos-value "val")
-    ("l" apropos-library "lib")
-    ("o" apropos-user-option "option")
-    ("v" apropos-variable "var")
-    ("i" info-apropos "info")
-    ("t" tags-apropos "tags")
-    ("z" hydra-customize-apropos/body "customize"))
-
-  (defhydra hydra-customize-apropos (:color blue)
-    "Apropos (customize)"
-    ("a" customize-apropos "apropos")
-    ("f" customize-apropos-faces "faces")
-    ("g" customize-apropos-groups "groups")
-    ("o" customize-apropos-options "options"))
-
-  (bind-keys ("C-h a" . hydra-apropos/body))
-    #+END_SRC
-** Describe
-*** Hydra
-    #+BEGIN_SRC emacs-lisp
-      (defhydra hydra-describe (:color blue)
-        "Helpful"
-        ("f" helpful-callable "call")
-        ("v" helpful-variable "var")
-        ("k" helpful-key "key")
-        ("p" helpful-at-point "at-point")
-        ("F" helpful-function "func")
-        ("c" helpful-command "command")
-        ("P" describe-package "package")
-        ("m" describe-mode "mode")
-        ("b" describe-binding "bind")
-        ("s" describe-syntax "syntax")
-        ("o" describe-symbol "symbol")
-      )
-      (bind-keys ("C-h d" . hydra-describe/body))
-    #+END_SRC
-
-    #+RESULTS:
-    : hydra-describe/body
-
-*** Unbindings
-    #+BEGIN_SRC emacs-lisp
-      (global-unset-key (kbd "C-h f")) ;; describe-function
-      (global-unset-key (kbd "C-h v")) ;; describe-variable
-      (global-unset-key (kbd "C-h k")) ;; describe-key
-      (global-unset-key (kbd "C-h C")) ;; describe-coding-system
-      (global-unset-key (kbd "C-h P")) ;; describe-package
-      (global-unset-key (kbd "C-h c")) ;; describe-key-briefly
-      (global-unset-key (kbd "C-h g")) ;; describe-gnu-project
-      (global-unset-key (kbd "C-h C-w")) ;; describe-no-warranty
-      (global-unset-key (kbd "C-h C-o")) ;; describe-distribution
-      (global-unset-key (kbd "C-h C-c")) ;; describe-copying
-      (global-unset-key (kbd "C-h C-\\")) ;; describe-input-method
-      (global-unset-key (kbd "C-h I")) ;; describe-input-method
-      (global-unset-key (kbd "C-h L")) ;; describe-language-environment
-      (global-unset-key (kbd "C-h o")) ;; describe-symbol
-      (global-unset-key (kbd "C-h b")) ;; describe-binding
-      (global-unset-key (kbd "C-h s")) ;; describe-syntax
-      (global-unset-key (kbd "C-h m")) ;; describe-mode
-    #+END_SRC
-
-    #+RESULTS:
-
-    #+BEGIN_SRC emacs-lisp
-      (global-unset-key (kbd "C-h C-d")) ;; view-emacs-debugging
-      (global-unset-key (kbd "C-h F")) ;; Info-goto-emacs-key-command
-    #+END_SRC
-** Helpful
-   #+BEGIN_SRC emacs-lisp
- (defhydra hydra-helpful (:color blue)
-   "Helpful"
-   ("f" helpful-callable "call")
-   ("v" helpful-variable "var")
-   ("k" helpful-key "key")
-   ("p" helpful-at-point "point")
-   ("F" helpful-function "func")
-   ("c" helpful-command "command")
- )
- (bind-keys ("C-h h" . hydra-helpful/body))
-  
-   #+END_SRC
-** View
-*** Unbind
-    #+BEGIN_SRC emacs-lisp
-     (global-unset-key (kbd "C-h e")) ;; view-echo-area-messages
-     (global-unset-key (kbd "C-h l")) ;; view-echo-area-messages
-     (global-unset-key (kbd "C-h n")) ;; view-emacs-news
-     (global-unset-key (kbd "C-h C-n")) ;; view-emacs-news
-     (global-unset-key (kbd "C-h C-e")) ;; view-external-packages
-     (global-unset-key (kbd "C-h C-p")) ;; view-emacs-problems
-     (global-unset-key (kbd "C-h C-t")) ;; view-emacs-todo
-     (global-unset-key (kbd "C-h C-f")) ;; view-emacs-FAQ
-    #+END_SRC
-
-    #+RESULTS:
-
-*** Hydra
-    #+BEGIN_SRC emacs-lisp
-      (defhydra hydra-view (:color blue)
-        "View"
-        ("e" helpful-callable "echo")
-        ("l" helpful-variable "lossage")
-        ("n" helpful-key "news")
-        ("p" helpful-at-point "problems")
-        ("f" helpful-function "todo")
-        ("x" helpful-command "external packages")
-      )
-      (bind-keys ("C-h v" . hydra-view/body))
-    #+END_SRC
-
-    #+RESULTS:
-    : hydra-view/body
 ** Transpose
    #+BEGIN_SRC emacs-lisp
      (global-set-key (kbd "C-c t")
@@ -630,219 +785,135 @@ command by default which I most definitely will not miss.
 
    #+RESULTS:
    : hydra-hs/body
-
-* Server
-  #+BEGIN_SRC emacs-lisp
-  (server-start)
-  #+END_SRC
-* Helpful
-  #+BEGIN_SRC emacs-lisp
-    (use-package helpful)
-  #+END_SRC
-* Which Key
-   Brings up some help
+* Coding
+** Flycheck
    #+BEGIN_SRC emacs-lisp
-   (use-package which-key
-	 :ensure t 
-	 :config
-	 (which-key-mode))
+   (use-package flycheck
+ :config (global-flycheck-mode))
    #+END_SRC
-* Try
-#+BEGIN_SRC emacs-lisp
-  (use-package try)
-#+END_SRC
-* Path
-  #+BEGIN_SRC emacs-lisp
-    (use-package exec-path-from-shell
-      :config (when (memq window-system '(mac ns x))
-      (exec-path-from-shell-initialize)))
-  #+END_SRC
-* Javascript
-** js2-mode
-   Mainly used for syntax parsing, a dependency for other packages
+** Smartparens
    #+BEGIN_SRC emacs-lisp
-     (use-package js2-mode
- :ensure t
- :config
- (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
- (add-to-list 'interpreter-mode-alist '("node" . js2-mode))
- ;; (add-to-list 'auto-mode-alist '("\\.jsx?\\'" . js2-jsx-mode)) ; jsx support
- )
-   #+END_SRC
-** js2-refactor
-   https://github.com/magnars/js2-refactor.el
-   #+BEGIN_SRC emacs-lisp
-     (use-package js2-refactor
- :ensure t
- :config
- (add-hook 'js2-mode-hook #'js2-refactor-mode)
- (setq js2-skip-preprocessor-directives t)
- (js2r-add-keybindings-with-prefix "C-c C-j")
- )
-   #+END_SRC
-** Tern
- #   #+BEGIN_SRC emacs-lisp
- #     (use-package tern
- # :ensure t)
-
- #     (use-package company-tern
- # :ensure t
- # :config
- # (add-to-list 'company-backends 'company-tern)
- # (add-hook 'js2-mode-hook (lambda ()
- #  			(tern-mode)
- #  			(company-mode))))
- #   #+END_SRC
-
-
-** Indium
-   #+BEGIN_SRC emacs-lisp
-     ;;     (use-package tern
-     ;; :ensure t
-     ;; :config
-     ;; (autoload 'tern-mode "tern.el" nil t)
-     ;; (add-hook 'js-mode-hook (lambda () (tern-mode t))))
-   #+END_SRC
-* Flycheck
-  #+BEGIN_SRC emacs-lisp
-  (use-package flycheck
-:config (global-flycheck-mode))
-  #+END_SRC
-* Go
-  #+BEGIN_SRC emacs-lisp
-  (use-package go-mode)
-  #+END_SRC
-* YAML
-  #+BEGIN_SRC emacs-lisp
-      (use-package yaml-mode
-    :config
-       (add-to-list 'auto-mode-alist '("\\.yaml\\'" . yaml-mode)))
-
-    ;; Unlike python-mode, this mode follows the Emacs convention of not
-    ;; binding the ENTER key to `newline-and-indent'.  To get this
-    ;; behavior, add the key definition to `yaml-mode-hook':
-
-    ;;    (add-hook 'yaml-mode-hook
-    ;;     '(lambda ()
-    ;;        (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
-  #+END_SRC
-#+BEGIN_SRC emacs-lisp
-  (use-package highlight-indentation
-    :config
-    (set-face-background 'highlight-indentation-face "#e3e3d3")
-  (set-face-background 'highlight-indentation-current-column-face "#c3b3b3"))
-#+END_SRC
-#+BEGIN_SRC emacs-lisp
-(defun aj-toggle-fold ()
-  "Toggle fold all lines larger than indentation on current line"
-  (interactive)
-  (let ((col 1))
-    (save-excursion
-      (back-to-indentation)
-      (setq col (+ 1 (current-column)))
-      (set-selective-display
-       (if selective-display nil (or col 1))))))
-(global-set-key [(M C i)] 'aj-toggle-fold)
-#+END_SRC
-
-* Expand Region
-  #+BEGIN_SRC emacs-lisp
-    (use-package expand-region
-      :ensure t
-      :config (global-set-key (kbd "C-=") 'er/expand-region))
-  #+END_SRC
-* Neotree
-   #+BEGIN_SRC emacs-lisp
-     (use-package neotree
-       :ensure t
-       :config (global-set-key [f8] 'neotree-toggle)
-    (setq neo-smart-open t)
-    (setq neo-theme (if (display-graphic-p) 'icons 'arrow 'ascii 'nerd))
-    (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
-    (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
-    (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
-    (evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
-    (evil-define-key 'normal neotree-mode-map (kbd "r") 'neotree-refresh)
-    (evil-define-key 'normal neotree-mode-map (kbd "A") 'neotree-stretch-toggle)
-    (evil-define-key 'normal neotree-mode-map (kbd "H") 'neotree-hidden-file-toggle)
-)
+     (use-package smartparens
+       :config (require 'smartparens-config)
+       (add-hook 'js-mode-hook #'smartparens-mode))
 
    #+END_SRC
-* Backups
-  [[https://ogbe.net/emacsconfig.html][This tweak saves autosave files in one location, rather than in the same directory as the file that is being edited.]]
+** Autopair
+   #+BEGIN_SRC emacs-lisp
+     (use-package autopair
+       :config (autopair-global-mode))
+   #+END_SRC
+** YASnippets
+   #+BEGIN_SRC emacs-lisp
+     (use-package yasnippet
+       :config (yas-global-mode 1))
+   #+END_SRC
+   #+BEGIN_SRC emacs-lisp
+     (use-package yasnippet-snippets
+       :config )
+   #+END_SRC
+* Language
+** Javascript
+*** js2-mode
+    Mainly used for syntax parsing, a dependency for other packages
+    #+BEGIN_SRC emacs-lisp
+      (use-package js2-mode
+  :config
+  (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+  (add-to-list 'interpreter-mode-alist '("node" . js2-mode))
+  (setq js2-strict-missing-semi-warning nil) ;; using flycheck and eslint
+  ;; (add-to-list 'auto-mode-alist '("\\.jsx?\\'" . js2-jsx-mode)) ; jsx support
+  )
+    #+END_SRC
 
-  #+BEGIN_SRC emacs-lisp
-    (defvar backup-dir (expand-file-name "~/.emacs.d/backup/"))
-    (defvar autosave-dir (expand-file-name "~/.emacs.d/autosave/"))
-    (setq backup-directory-alist (list (cons ".*" backup-dir))
-	  auto-save-list-file-prefix autosave-dir
-	  auto-save-file-name-transforms `((".*" ,autosave-dir t))
-	  tramp-backup-directory-alist backup-directory-alist
-	  tramp-auto-save-directory autosave-dir)
-  #+END_SRC
-  #+BEGIN_SRC emacs-lisp
-  (global-undo-tree-mode)
-(setq undo-tree-auto-save-history t)
-(setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
-(undo-tree-load-history-hook)
-  #+END_SRC
+    #+RESULTS:
+    : t
 
-  #+RESULTS:
+*** js2-refactor
+    https://github.com/magnars/js2-refactor.el
+    #+BEGIN_SRC emacs-lisp
+      (use-package js2-refactor
+  :config
+  (add-hook 'js2-mode-hook #'js2-refactor-mode)
+  (setq js2-skip-preprocessor-directives t)
+  (js2r-add-keybindings-with-prefix "C-c C-j")
+  )
+    #+END_SRC
+*** Tern
+  #   #+BEGIN_SRC emacs-lisp
+  #     (use-package tern
 
-* Smartparens
-  #+BEGIN_SRC emacs-lisp
-    (use-package smartparens
-      :ensure t
-      :config (require 'smartparens-config)
-      (add-hook 'js-mode-hook #'smartparens-mode))
+  #     (use-package company-tern
+  # :config
+  # (add-to-list 'company-backends 'company-tern)
+  # (add-hook 'js2-mode-hook (lambda ()
+  #  			(tern-mode)
+  #  			(company-mode))))
+  #   #+END_SRC
 
-  #+END_SRC
-* Autopair
-  #+BEGIN_SRC emacs-lisp
-    (use-package autopair
-      :ensure t
-      :config (autopair-global-mode))
-  #+END_SRC
-* YASnippets
-  #+BEGIN_SRC emacs-lisp
-    (use-package yasnippet
-      :ensure t
-      :config (yas-global-mode 1))
-  #+END_SRC
-  #+BEGIN_SRC emacs-lisp
-    (use-package yasnippet-snippets
-      :ensure t
-      :config )
-  #+END_SRC
-* Discover
-** Discover.el
-#+BEGIN_SRC emacs-lisp
-    (use-package discover
-      :ensure t
-      :config )
-#+END_SRC
 
-** Discover Major
-#+BEGIN_SRC emacs-lisp
-  (use-package discover-my-major
-    :ensure t
-    :config
-    (global-set-key (kbd "C-h C-m") 'discover-my-major)
-    (global-set-key (kbd "C-h M-m") 'discover-my-mode))
-#+END_SRC
-* Window
-  #+BEGIN_SRC emacs-lisp
-  #+END_SRC
-* Server
-#+BEGIN_SRC emacs-lisp
-;;(server-start)
-#+END_SRC
-* DevOps
+*** Indium
+    #+BEGIN_SRC emacs-lisp
+      ;;     (use-package tern
+      ;; :config
+      ;; (autoload 'tern-mode "tern.el" nil t)
+      ;; (add-hook 'js-mode-hook (lambda () (tern-mode t))))
+    #+END_SRC
+** Go
+   #+BEGIN_SRC emacs-lisp
+   (use-package go-mode)
+   #+END_SRC
+** YAML
+   #+BEGIN_SRC emacs-lisp
+       (use-package yaml-mode
+     :config
+        (add-to-list 'auto-mode-alist '("\\.yaml\\'" . yaml-mode)))
+
+     ;; Unlike python-mode, this mode follows the Emacs convention of not
+     ;; binding the ENTER key to `newline-and-indent'.  To get this
+     ;; behavior, add the key definition to `yaml-mode-hook':
+
+     ;;    (add-hook 'yaml-mode-hook
+     ;;     '(lambda ()
+     ;;        (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
+   #+END_SRC
+ #+BEGIN_SRC emacs-lisp
+   (use-package highlight-indentation
+     :config
+     (set-face-background 'highlight-indentation-face "#e3e3d3")
+   (set-face-background 'highlight-indentation-current-column-face "#c3b3b3"))
+ #+END_SRC
+ #+BEGIN_SRC emacs-lisp
+ (defun aj-toggle-fold ()
+   "Toggle fold all lines larger than indentation on current line"
+   (interactive)
+   (let ((col 1))
+     (save-excursion
+       (back-to-indentation)
+       (setq col (+ 1 (current-column)))
+       (set-selective-display
+        (if selective-display nil (or col 1))))))
+ (global-set-key [(M C i)] 'aj-toggle-fold)
+ #+END_SRC
+** Markdown
+   #+BEGIN_SRC emacs-lisp
+     (use-package markdown-mode
+     :mode (("README\\.md\\'" . gfm-mode)
+             ("\\.md\\'" . markdown-mode)
+             ("\\.markdown\\'" . markdown-mode))
+     :init (setq markdown-command "multimarkdown"))
+   #+END_SRC
+* Porcelain
 ** Docker
    #+BEGIN_SRC emacs-lisp
    (use-package docker
-   :ensure t
    :bind ("C-c d" . docker))
+   #+END_SRC
+** Magit
+   #+BEGIN_SRC emacs-lisp
+     (use-package magit
+       :bind ("C-c g" . magit-status))
+     ;; (use-package evil-magit)
    #+END_SRC
 ** Kubernetes
    #+BEGIN_SRC emacs-lisp
@@ -861,6 +932,12 @@ command by default which I most definitely will not miss.
 ** Terraform
    #+BEGIN_SRC emacs-lisp
    (use-package terraform-mode
-   :ensure t
    :config )
    #+END_SRC
+* Mu4e
+#+BEGIN_SRC emacs-lisp
+  ;; (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu/mu4e")
+  ;; (require 'mu4e)
+  ;; (setq
+  ;;   mu4e-maildir "~/Maildir/tangj1122")
+#+END_SRC

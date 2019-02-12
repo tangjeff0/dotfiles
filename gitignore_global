@@ -86,3 +86,5 @@ tags
 idea*
 terraform*
 .terraform*
+
+.projectile

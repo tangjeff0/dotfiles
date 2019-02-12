@@ -2,13 +2,16 @@ export EDITOR='vim'
 export DOCKER_ID_USER='tangsauce'
 export TERM=xterm-256color
 export PY=/usr/local/lib/python2.7/site-packages
+export GOPATH=/Users/jefftang/code/go
+export GOROOT=/usr/local/opt/go/libexec/
+export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$GOROOT/bin
 
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-11.0.2.jdk/Contents/Home
 export PATH=$PATH:$JAVA_HOME
 
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.6/bin
 export PATH=$PATH:/Applications/Dev
-export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:~/.yarn/bin
 # export PATH=$PATH:/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin
 # export PATH=$PATH:/usr/java/jre1.8.0_171/bin
@@ -57,7 +60,6 @@ export XRP_PRIVATE="sniJNebJrWA3rSkxwdejFBG75YyW7"
 export XRP_PUBILC="rEqgt54AqWG6RVFCkSY68e46qmrmtiFCfr"
 export XRP_NET="wss://s.altnet.rippletest.net:51233"
 
-export GOPATH=$HOME/code/go
 
 
 # kubectl switch context
@@ -89,3 +91,4 @@ if [ -f '/Users/jefftang/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/jeffta
 if [ -f '/Users/jefftang/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/jefftang/google-cloud-sdk/completion.zsh.inc'; fi
 
 source ~/code/strata/env.sh
+export DEBUG=''

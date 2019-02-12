@@ -110,7 +110,7 @@ Plugin 'junegunn/fzf.vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'xolox/vim-notes'
 Plugin 'dkarter/bullets.vim'
-Plugin 'unblevable/quick-scope'
+" Plugin 'unblevable/quick-scope'
 Plugin 'easymotion/vim-easymotion'
 call vundle#end()
 filetype plugin indent on

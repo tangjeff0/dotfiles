@@ -1,12 +1,15 @@
+;;; Package -- Summary
+;;; Commentary:
+;;; Code:
+
 (set-background-color "#4b4b4b") ; prevent the white flash
 (setq inhibit-startup-message t) ; hide the propganda
 
 
-(dired "~/code/strata/hydra/")
+;; (dired "~/code/strata/hydra/")
 (find-file "~/.emacs.d/init.el")
 (find-file "~/Dropbox/org/myinit.org")
 (find-file "~/Dropbox/org/idx.org")
-;; (setq initial-buffer-choice "~/Dropbox/org/idx.org")
 
 ;; load package manager module
 (require 'package)
@@ -23,14 +26,6 @@
 (setq use-package-always-ensure t)
 
 (require 'org)
-
-(use-package evil
-    :ensure t
-    :init
-    (setq evil-want-keybinding nil)
-    :config
-    (evil-mode 1))
-
 
 (org-babel-load-file (expand-file-name "~/Dropbox/org/myinit.org"))
 (org-babel-load-file (expand-file-name "~/Dropbox/org/secrets.org"))
@@ -69,11 +64,51 @@ Unscheduled TODO")
                  (quote todo)
                  (quote
                   ("DONE"))))))))
-      nil))))
+      nil))) t)
  '(org-archive-location "~/Dropbox/org/idx.org::* Archives")
+ '(org-structure-template-alist
+   (quote
+    (("E" "#+BEGIN_SRC emacs-lisp
+
+#+END_SRC")
+     ("s" "#+BEGIN_SRC ?
+
+#+END_SRC")
+     ("e" "#+BEGIN_EXAMPLE
+?
+#+END_EXAMPLE")
+     ("q" "#+BEGIN_QUOTE
+?
+#+END_QUOTE")
+     ("v" "#+BEGIN_VERSE
+?
+#+END_VERSE")
+     ("V" "#+BEGIN_VERBATIM
+?
+#+END_VERBATIM")
+     ("c" "#+BEGIN_CENTER
+?
+#+END_CENTER")
+     ("C" "#+BEGIN_COMMENT
+?
+#+END_COMMENT")
+     ("l" "#+BEGIN_EXPORT latex
+?
+#+END_EXPORT")
+     ("L" "#+LaTeX: ")
+     ("h" "#+BEGIN_EXPORT html
+?
+#+END_EXPORT")
+     ("H" "#+HTML: ")
+     ("a" "#+BEGIN_EXPORT ascii
+?
+#+END_EXPORT")
+     ("A" "#+ASCII: ")
+     ("i" "#+INDEX: ?")
+     ("I" "#+INCLUDE: %file ?"))))
  '(package-selected-packages
    (quote
-    (projectile hydra helpful flycheck go-mode gnugo gnu-go org-cliplink highlight-indentation yaml-mode org-download magi exec-path-from-shell workgroups kubernetes-evil kubernetes terraform-mode docker powerline-evil autopair discover-my-major discover company-tern tern yasnippet-snippets smartparens beacon rainbow-delimiters evil-collection all-the-icons neotree emacs-neotree expand-region js2-refactor js2-mode counsel evil-org evil-visualstar evil-surround org-gcal org-bullets linum-relative nlinum-relative evil-numbers evil-magit evil-matchit evil-commentary magit company auto-complete seoul256-theme which-key use-package try)))
+    (imenu-list markdown-mode projectile hydra helpful flycheck go-mode gnugo gnu-go org-cliplink highlight-indentation yaml-mode org-download magi exec-path-from-shell workgroups kubernetes-evil kubernetes terraform-mode docker powerline-evil autopair discover-my-major discover company-tern tern yasnippet-snippets smartparens beacon rainbow-delimiters evil-collection all-the-icons neotree emacs-neotree expand-region js2-refactor js2-mode counsel evil-org evil-visualstar evil-surround org-gcal org-bullets linum-relative nlinum-relative evil-numbers evil-magit evil-matchit evil-commentary magit company auto-complete seoul256-theme which-key use-package try)))
  '(undo-tree-auto-save-history t)
  '(undo-tree-history-directory-alist (quote (("" . "~/.emacs.d/undo")))))
 (custom-set-faces
@@ -86,3 +121,5 @@ Unscheduled TODO")
  '(org-level-3 ((t (:inherit outline-3 :height 1.0))))
  '(org-level-4 ((t (:inherit outline-4 :height 1.0))))
  '(org-level-5 ((t (:inherit outline-5 :height 1.0)))))
+
+;;; init.el ends here

@@ -5,8 +5,7 @@
 	process = git-lfs filter-process
 [user]
 	username = tangsauce
-	email = jt26@rice.edu
-	name = Jeff Tang
+	email = tangj1122@gmail.com
 [core]
 	editor = /usr/bin/vim
 	excludesfile = ~/.gitignore_global
