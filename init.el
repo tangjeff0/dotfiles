@@ -2,7 +2,10 @@
 ;;; Commentary:
 ;;; Code:
 
-(set-background-color "#4b4b4b") ; prevent the white flash
+;; prevent the white flash
+;; (set-background-color "#4b4b4b") ; seoul
+;; (set-background-color "#606280") ; 
+
 (setq inhibit-startup-message t) ; hide the propganda
 
 
@@ -108,7 +111,10 @@ Unscheduled TODO")
      ("I" "#+INCLUDE: %file ?"))))
  '(package-selected-packages
    (quote
-    (imenu-list markdown-mode projectile hydra helpful flycheck go-mode gnugo gnu-go org-cliplink highlight-indentation yaml-mode org-download magi exec-path-from-shell workgroups kubernetes-evil kubernetes terraform-mode docker powerline-evil autopair discover-my-major discover company-tern tern yasnippet-snippets smartparens beacon rainbow-delimiters evil-collection all-the-icons neotree emacs-neotree expand-region js2-refactor js2-mode counsel evil-org evil-visualstar evil-surround org-gcal org-bullets linum-relative nlinum-relative evil-numbers evil-magit evil-matchit evil-commentary magit company auto-complete seoul256-theme which-key use-package try)))
+    (tide dracula-theme typescript-mode imenu-list markdown-mode projectile hydra helpful flycheck go-mode gnugo gnu-go org-cliplink highlight-indentation yaml-mode org-download magi exec-path-from-shell workgroups kubernetes-evil kubernetes terraform-mode docker powerline-evil autopair discover-my-major discover company-tern tern yasnippet-snippets smartparens beacon rainbow-delimiters evil-collection all-the-icons neotree emacs-neotree expand-region js2-refactor js2-mode counsel evil-org evil-visualstar evil-surround org-gcal org-bullets linum-relative nlinum-relative evil-numbers evil-magit evil-matchit evil-commentary magit company auto-complete seoul256-theme which-key use-package try)))
+ '(projectile-globally-ignored-directories
+   (quote
+    ("node_modules" ".idea" ".ensime_cache" ".eunit" ".git" ".hg" ".fslckout" "_FOSSIL_" ".bzr" "_darcs" ".tox" ".svn" ".stack-work")))
  '(undo-tree-auto-save-history t)
  '(undo-tree-history-directory-alist (quote (("" . "~/.emacs.d/undo")))))
 (custom-set-faces

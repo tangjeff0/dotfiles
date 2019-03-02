@@ -110,8 +110,8 @@ Plugin 'junegunn/fzf.vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'xolox/vim-notes'
 Plugin 'dkarter/bullets.vim'
-" Plugin 'unblevable/quick-scope'
 Plugin 'easymotion/vim-easymotion'
+Plugin 'b4b4r07/vim-hcl'
 call vundle#end()
 filetype plugin indent on
 
@@ -151,6 +151,7 @@ set fileencoding=utf-8
 set noequalalways
 set nojoinspaces
 set shiftround
+set mouse=a
 
 " Mappings {{{1
 " FMap {{{2
@@ -242,8 +243,8 @@ let g:NERDTreeCreatePrefix = "silent keepalt keepjumps"
 let g:ale_linters = {
 \ 'javascript': ['eslint'],
 \ }
-" nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-" nmap <silent> <C-j> <Plug>(ale_next_wrap)
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 " TmuxResize {{{2
 nnoremap <Left> :call TmuxResize('h', 5)<CR>

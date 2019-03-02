@@ -8,10 +8,16 @@ for some reason, if i `find-file` in my `init.el` on .org files, any org files t
 
 * GUI
 ** Theme
-   #+BEGIN_SRC emacs-lisp
-     (use-package seoul256-theme
- :config (load-theme 'seoul256 t))
-   #+END_SRC
+*** Seoul
+    #+BEGIN_SRC emacs-lisp
+      (use-package seoul256-theme
+  :config (load-theme 'seoul256 t))
+    #+END_SRC
+*** Dracula
+    #+BEGIN_SRC emacs-lisp
+      (use-package dracula-theme
+  :config (load-theme 'dracula t))
+    #+END_SRC
 ** Word Wrap
 #+BEGIN_SRC emacs-lisp
 (global-visual-line-mode t)
@@ -75,6 +81,7 @@ for some reason, if i `find-file` in my `init.el` on .org files, any org files t
     (setq-default indent-tabs-mode nil))
   (setq-default tab-width 2)
   (setq js-indent-level 2)
+  (setq typescript-indent-level 2)
 
 #+END_SRC
 
@@ -311,6 +318,7 @@ everything using the readline library.  I consider =M-u= as a good
 replacement considering it's bound to the rather useless ~upcase-word~
 command by default which I most definitely will not miss.
 
+;; HERE
 #+BEGIN_SRC emacs-lisp
 (define-key global-map (kbd "C-u") 'kill-whole-line)
 (define-key global-map (kbd "M-u") 'universal-argument)
@@ -649,7 +657,7 @@ command by default which I most definitely will not miss.
       ;; i        projectile-invalidate-cache
       ;; z        projectile-cache-current-file
 
-      (defhydra hydra-projectile (:color teal :hint nil)
+      (defhydra hydra-projectile (:color blue :hint nil)
         "Projectile"
 
         ("l"        projectile-project-buffers-other-buffer "Last Buffer" :column "Buffer")
@@ -689,11 +697,11 @@ command by default which I most definitely will not miss.
       ("j" shrink-window "h-")
       ("e" enlarge-window-horizontally "w+")
       ("d" shrink-window-horizontally "w-")
-      ("s" split-window-below "horizontal")
-      ("v" split-window-right "vertical")
-      ("0" delete-window :color "delete")
-      ("o" delete-other-windows :color "only")
-      ("=" balance-windows "balance")
+      ("s" split-window-below "horizontal" :color blue)
+      ("v" split-window-right "vertical" :color blue)
+      ("0" delete-window "delete" :color blue)
+      ("o" delete-other-windows "only" :color blue)
+      ("=" balance-windows "balance" :color blue)
       ("q" nil "exit" :color blue))
          (bind-keys ("C-x w" . hydra-window/body))
     #+END_SRC
@@ -859,6 +867,30 @@ command by default which I most definitely will not miss.
       ;; (autoload 'tern-mode "tern.el" nil t)
       ;; (add-hook 'js-mode-hook (lambda () (tern-mode t))))
     #+END_SRC
+** Typescript
+   #+BEGIN_SRC emacs-lisp
+     (use-package typescript-mode)
+     ;; (use-package tide)
+   #+END_SRC
+       :config
+       (defun setup-tide-mode ()
+         (interactive)
+         (tide-setup)
+         (flycheck-mode +1)
+         (setq flycheck-check-syntax-automatically '(save mode-enabled))
+         (eldoc-mode +1)
+         (tide-hl-identifier-mode +1)
+         ;; company is an optional dependency. You have to
+         ;; install it separately via package-install
+         ;; `M-x package-install [ret] company`
+         (company-mode +1))
+
+       ;; aligns annotation to the right hand side
+       (setq company-tooltip-align-annotations t)
+
+       ;; formats the buffer before saving
+       (add-hook 'before-save-hook 'tide-format-before-save)
+       (add-hook 'typescript-mode-hook #'setup-tide-mode)
 ** Go
    #+BEGIN_SRC emacs-lisp
    (use-package go-mode)

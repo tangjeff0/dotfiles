@@ -19,19 +19,20 @@ export PATH=$PATH:~/.yarn/bin
 
 
 alias v='vim'
-alias ec='emacsclient'
+alias ec='emacsclient -n'
 alias o='xdg-open'
 alias g='git'
-alias h='heroku'
+alias h='helm'
 alias py='python3'
 alias py3='python3'
-alias dc='~/Desktop/code'
+# alias dc='~/Desktop/code'
 alias soz='source ~/.zshrc'
 alias soe='source .env && echo "sourced .env"; source env.sh && echo sourced env.sh'
 alias gAm="git add -A && git commit -m"
 alias jcj='f() { javac $1 && java ${1%.*} }; f'
 # alias pbcopy='xclip -selection clipboard'
 alias matlab='~/MATLAB/bin/matlab -nosplash'
+alias dr='docker'
 
 # tmux
 alias ta='tmux attach -t'
@@ -52,8 +53,17 @@ alias kc='kubectl config current-context'
 alias kx='kc | cut -d "_" -f 4'
 alias ku='kubectl config use-context'
 
-export PROJECT_ID='solid-setup-217619'
-export ZONE='us-central1-a'
+# google cloud
+alias gc='gcloud'
+alias gccsa='gcloud config set account'
+alias gccsp='gcloud config set project'
+alias gcal='gcloud auth list'
+# export PROJECT_ID='solid-setup-217619'
+# export ZONE='us-central1-a'
+
+# terraform
+alias tf='terraform'
+# alias tfa='terraform apply'
 
 # test credentials
 export XRP_PRIVATE="sniJNebJrWA3rSkxwdejFBG75YyW7"
@@ -92,3 +102,5 @@ if [ -f '/Users/jefftang/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/
 
 source ~/code/strata/env.sh
 export DEBUG=''
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"

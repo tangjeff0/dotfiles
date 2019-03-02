@@ -88,3 +88,4 @@ terraform*
 .terraform*
 
 .projectile
+*.pem
