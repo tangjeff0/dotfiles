@@ -197,6 +197,7 @@ augroup config
   autocmd BufWinEnter *? normal! zM
   autocmd BufEnter,InsertLeave *? set relativenumber
   autocmd BufLeave,InsertEnter *? set norelativenumber
+  autocmd InsertEnter,InsertLeave * set cul " highlight line if in insert mode!
   " autocmd FileType markdown setlocal nospell
   " autocmd BufLeave,InsertEnter *.txt,*.md set nonumber norelativenumber
   " autocmd BufEnter,InsertLeave *.txt,*.md set nonumber norelativenumber
