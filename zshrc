@@ -45,7 +45,7 @@ alias tkss='tmux kill-session -t'
 # kubernetes
 alias k='kubectl'
 alias ka='kubectl apply -Rf'
-alias kd='kubectl delete'
+alias kd='kubectl describe'
 alias ke='kubectl exec -ti'
 alias kg='kubectl get'
 alias kl='kubectl logs'
@@ -65,10 +65,12 @@ alias gcal='gcloud auth list'
 alias tf='terraform'
 # alias tfa='terraform apply'
 
-# test credentials
-export XRP_PRIVATE="sniJNebJrWA3rSkxwdejFBG75YyW7"
-export XRP_PUBILC="rEqgt54AqWG6RVFCkSY68e46qmrmtiFCfr"
-export XRP_NET="wss://s.altnet.rippletest.net:51233"
+alias ebook='ebook-viewer --continue &'
+
+# # test credentials
+# export XRP_PRIVATE="sniJNebJrWA3rSkxwdejFBG75YyW7"
+# export XRP_PUBILC="rEqgt54AqWG6RVFCkSY68e46qmrmtiFCfr"
+# export XRP_NET="wss://s.altnet.rippletest.net:51233"
 
 
 
@@ -102,5 +104,5 @@ if [ -f '/Users/jefftang/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/
 
 source ~/code/strata/env.sh
 export DEBUG=''
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+# eval "$(pyenv init -)"
+# eval "$(pyenv virtualenv-init -)"

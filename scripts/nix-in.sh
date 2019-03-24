@@ -10,5 +10,6 @@ cp ~/.gitconfig gitconfig
 cp ~/.gitignore_global gitignore_global
 cp ~/.vim/vimrc vim/vimrc
 cp ~/.tmux.conf tmux.conf
+cp ~/.zsh zsh
 cp ~/.zshrc zshrc
 cp ~/.zpreztorc zpreztorc

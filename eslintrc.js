@@ -23,8 +23,8 @@ module.exports = {
     "sourceType": "module"
   },
   "rules": {
-    "react/jsx-uses-vars": 1,
-    "react/jsx-uses-react": 1,
+    // "react/jsx-uses-vars": 1,
+    // "react/jsx-uses-react": 1,
     "indent": [
       1,
       2

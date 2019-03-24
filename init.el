@@ -6,15 +6,15 @@
 ;; (set-background-color "#4b4b4b") ; seoul
 ;; (set-background-color "#606280") ; 
 
-(setq inhibit-startup-message t) ; hide the propganda
+;; hide the propganda
+(setq inhibit-startup-message t)
 
-
-;; (dired "~/code/strata/hydra/")
-(find-file "~/.emacs.d/init.el")
-(find-file "~/Dropbox/org/myinit.org")
+;; i always want immediate access to these files
 (find-file "~/Dropbox/org/idx.org")
+(find-file "~/Dropbox/org/myinit.org")
+(find-file "~/.emacs.d/init.el")
 
-;; load package manager module
+;; load and configure package manager
 (require 'package)
 (setq package-enable-at-startup nil)
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
@@ -22,14 +22,14 @@
                          ("marmalade" . "http://marmalade-repo.org/packages/")))
 (package-initialize)
 
-;; Bootstrap `use-package'
+;; load and configure `use-package'
 (unless (package-installed-p 'use-package)
 (package-refresh-contents)
 (package-install 'use-package))
 (setq use-package-always-ensure t)
 
+;; load `org` with org startup files
 (require 'org)
-
 (org-babel-load-file (expand-file-name "~/Dropbox/org/myinit.org"))
 (org-babel-load-file (expand-file-name "~/Dropbox/org/secrets.org"))
 
@@ -67,8 +67,7 @@ Unscheduled TODO")
                  (quote todo)
                  (quote
                   ("DONE"))))))))
-      nil))) t)
- '(org-archive-location "~/Dropbox/org/idx.org::* Archives")
+      nil))))
  '(org-structure-template-alist
    (quote
     (("E" "#+BEGIN_SRC emacs-lisp
@@ -111,7 +110,7 @@ Unscheduled TODO")
      ("I" "#+INCLUDE: %file ?"))))
  '(package-selected-packages
    (quote
-    (tide dracula-theme typescript-mode imenu-list markdown-mode projectile hydra helpful flycheck go-mode gnugo gnu-go org-cliplink highlight-indentation yaml-mode org-download magi exec-path-from-shell workgroups kubernetes-evil kubernetes terraform-mode docker powerline-evil autopair discover-my-major discover company-tern tern yasnippet-snippets smartparens beacon rainbow-delimiters evil-collection all-the-icons neotree emacs-neotree expand-region js2-refactor js2-mode counsel evil-org evil-visualstar evil-surround org-gcal org-bullets linum-relative nlinum-relative evil-numbers evil-magit evil-matchit evil-commentary magit company auto-complete seoul256-theme which-key use-package try)))
+    (ag tide dracula-theme typescript-mode imenu-list markdown-mode projectile hydra helpful flycheck go-mode gnugo gnu-go org-cliplink highlight-indentation yaml-mode org-download magi exec-path-from-shell workgroups kubernetes-evil kubernetes terraform-mode docker powerline-evil autopair discover-my-major discover company-tern tern yasnippet-snippets smartparens beacon rainbow-delimiters evil-collection all-the-icons neotree emacs-neotree expand-region js2-refactor js2-mode counsel evil-org evil-visualstar evil-surround org-gcal org-bullets linum-relative nlinum-relative evil-numbers evil-magit evil-matchit evil-commentary magit company auto-complete seoul256-theme which-key use-package try)))
  '(projectile-globally-ignored-directories
    (quote
     ("node_modules" ".idea" ".ensime_cache" ".eunit" ".git" ".hg" ".fslckout" "_FOSSIL_" ".bzr" "_darcs" ".tox" ".svn" ".stack-work")))

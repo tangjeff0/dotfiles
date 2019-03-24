@@ -1,11 +1,10 @@
 for some reason, if i `find-file` in my `init.el` on .org files, any org files that are not the last found file do not have org bullets
-#+BEGIN_SRC emacs-lisp
+
 (org-mode-restart)
-#+END_SRC
+(load-file "")
 
 #+RESULTS:
 : org-mode restarted
-
 * GUI
 ** Theme
 *** Seoul
@@ -84,7 +83,6 @@ for some reason, if i `find-file` in my `init.el` on .org files, any org files t
   (setq typescript-indent-level 2)
 
 #+END_SRC
-
 ** Scroll Margin
    #+BEGIN_SRC emacs-lisp
      (setq scroll-margin 10)
@@ -134,7 +132,7 @@ for some reason, if i `find-file` in my `init.el` on .org files, any org files t
     Brings up some help
     #+BEGIN_SRC emacs-lisp
     (use-package which-key
-	  :ensure t 
+	  :ensure t
 	  :config
 	  (which-key-mode))
     #+END_SRC
@@ -158,7 +156,6 @@ for some reason, if i `find-file` in my `init.el` on .org files, any org files t
        :ensure t
        :config )
  #+END_SRC
-
 *** Discover Major
  #+BEGIN_SRC emacs-lisp
    (use-package discover-my-major
@@ -184,8 +181,36 @@ for some reason, if i `find-file` in my `init.el` on .org files, any org files t
 (setq org-mobile-directory "~/Dropbox/Apps/MobileOrg")
 (setq org-startup-with-inline-images t)
 #+END_SRC
-** Structure Templates / Tempo
+** Narrow or Widden
+  #+BEGIN_SRC emacs-lisp
+    (defun narrow-or-widen-dwim (p)
+      "If the buffer is narrowed, it widens. Otherwise, it narrows
+    intelligently.  Intelligently means: region, org-src-block,
+    org-subtree, or defun, whichever applies first.  Narrowing to
+    org-src-block actually calls `org-edit-src-code'.
 
+    With prefix P, don't widen, just narrow even if buffer is already
+    narrowed."
+      (interactive "P")
+      (declare (interactive-only))
+      (cond ((and (buffer-narrowed-p) (not p)) (widen))
+      ((and (boundp 'org-src-mode) org-src-mode (not p))
+       (org-edit-src-exit))
+      ((region-active-p)
+       (narrow-to-region (region-beginning) (region-end)))
+      ((derived-mode-p 'org-mode)
+       (cond ((ignore-errors (org-edit-src-code))
+        (delete-other-windows))
+       ((org-at-block-p)
+        (org-narrow-to-block))
+       (t (org-narrow-to-subtree))))
+      ((derived-mode-p 'prog-mode) (narrow-to-defun))
+      (t (error "Please select a region to narrow to"))))
+
+    (eval-after-load 'org-src
+      '(bind-key "C-x n s" 'org-edit-src-exit org-src-mode-map))
+  #+END_SRC
+** Structure Templates / Tempo
 ** Time
 #+BEGIN_SRC emacs-lisp
 (setq org-log-done 'time)
@@ -219,16 +244,26 @@ for some reason, if i `find-file` in my `init.el` on .org files, any org files t
     (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
   (org-bullets-mode))
 #+END_SRC
-
+** Language
+   #+BEGIN_SRC emacs-lisp
+   ;; (require 'josh-chinese)
+   #+END_SRC
 ** Capture
 #+BEGIN_SRC emacs-lisp
   (setq org-capture-templates
         '(("t" "Task" entry (file+headline "~/Dropbox/org/idx.org" "Tasks") "* TODO %i%?\n")
-          ("a" "Appointment" entry (file  "~/Dropbox/org/gcal.org" ) "* %?\n\n%^T\n\n:PROPERTIES:\n\n:END:\n\n")
-          ;; ("p" "Project" entry (file+olp+datetree "~/Dropbox/org/review.org" "Monthly") (file "~/Dropbox/org/templates/Monthly.org"))
-          ("d" "Daily Review" entry (file+olp+datetree "~/Dropbox/org/review.org" "Daily") (file "~/Dropbox/org/templates/daily.org"))
-          ("w" "Weekly Review" entry (file+olp+datetree "~/Dropbox/org/review.org" "Weekly") (file "~/Dropbox/org/templates/Weekly.org"))
-          ("m" "Monthly Review" entry (file+olp+datetree "~/Dropbox/org/review.org" "Monthly") (file "~/Dropbox/org/templates/Monthly.org"))
+          ;; ("a" "Appointment" entry (file  "~/Dropbox/org/gcal.org" ) "* %?\n\n%^T\n\n:PROPERTIES:\n\n:END:\n\n")
+          ("r" "Review")
+          ("rd" "Daily" entry (file+olp+datetree "~/Dropbox/org/review.org" "Daily") (file "~/Dropbox/org/templates/daily.org"))
+          ("rw" "Weekly" entry (file+olp+datetree "~/Dropbox/org/review.org" "Weekly") (file "~/Dropbox/org/templates/Weekly.org"))
+          ("rm" "Monthly" entry (file+olp+datetree "~/Dropbox/org/review.org" "Monthly") (file "~/Dropbox/org/templates/Monthly.org"))
+          ("s" "Strata")
+          ("sd" "Daily" entry (file+headline "~/Dropbox/org/strata.org" "Meetings") (file "~/Dropbox/org/templates/strata_daily.org"))
+          ("sw" "Weekly" entry (file+headline "~/Dropbox/org/strata.org" "Meetings") (file "~/Dropbox/org/templates/strata_weekly.org"))
+          ("sm" "Misc." entry (file+headline "~/Dropbox/org/strata.org" "Meetings") "* %u :misc: \n- %?")
+          ("st" "Task" entry (file+headline "~/Dropbox/org/strata.org" "Tasks") "* TODO %i%?\n")
+          ("l" "language")
+          ("lc" "Chinese" entry (file+headline "~/Dropbox/org/language.org" "Chinese") (file "~/Dropbox/org/templates/chinese.org"))
           ))
 #+END_SRC
 ** Agenda
@@ -257,7 +292,7 @@ for some reason, if i `find-file` in my `init.el` on .org files, any org files t
 #+END_SRC
 ** Archive
    #+BEGIN_SRC emacs-lisp
-
+(setq org-archive-location "::* Archive")
 
    #+END_SRC
 ** Link
@@ -276,8 +311,24 @@ for some reason, if i `find-file` in my `init.el` on .org files, any org files t
   )
 
 #+END_SRC
-** TODO Export
+** Export
+   #+BEGIN_SRC emacs-lisp
+     (setq org-export-coding-system 'utf-8)
+   #+END_SRC
 *** Presentation
+** org-babel-do-load-languages
+   #+BEGIN_SRC emacs-lisp
+  ;; active Babel languages
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((emacs-lisp . t)
+(js . t)
+(shell . t)
+(python . t)
+))
+   #+END_SRC
+
+   #+RESULTS:
 * Evil
 ** Use Evil
    #+BEGIN_SRC emacs-lisp
@@ -399,6 +450,10 @@ command by default which I most definitely will not miss.
  )
    #+END_SRC
 *** TODO auto show docs
+** Ag
+   #+BEGIN_SRC emacs-lisp
+   (use-package ag)
+   #+END_SRC
 ** Swiper / Counsel / Ivy
 *** Counsel
    #+BEGIN_SRC emacs-lisp
@@ -416,10 +471,9 @@ command by default which I most definitely will not miss.
      ;; 	   :map read-expression-map
      ;; 	   ("C-r" . counsel-expression-history)))
  #+END_SRC
-
 *** Swiper
     #+BEGIN_SRC emacs-lisp
-     
+
    (use-package swiper
      :bind (("C-s" . swiper)
 	    ("C-r" . swiper)
@@ -450,7 +504,6 @@ command by default which I most definitely will not miss.
 
    #+RESULTS:
    : t
-
 ** Projectile
    #+BEGIN_SRC emacs-lisp
      (use-package projectile
@@ -524,7 +577,6 @@ command by default which I most definitely will not miss.
 
      #+RESULTS:
      : hydra-apropos/body
-
 **** Describe
     Don't really need this anymore because of Helpful
      #+BEGIN_SRC emacs-lisp
@@ -687,7 +739,6 @@ command by default which I most definitely will not miss.
 
     #+RESULTS:
     : hydra-projectile/body
-
 ** Window
 *** Hydra
     #+BEGIN_SRC emacs-lisp
@@ -708,7 +759,6 @@ command by default which I most definitely will not miss.
 
     #+RESULTS:
     : hydra-window/body
-
 *** Unbindings
     #+BEGIN_SRC emacs-lisp
     (global-unset-key (kbd "C-x 0")) ;; delete-window
@@ -737,7 +787,6 @@ command by default which I most definitely will not miss.
 
     #+RESULTS:
     : hydra-zoom/body
-
 *** Unbind
     #+BEGIN_SRC emacs-lisp
     (global-unset-key (kbd "C-x C-0")) ;; reset
@@ -836,7 +885,6 @@ command by default which I most definitely will not miss.
 
     #+RESULTS:
     : t
-
 *** js2-refactor
     https://github.com/magnars/js2-refactor.el
     #+BEGIN_SRC emacs-lisp
@@ -858,8 +906,6 @@ command by default which I most definitely will not miss.
   #  			(tern-mode)
   #  			(company-mode))))
   #   #+END_SRC
-
-
 *** Indium
     #+BEGIN_SRC emacs-lisp
       ;;     (use-package tern
@@ -960,7 +1006,6 @@ command by default which I most definitely will not miss.
      ;;   :after kubernetes)
 
    #+RESULTS:
-
 ** Terraform
    #+BEGIN_SRC emacs-lisp
    (use-package terraform-mode
