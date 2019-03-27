@@ -1,6 +1,7 @@
 #! /bin/bash
 # script to copy in dotfiles from jeff's macbook to `dotfiles` repo
 
+# yeet
 # .config folder
 
 cp ~/.eslintrc.js eslintrc.js
