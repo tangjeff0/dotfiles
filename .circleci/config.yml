@@ -9,7 +9,7 @@ jobs:
       - checkout
       - run:
           name: hi
-          command: echo "hello world"
+          command: echo "hello yeet world"
 
 workflows:
   version: 2
