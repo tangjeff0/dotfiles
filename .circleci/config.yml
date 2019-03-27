@@ -1,6 +1,5 @@
 version: 2.1
 jobs:
-
   build:
     docker:
       - image: circleci/node:8.12.0
@@ -10,7 +9,6 @@ jobs:
       - run:
           name: hi
           command: echo "hello world"
-
 workflows:
   version: 2
   build:
