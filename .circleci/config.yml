@@ -1,7 +1,7 @@
 version: 2.1
 jobs:
 
-  config:
+  build:
     docker:
       - image: circleci/node:8.12.0
     working_directory: ~/code
@@ -15,7 +15,7 @@ workflows:
   version: 2
   build:
     jobs:
-      - config:
+      - build:
           filters:
             branches:
               only: /jt-circleci/
