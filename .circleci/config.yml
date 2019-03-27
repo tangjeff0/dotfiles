@@ -1,0 +1,21 @@
+version: 2.1
+jobs:
+
+  config:
+    docker:
+      - image: circleci/node:8.12.0
+    working_directory: ~/code
+    steps:
+      - checkout
+      - run:
+          name: hi
+          command: echo "hello world"
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - config:
+          filters:
+            branches:
+              only: /jt-circleci/
