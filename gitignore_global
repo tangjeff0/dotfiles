@@ -80,7 +80,6 @@ Thumbs.db
 *.swp
 sessions/*
 node_modules
-env.sh
 .env
 tags
 idea*

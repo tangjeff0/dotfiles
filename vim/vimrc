@@ -112,6 +112,7 @@ Plugin 'xolox/vim-notes'
 Plugin 'dkarter/bullets.vim'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'b4b4r07/vim-hcl'
+Plugin 'vim-scripts/bats.vim'
 call vundle#end()
 filetype plugin indent on
 
@@ -120,6 +121,7 @@ syntax enable
 set nocompatible
 " set shellpipe=>
 colo seoul256
+" colo seoul256-light
 set directory=~/.vim/swap
 set undofile undodir=~/.vim/undo
 set tabstop=2 shiftwidth=2

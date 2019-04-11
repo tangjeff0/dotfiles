@@ -1,7 +1,6 @@
 for some reason, if i `find-file` in my `init.el` on .org files, any org files that are not the last found file do not have org bullets
 
 (org-mode-restart)
-(load-file "")
 
 #+RESULTS:
 : org-mode restarted
@@ -174,6 +173,11 @@ for some reason, if i `find-file` in my `init.el` on .org files, any org files t
        :config (global-set-key (kbd "C-=") 'er/expand-region))
    #+END_SRC
 * Org Mode
+** Install
+   #+BEGIN_SRC emacs-lisp
+;; (use-package org)
+
+   #+END_SRC
 ** Settings
 #+BEGIN_SRC emacs-lisp
 (setq org-directory "~/Dropbox/org")
@@ -181,6 +185,16 @@ for some reason, if i `find-file` in my `init.el` on .org files, any org files t
 (setq org-mobile-directory "~/Dropbox/Apps/MobileOrg")
 (setq org-startup-with-inline-images t)
 #+END_SRC
+#+BEGIN_SRC python
+print("hi")
+return 1
+#+END_SRC
+
+#+RESULTS:
+: 1
+
+
+
 ** Narrow or Widden
   #+BEGIN_SRC emacs-lisp
     (defun narrow-or-widen-dwim (p)
@@ -313,7 +327,16 @@ for some reason, if i `find-file` in my `init.el` on .org files, any org files t
 #+END_SRC
 ** Export
    #+BEGIN_SRC emacs-lisp
-     (setq org-export-coding-system 'utf-8)
+        (setq org-export-coding-system 'utf-8)
+     (use-package htmlize)
+     (use-package ox-reveal
+     :load-path "~/.emacs.d/org-reveal"
+       :config
+     )
+     (require 'ox-md)
+     (require 'ox-latex)
+     (require 'ox-man)
+
    #+END_SRC
 *** Presentation
 ** org-babel-do-load-languages
@@ -327,8 +350,14 @@ for some reason, if i `find-file` in my `init.el` on .org files, any org files t
 (python . t)
 ))
    #+END_SRC
+   
+#+BEGIN_SRC bash
+echo "hey land"
+
+#+END_SRC
 
    #+RESULTS:
+   : hey land
 * Evil
 ** Use Evil
    #+BEGIN_SRC emacs-lisp

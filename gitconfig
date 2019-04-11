@@ -1,16 +1,16 @@
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	required = true
-	process = git-lfs filter-process
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  required = true
+  process = git-lfs filter-process
 [user]
-	username = tangsauce
-	email = tangj1122@gmail.com
+  username = tangsauce
+  email = tangj1122@gmail.com
 [core]
-	editor = /usr/bin/vim
-	excludesfile = ~/.gitignore_global
+  editor = /usr/bin/vim
+  excludesfile = ~/.gitignore_global
 [push]
-	default = current
+  default = current
 [alias]
   u = !git branch --set-upstream-to=origin/`git symbolic-ref --short HEAD`
   co = checkout
@@ -21,9 +21,9 @@
   p = push
   d = diff
   f = fetch
-  l = log
-  ll = pull
+  l = log --decorate=full --abbrev-commit
   phm = push heroku master
   r = remote -v
+  v = tag --sort=v:refname
 [merge]
-	conflictStyle = diff3
+  conflictStyle = diff3
