@@ -12,18 +12,17 @@
 [push]
   default = current
 [alias]
-  u = !git branch --set-upstream-to=origin/`git symbolic-ref --short HEAD`
-  co = checkout
-  s = status
-  b = branch
   a = add
+  b = branch
   c = commit
-  p = push
+  co = checkout
   d = diff
   f = fetch
   l = log --decorate=full --abbrev-commit
-  phm = push heroku master
-  r = remote -v
+  p = push
+  s = status
+  r = rebase
+  u = !git branch --set-upstream-to=origin/`git symbolic-ref --short HEAD`
   v = tag --sort=v:refname
 [merge]
   conflictStyle = diff3
