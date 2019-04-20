@@ -10,13 +10,16 @@ symlink=(
 )
 
 for x in ${symlink[*]}; do
-  ln -s $symlink ~/$symlink
+  if [[ ! -L ~/$x ]]; then
+    ln -s $PWD/$x ~/$x
+  fi
 done
 
 
 dir=(
 zsh
 vim
+git
 )
 for x in ${dir[*]}; do
   if [[ ! -d  ~/.$x ]]; then
