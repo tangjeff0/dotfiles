@@ -11,6 +11,7 @@ export PY=/usr/local/lib/python2.7/site-packages
 export GOPATH=/Users/jefftang/code/go
 export GOROOT=/usr/local/opt/go/libexec
 export ZDOTDIR=$HOME/.zsh
+export LESSHISTFILE=/dev/null
 
 # PATH
 export PATH=$PATH:$GOPATH/bin

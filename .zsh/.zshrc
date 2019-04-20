@@ -8,3 +8,6 @@ precmd_functions+=( precmd_vcs_info )
 setopt prompt_subst
 RPROMPT="%{$fg[magenta]%}% \$vcs_info_msg_0_ %{$reset_color%}%"
 zstyle ':vcs_info:git:*' formats '%b'
+
+for config (~/.zsh/*.zsh) source $config
+source /Users/jefftang/dotfiles/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

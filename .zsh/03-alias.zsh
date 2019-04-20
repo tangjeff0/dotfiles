@@ -3,12 +3,12 @@ alias v='vim'
 alias ec='emacsclient -n'
 alias g='git'
 alias h='history'
-# alias h='helm'
 alias t='terraform'
 alias d='docker'
 alias py='python3'
-alias soz="source $ZDOTDIR/zshrc"
+alias soz="source $ZDOTDIR/.zshrc"
 alias soe='source .env && echo "sourced .env"; source env.sh && echo sourced env.sh'
+alias r='ranger.py'
 
 alias cd=' cd'
 alias ls=' ls'
