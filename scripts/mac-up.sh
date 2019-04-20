@@ -14,44 +14,28 @@ brew update
 brew upgrade
 
 echo "brew install command line apps"
-brew install coreutils
-brew install vim --with-override-system-vi
-brew install emacs
-brew install tmux
-brew install grep
-brew install ag
-brew install tree
-brew install node
-brew install yarn
-brew install thefuck
-brew install python
-brew install jq
-brew install the_silver_searcher
-
-echo "brew cleanup"
-brew cleanup
+brew install $(cat ./brew.list)
 
 echo "brew cask install gui apps"
-brew cask install google-chrome
-brew cask install postico
-brew cask install spectacle
-brew cask install postman
-brew cask install evernote
-brew cask install docker
-brew cask install minikube
-brew cask install dropbox
-brew cask install spotify
-brew cask install virtualbox
-brew cask install macvim
-brew cask install iterm2
+brew cask install $(cat ./brew_cask.list)
 
-echo "install zsh"
-brew install zsh
-git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
-chsh -s /bin/zsh
+brew cleanup
 
-echo "copy dotfiles out"
-./scripts/nix-out.sh
+echo "yarn global install"
+yarn global add $(cat ./npm.list)
 
-echo "npm install global packages"
-./scripts/npm.sh
+
+# echo "install zsh"
+# brew install zsh
+# git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+# chsh -s /bin/zsh
+
+# echo "copy dotfiles out"
+# ./scripts/nix-out.sh
+
+# echo "npm install global packages"
+# ./scripts/npm.sh
+
+main () {
+  echo 'yeet'
+}

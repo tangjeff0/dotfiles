@@ -100,29 +100,25 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-files=(
-'/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh'
-"$HOME/.zsh/zsh-history-substring-search.zsh"
-"$HOME/.zsh/vi-mode.plugin.zsh"
-"$HOME/.fzf.zsh"
-"$HOME/.zsh.env"
-"$HOME/google-cloud-sdk/path.zsh.inc" # updates PATH for the Google Cloud SDK.
-"$HOME/google-cloud-sdk/completion.zsh.inc" # enables shell command completion for gcloud.
-)
+# files=(
+# '/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh'
+# "$HOME/.zsh/zsh-history-substring-search.zsh"
+# "$HOME/.zsh/vi-mode.plugin.zsh"
+# "$HOME/.fzf.zsh"
+# "$HOME/.zsh.env"
+# "$HOME/google-cloud-sdk/path.zsh.inc" # updates PATH for the Google Cloud SDK.
+# "$HOME/google-cloud-sdk/completion.zsh.inc" # enables shell command completion for gcloud.
+# )
 
 green=`tput setaf 2`
 reset=`tput sgr0`
 
-for file in $files; do
-  if [ -f $file ]
-  then
-    . $file
-  fi
-done
-
-findpgm() {
-  grep "$1" $HOME/code/bash_to_zsh/progfile | column
-}
+# for file in $files; do
+#   if [ -f $file ]
+#   then
+#     . $file
+#   fi
+# done
 
 source ~/code/strata/env.sh
 . <(helm completion zsh)

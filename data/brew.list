@@ -1,7 +1,6 @@
 autoconf
 automake
 bash
-bats-core
 cairo
 circleci
 coreutils
@@ -49,7 +48,6 @@ perl
 pixman
 pkg-config
 poppler
-pulumi
 pyenv
 pyenv-virtualenv
 python
@@ -68,7 +66,6 @@ tmux
 tree
 typescript
 ucl
-upx
 vim
 xapian
 xz
