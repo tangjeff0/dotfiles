@@ -104,7 +104,7 @@ Plugin 'godlygeek/csapprox'
 Plugin 'rizzatti/dash.vim'
 Plugin 'junegunn/seoul256.vim'
 Plugin 'marciomazza/vim-brogrammer-theme'
-Plugin 'python-mode/python-mode'
+" Plugin 'python-mode/python-mode'
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
 Plugin 'mileszs/ack.vim'
