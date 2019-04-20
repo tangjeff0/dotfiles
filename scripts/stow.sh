@@ -7,6 +7,7 @@ fi
 symlink=(
 .profile
 .tmux.conf
+eslintrc.js
 )
 
 for x in ${symlink[*]}; do

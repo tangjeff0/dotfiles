@@ -1,0 +1,4 @@
+- [X] fragment zsh
+- [ ] pimp my tmux
+- [X] fix history
+- [ ] cleanup scripts
