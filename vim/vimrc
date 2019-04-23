@@ -157,6 +157,7 @@ set nojoinspaces
 set shiftround
 set mouse=a
 set viminfofile=$HOME/.vim/viminfo
+set cursorline
 
 " Mappings {{{1
 " FMap {{{2

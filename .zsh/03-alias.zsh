@@ -1,5 +1,6 @@
 # aliases
 alias v='vim'
+alias f='vifm'
 alias ec='emacsclient -n'
 alias g='git'
 alias h='history'
@@ -8,7 +9,7 @@ alias d='docker'
 alias py='python3'
 alias soz="source $ZDOTDIR/.zshrc"
 alias soe='source .env && echo "sourced .env"; source env.sh && echo sourced env.sh'
-alias r='ranger.py'
+alias ra='ranger'
 
 alias cd=' cd'
 alias ls=' ls'
