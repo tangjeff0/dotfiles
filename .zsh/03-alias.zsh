@@ -35,6 +35,7 @@ alias kl='kubectl logs'
 alias kc='kubectl config current-context'
 alias kx='kc | cut -d "_" -f 4'
 alias ku='kubectl config use-context'
+alias kpf='kubectl port-forward'
 # kubectl switch context
 ks() {
   if [[ $(kx) == "prod" ]] ; then

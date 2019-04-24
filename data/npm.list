@@ -11,12 +11,6 @@ eslint-plugin-prettier
 eslint-plugin-promise
 eslint-plugin-react
 eslint-plugin-standard
-ilp-connector
-ilp-curl
-ilp-plugin-btp
-ilp-plugin-xrp-asym-client
-ilp-spsp
-ilp-spsp-server
 moneyd
 moneyd-gui
 moneyd-uplink-xrp
