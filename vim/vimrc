@@ -1,3 +1,4 @@
+" tangsauce vimrc
 " Notes
   " :scriptnames
   " Practical Vim
@@ -54,17 +55,14 @@
     " 116: chain <c-x><c-l> add entire lines
     " 117: chain <c-x><c-p> to keep on adding words
     " 123: <C-x>s spell autocompletion
-
 " Bootstrap
   if empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
       \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
   endif
-
-" Vundle
+" vim-plug
   call plug#begin()
-  Plug 'VundleVim/Vundle.vim'
   Plug 'scrooloose/nerdtree'
   Plug 'Xuyuanp/nerdtree-git-plugin'
   Plug 'tpope/vim-vinegar'
@@ -110,7 +108,6 @@
   " Plug 'unblevable/quick-scope'
   Plug 'easymotion/vim-easymotion'
   call plug#end()
-
 " Vanilla Vim
   set nocompatible
   colo seoul256
@@ -144,8 +141,8 @@
   set noequalalways
   set nojoinspaces
   set shiftround
+  set fillchars+=fold:·
   " set foldmethod=marker
-
 " Mappings
   " fn keys
     set pastetoggle=<F1>
@@ -182,7 +179,6 @@
     " imap cll console.log()<Esc>$F(a
     " vmap cll yocll<Esc>p
     " nmap cll yiwocll<Esc>p
-
 " Autogroups
   augroup config
     autocmd!
@@ -199,7 +195,6 @@
   augroup end
   autocmd User GoyoEnter Limelight
   autocmd User GoyoLeave Limelight!
-
 " Functions
   function! s:VSetSearch(cmdtype)
     let temp = @s
@@ -210,40 +205,50 @@
   function! FilenameForLightline()
       return expand('%')
   endfunction
-
   " Custom Folding Function
-  function! IndentLevel(lnum)
-      return indent(a:lnum) / &shiftwidth
-  endfunction
-  function! NextNonBlankLine(lnum)
-      let numlines = line('$')
-      let current = a:lnum + 1
-      while current <= numlines
-          if getline(current) =~? '\v\S'
-              return current
-          endif
-          let current += 1
-      endwhile
-      return -2
-  endfunction
-  function! GetPotionFold(lnum)
-      if getline(a:lnum) =~? '\v^\s*$'
-          return '-1'
-      endif
-      let this_indent = IndentLevel(a:lnum)
-      let next_indent = IndentLevel(NextNonBlankLine(a:lnum))
-      if next_indent == this_indent
-          return this_indent
-      elseif next_indent < this_indent
-          return this_indent
-      elseif next_indent > this_indent
-          return '>' . next_indent
-      endif
-  endfunction
-
+    " http://learnvimscriptthehardway.stevelosh.com/chapters/49.html
+    function! IndentLevel(lnum)
+        return indent(a:lnum) / &shiftwidth
+    endfunction
+    function! NextNonBlankLine(lnum)
+        let numlines = line('$')
+        let current = a:lnum + 1
+        while current <= numlines
+            if getline(current) =~? '\v\S'
+                return current
+            endif
+            let current += 1
+        endwhile
+        return -2
+    endfunction
+    function! GetPotionFold(lnum)
+        if getline(a:lnum) =~? '\v^\s*$'
+            return '-1'
+        endif
+        let this_indent = IndentLevel(a:lnum)
+        let next_indent = IndentLevel(NextNonBlankLine(a:lnum))
+        if next_indent == this_indent
+            return this_indent
+        elseif next_indent < this_indent
+            return this_indent
+        elseif next_indent > this_indent
+            return '>' . next_indent
+        endif
+    endfunction
+  " Fold Styling
+    " https://github.com/wincent/wincent/blob/fe798113ffb7c616cb7c332c91eaffd62e781048/roles/dotfiles/files/.vim/autoload/wincent/settings.vim#L7-L20
+      function! Foldtext() abort
+        let s:middot='·'
+        let s:raquo='»'
+        let s:small_l='ℓ'
+        let l:lines='[' . (v:foldend - v:foldstart + 1) . s:small_l . ']'
+        let l:first=substitute(getline(v:foldstart), '\v *', '', '')
+        let l:dashes=substitute(v:folddashes, '-', s:middot, 'g')
+        return s:raquo . s:middot . s:middot . l:lines . l:dashes . ': ' . l:first
+      endfunction
   set foldmethod=expr
   set foldexpr=GetPotionFold(v:lnum)
-
+  set foldtext=Foldtext()
 " Plugin options
   " Lightline
     let g:lightline = {
