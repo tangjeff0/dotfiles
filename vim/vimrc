@@ -1,23 +1,17 @@
 " Notes
   " :scriptnames
-  " cmdwin q/ q? q: or CTRL_F
   " Practical Vim
   " https://github.com/kana/vim-textobj-entire
-  " cat /dev/urandom
-  " smile
   " <c-k>{char1}{char2} digraph
   " :'<,'>norm.
   " :set path
   " @:
   " c_CTRL-R_CTRL-W
-  " :read !cat filename.txt
   " :!mkdir -p %:h
-  " :w !sudo tee % > /dev/null
-  " '. last change
   " '^ last insertion
   " '[ start of last change or yank
   " :changes
-    " g; g,
+    " jump list g; g,
   " yanks
     " "_ black hole register
     " "0 (intentional) yank register
@@ -60,69 +54,68 @@
     " 116: chain <c-x><c-l> add entire lines
     " 117: chain <c-x><c-p> to keep on adding words
     " 123: <C-x>s spell autocompletion
+
+" Bootstrap
+  if empty(glob('~/.vim/autoload/plug.vim'))
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+      \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+  endif
+
 " Vundle
-  set rtp+=~/.vim/bundle/Vundle.vim
-  set nocompatible
-  filetype off
-  call vundle#begin()
-  Plugin 'VundleVim/Vundle.vim'
-  Plugin 'scrooloose/nerdtree'
-  Plugin 'Xuyuanp/nerdtree-git-plugin'
-  Plugin 'tpope/vim-vinegar'
-  Plugin 'tpope/vim-commentary'
-  Plugin 'tpope/vim-fugitive'
-  Plugin 'tpope/vim-repeat'
-  Plugin 'tpope/vim-surround'
-  Plugin 'tpope/vim-unimpaired'
-  Plugin 'tpope/vim-abolish'
-  " Plugin 'tpope/projectionist'
-  Plugin 'airblade/vim-gitgutter'
-  Plugin 'benjifisher/matchit.zip'
-  Plugin 'majutsushi/tagbar'
-  " Plugin 'xolox/vim-easytags'
-  Plugin 'xolox/vim-misc'
-  Plugin 'itchyny/lightline.vim'
-  Plugin 'Yggdroot/indentLine'
-  Plugin 'w0rp/ale'
-  Plugin 'mattn/emmet-vim'
-  Plugin 'pangloss/vim-javascript'
-  Plugin 'mxw/vim-jsx'
-  Plugin 'leafgarland/typescript-vim'
-  " Plugin 'othree/yaus.vim'
-  Plugin 'valloric/matchtagalways'
-  Plugin 'mbbill/undotree'
-  Plugin 'tangsauce/tmux-resize.vim'
-  Plugin 'reedes/vim-pencil'
-  Plugin 'suan/vim-instant-markdown'
-  Plugin 'junegunn/goyo.vim'
-  Plugin 'junegunn/limelight.vim'
-  Plugin 'ervandew/supertab'
-  Plugin 'SirVer/ultisnips'
-  Plugin 'honza/vim-snippets'
-  Plugin 'godlygeek/csapprox'
-  Plugin 'rizzatti/dash.vim'
-  Plugin 'junegunn/seoul256.vim'
-  Plugin 'marciomazza/vim-brogrammer-theme'
-  " Plugin 'python-mode/python-mode'
-  Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-  Plugin 'junegunn/fzf.vim'
-  Plugin 'mileszs/ack.vim'
-  Plugin 'xolox/vim-notes'
-  Plugin 'dkarter/bullets.vim'
-  Plugin 'easymotion/vim-easymotion'
-  Plugin 'b4b4r07/vim-hcl'
-  Plugin 'vim-scripts/bats.vim'
-  Plugin 'tmux-plugins/vim-tmux'
-  call vundle#end()
-  filetype plugin indent on
+  call plug#begin()
+  Plug 'VundleVim/Vundle.vim'
+  Plug 'scrooloose/nerdtree'
+  Plug 'Xuyuanp/nerdtree-git-plugin'
+  Plug 'tpope/vim-vinegar'
+  Plug 'tpope/vim-commentary'
+  Plug 'tpope/vim-fugitive'
+  Plug 'tpope/vim-repeat'
+  Plug 'tpope/vim-surround'
+  Plug 'tpope/vim-unimpaired'
+  Plug 'tpope/vim-abolish'
+  " Plug 'tpope/projectionist'
+  Plug 'airblade/vim-gitgutter'
+  Plug 'benjifisher/matchit.zip'
+  Plug 'majutsushi/tagbar'
+  " Plug 'xolox/vim-easytags'
+  Plug 'xolox/vim-misc'
+  Plug 'itchyny/lightline.vim'
+  Plug 'Yggdroot/indentLine'
+  Plug 'w0rp/ale'
+  Plug 'mattn/emmet-vim'
+  Plug 'pangloss/vim-javascript'
+  Plug 'mxw/vim-jsx'
+  " Plug 'othree/yaus.vim'
+  Plug 'valloric/matchtagalways'
+  Plug 'mbbill/undotree'
+  Plug 'tangsauce/tmux-resize.vim'
+  Plug 'reedes/vim-pencil'
+  Plug 'suan/vim-instant-markdown'
+  Plug 'junegunn/goyo.vim'
+  Plug 'junegunn/limelight.vim'
+  Plug 'ervandew/supertab'
+  Plug 'SirVer/ultisnips'
+  Plug 'honza/vim-snippets'
+  Plug 'godlygeek/csapprox'
+  Plug 'rizzatti/dash.vim'
+  Plug 'junegunn/seoul256.vim'
+  Plug 'marciomazza/vim-brogrammer-theme'
+  Plug 'python-mode/python-mode'
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  Plug 'junegunn/fzf.vim'
+  Plug 'mileszs/ack.vim'
+  Plug 'xolox/vim-notes'
+  Plug 'dkarter/bullets.vim'
+  " Plug 'unblevable/quick-scope'
+  Plug 'easymotion/vim-easymotion'
+  call plug#end()
+
 " Vanilla Vim
-  syntax enable
   set nocompatible
-  " set shellpipe=>
-  " colo seoul256
-  colo seoul256-light
+  colo seoul256
   set directory=~/.vim/swap
-  set undofile undodir=~/.vim/undo
+  set undofile undodir=~/.vim/undodir
   set tabstop=2 shiftwidth=2
   set softtabstop=2 expandtab
   set autoindent smartindent
@@ -143,53 +136,53 @@
   set incsearch
   set autoread
   set t_Co=256
-  set list listchars=eol:↩,trail:·,tab:>-
+  set list listchars=trail:·,tab:>-
   set infercase
   " set viewoptions-=options
-  set fillchars+=fold:·
   set encoding=utf-8
   set fileencoding=utf-8
   set noequalalways
   set nojoinspaces
   set shiftround
-  set mouse=a
-  set viminfofile=$HOME/.vim/viminfo
-  set cursorline
-  set foldmethod=expr
-  set foldexpr=GetPotionFold(v:lnum)
+  " set foldmethod=marker
+
 " Mappings
-  " FMap
-  set pastetoggle=<F1>
-  nnoremap <F2> :CtrlPClearCache<CR>
-  nnoremap <F2> :UndotreeToggle<CR>
-  nnoremap <F4> :TagbarToggle<CR>
+  " fn keys
+    set pastetoggle=<F1>
+    nnoremap <F2> :CtrlPClearCache<CR>
+    nnoremap <F2> :UndotreeToggle<CR>
+    nnoremap <F4> :TagbarToggle<CR>
   " Remap
-  nnoremap <S-y> y$
-  nnoremap & :&&<CR>
-  xnoremap & :&&<CR>
-  cnoremap <expr> %%  getcmdtype() == ':' ? expand('%:h').'/' : '%%'
-  xnoremap * :<C-u>call <SID>VSetSearch('/')<CR>/<C-R>=@/<CR><CR>
-  xnoremap # :<C-u>call <SID>VSetSearch('?')<CR>?<C-R>=@/<CR><CR>
-  " Command
-  command! VI source ~/.vim/vimrc | VundleInstall
-  command! VC source ~/.vim/vimrc | VundleClean<
-  command! Revise setlocal number! relativenumber! spell!
+    nnoremap <S-y> y$
+    nnoremap & :&&<CR>
+    xnoremap & :&&<CR>
+    cnoremap <expr> %%  getcmdtype() == ':' ? expand('%:h').'/' : '%%'
+    xnoremap * :<C-u>call <SID>VSetSearch('/')<CR>/<C-R>=@/<CR><CR>
+    xnoremap # :<C-u>call <SID>VSetSearch('?')<CR>?<C-R>=@/<CR><CR>
+  " Commands
+    command! PI source ~/.vim/vimrc | PlugInstall
+    command! PC source ~/.vim/vimrc | PlugClean
+    command! Revise setlocal number! relativenumber! spell!
   " Leader
-  let mapleader= " "
-  noremap <leader>c "+y
-  nnoremap <leader>r :source ~/.vim/vimrc<CR>
-  nnoremap <leader>b :Buffers<CR>
-  nnoremap <leader>G :Goyo<CR>
-  nnoremap <leader>d "_d
-  nnoremap <c-p> :Files<CR>
-  " nnoremap <leader>2 :set tabstop=2 shiftwidth=2<CR>
-  " nnoremap <leader>4 :set tabstop=4 shiftwidth=4<CR>
-  " nnoremap <silent>t :TagbarToggle<CR>
-  " map <leader>m :vert term ../bin/matlab -nodesktop -nosplash<CR>
-  " map <leader>q <C-w>:quit!
-  " imap cll console.log()<Esc>$F(a
-  " vmap cll yocll<Esc>p
-  " nmap cll yiwocll<Esc>p
+    let mapleader= " "
+    noremap <leader>c "+y
+    nnoremap <leader>r :source ~/.vim/vimrc<CR>
+    nnoremap <leader>b :Buffers<CR>
+    nnoremap <leader>G :Goyo<CR>
+    " nnoremap <leader>d "_d
+    " TODO: write if statement to toggle color
+    nnoremap <leader>l :set background=light<CR>
+    nnoremap <leader>d :set background=dark<CR>
+    nnoremap <c-p> :Files<CR>
+    " nnoremap <leader>2 :set tabstop=2 shiftwidth=2<CR>
+    " nnoremap <leader>4 :set tabstop=4 shiftwidth=4<CR>
+    " nnoremap <silent>t :TagbarToggle<CR>
+    " map <leader>m :vert term ../bin/matlab -nodesktop -nosplash<CR>
+    " map <leader>q <C-w>:quit!
+    " imap cll console.log()<Esc>$F(a
+    " vmap cll yocll<Esc>p
+    " nmap cll yiwocll<Esc>p
+
 " Autogroups
   augroup config
     autocmd!
@@ -200,32 +193,38 @@
     autocmd BufWinEnter *? normal! zM
     autocmd BufEnter,InsertLeave *? set relativenumber
     autocmd BufLeave,InsertEnter *? set norelativenumber
-    autocmd InsertEnter,InsertLeave * set cul " highlight line if in insert mode!
-    " autocmd FileType markdown setlocal nospell
-    " autocmd BufLeave,InsertEnter *.txt,*.md set nonumber norelativenumber
-    " autocmd BufEnter,InsertLeave *.txt,*.md set nonumber norelativenumber
+    autocmd FileType markdown setlocal nospell
+    autocmd BufLeave,InsertEnter *.txt,*.md set nonumber norelativenumber
+    autocmd BufEnter,InsertLeave *.txt,*.md set nonumber norelativenumber
   augroup end
   autocmd User GoyoEnter Limelight
   autocmd User GoyoLeave Limelight!
 
-  " autocmd BufRead,BufNewFile *.md 
-  " autocmd BufRead,BufNewFile *.md 
-  " nnoremap z= z=1<CR><CR>
 " Functions
-  " custom folding
+  function! s:VSetSearch(cmdtype)
+    let temp = @s
+    norm! gv"sy
+    let @/ = '\V' . substitute(escape(@s, a:cmdtype.'\'), '\n', '\\n', 'g')
+    let @s = temp
+  endfunction
+  function! FilenameForLightline()
+      return expand('%')
+  endfunction
+
+  " Custom Folding Function
   function! IndentLevel(lnum)
-    return indent(a:lnum) / &shiftwidth
+      return indent(a:lnum) / &shiftwidth
   endfunction
   function! NextNonBlankLine(lnum)
-    let numlines = line('$')
-    let current = a:lnum + 1
-    while current <= numlines
-      if getline(current) =~? '\v\S'
-        return current
-      endif
-      let current += 1
-    endwhile
-    return -2
+      let numlines = line('$')
+      let current = a:lnum + 1
+      while current <= numlines
+          if getline(current) =~? '\v\S'
+              return current
+          endif
+          let current += 1
+      endwhile
+      return -2
   endfunction
   function! GetPotionFold(lnum)
       if getline(a:lnum) =~? '\v^\s*$'
@@ -241,99 +240,70 @@
           return '>' . next_indent
       endif
   endfunction
-  " idk what this function is for
-  function! s:VSetSearch(cmdtype)
-    let temp = @s
-    norm! gv"sy
-    let @/ = '\V' . substitute(escape(@s, a:cmdtype.'\'), '\n', '\\n', 'g')
-    let @s = temp
-  endfunction
-  function! FilenameForLightline()
-      return expand('%')
-  endfunction
-" Plugin Config
+
+  set foldmethod=expr
+  set foldexpr=GetPotionFold(v:lnum)
+
+" Plugin options
   " Lightline
-  let g:lightline = {
-        \ 'active': {
-        \   'left': [ [ 'mode', 'paste' ],
-        \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-        \ },
-        \ 'component_function': {
-        \   'gitbranch': 'fugitive#head',
-        \   'filename': 'FilenameForLightline'
-        \ },
-        \ }
-  let g:lightline.colorscheme = 'solarized'
+    let g:lightline = {
+          \ 'active': {
+          \   'left': [ [ 'mode', 'paste' ],
+          \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+          \ },
+          \ 'component_function': {
+          \   'gitbranch': 'fugitive#head',
+          \   'filename': 'FilenameForLightline'
+          \ },
+          \ }
+    let g:lightline.colorscheme = 'solarized'
   " NerdTree
-  " let g:netrw_liststyle=3
-  nnoremap <C-n> :NERDTreeToggle<CR>
-  let g:NERDTreeWinPos = "left"
-  let g:NERDTreeMapOpenSplit = "s"
-  let g:NERDTreeMapOpenVSplit = "v"
-  let g:NERDTreeCreatePrefix = "silent keepalt keepjumps"
-  let g:NERDTreeShowHidden = 1
-
+    nnoremap <C-n> :NERDTreeToggle<CR>
+    let g:NERDTreeWinPos = "left"
+    let g:NERDTreeMapOpenSplit = "s"
+    let g:NERDTreeMapOpenVSplit = "v"
+    let g:NERDTreeCreatePrefix = "silent keepalt keepjumps"
   " ALE
-  let g:ale_linters = {
-  \ 'javascript': ['eslint'],
-  \ }
-  nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-  nmap <silent> <C-j> <Plug>(ale_next_wrap)
-
+    let g:ale_linters = {
+    \ 'javascript': ['eslint'],
+    \ }
+    " nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+    " nmap <silent> <C-j> <Plug>(ale_next_wrap)
   " TmuxResize
-  nnoremap <Left> :call TmuxResize('h', 5)<CR>
-  nnoremap <Up> :call TmuxResize('k', 5)<CR>
-  nnoremap <Down> :call TmuxResize('j', 5)<CR>
-  nnoremap <Right> :call TmuxResize('l', 5)<CR>
-
+    nnoremap <Left> :call TmuxResize('h', 5)<CR>
+    nnoremap <Up> :call TmuxResize('k', 5)<CR>
+    nnoremap <Down> :call TmuxResize('j', 5)<CR>
+    nnoremap <Right> :call TmuxResize('l', 5)<CR>
   " UltiSnips
-  let g:UltiSnipsExpandTrigger="<tab>"
-  let g:UltiSnipsListSnippets="<c-l>"
-  let g:UltiSnipsJumpForwardTrigger="<c-j>"
-  let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-  let g:UltiSnipsEditSplit='vertical'
-  let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips', $HOME.'/.vim/bundle/vim-snippets/UltiSnips']
-  let g:ultisnips_javascript = {
-  \ 'keyword-spacing': 'always',
-  \ 'semi': 'never',
-  \ }
-  let g:snips_author = 'Jeff Tang'
-
+    let g:UltiSnipsExpandTrigger="<tab>"
+    let g:UltiSnipsListSnippets="<c-l>"
+    let g:UltiSnipsJumpForwardTrigger="<c-j>"
+    let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+    let g:UltiSnipsEditSplit='vertical'
+    let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips', $HOME.'/.vim/bundle/vim-snippets/UltiSnips']
+    let g:ultisnips_javascript = {
+    \ 'keyword-spacing': 'always',
+    \ 'semi': 'never',
+    \ }
+    let g:snips_author = 'Jeff Tang'
   " MatchTagAlways
-  let g:mta_filetypes = {
-  \ 'javascript.jsx' : 1,
-  \}
-
+    let g:mta_filetypes = {
+    \ 'javascript.jsx' : 1,
+    \}
   " Ack
-  let g:ackprg = "ag --vimgrep --ignore-dir .git"
-
+    let g:ackprg = "ag --vimgrep"
   " FZF
-  " let g:fzf_action = {
-    \ 'ctrl-t': 'tab split',
-    \ 'ctrl-h': 'split',
-    \ 'ctrl-v': 'vsplit' }
-
-  let g:fzf_colors =
-  \ { 'fg':      ['fg', 'Normal'],
-    \ 'bg':      ['bg', 'Normal'],
-    \ 'hl':      ['fg', 'Comment'],
-    \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-    \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-    \ 'hl+':     ['fg', 'Statement'],
-    \ 'info':    ['fg', 'PreProc'],
-    \ 'border':  ['fg', 'Ignore'],
-    \ 'prompt':  ['fg', 'Conditional'],
-    \ 'pointer': ['fg', 'Exception'],
-    \ 'marker':  ['fg', 'Keyword'],
-    \ 'spinner': ['fg', 'Label'],
-    \ 'header':  ['fg', 'Comment'] }
-
-  " let g:pymode_lint = 0
-
-  " vim-notes
-  let g:notes_directories=['~/Dropbox/notes']
-  let g:notes_suffix='.md'
-  let g:notes_title_sync='rename_file'
-  " quick-scope
-  highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
-  highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
+    let g:fzf_colors =
+    \ { 'fg':      ['fg', 'Normal'],
+      \ 'bg':      ['bg', 'Normal'],
+      \ 'hl':      ['fg', 'Comment'],
+      \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+      \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+      \ 'hl+':     ['fg', 'Statement'],
+      \ 'info':    ['fg', 'PreProc'],
+      \ 'border':  ['fg', 'Ignore'],
+      \ 'prompt':  ['fg', 'Conditional'],
+      \ 'pointer': ['fg', 'Exception'],
+      \ 'marker':  ['fg', 'Keyword'],
+      \ 'spinner': ['fg', 'Label'],
+      \ 'header':  ['fg', 'Comment'] }
