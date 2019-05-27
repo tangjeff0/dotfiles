@@ -64,7 +64,10 @@
     CMD_NUM="${GREEN}[%h]$RESET"
     TIME="${WHITE}[$(date +%H:%M)]$RESET"
     VIM_MODE="${${KEYMAP/vicmd/🍑}/(main|viins)/🍆}"
-    VCS_INFO="$(git_prompt_info)${RED}[$(git_prompt_status)${RED} ]$RESET"
+    VCS_INFO="$(git_prompt_info)"
+    if [[ $(git_prompt_status) = *[![:space:]]* ]] ; then
+      VCS_INFO+="${RED}[$(git_prompt_status)${RED} ]$RESET"
+    fi
     RPROMPT=""
     RPROMPT+=$CODE
     RPROMPT+=$VCS_BRANCH
