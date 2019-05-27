@@ -6,14 +6,33 @@
 # PROMPT
   autoload -U colors && colors
   autoload -Uz vcs_info
-  precmd_vcs_info() { vcs_info }
-  precmd_functions+=( precmd_vcs_info )
-  PROMPT="%{$fg[yellow]%}%(5~|%-1~/.../%3~|%4~) %% %{$reset_color%}% "
   setopt prompt_subst
   zstyle ':vcs_info:git:*' formats '%b'
+  GREEN="%{$fg_bold[green]%}"
+  BLUE="%{$fg_bold[blue]%}"
+  RED="%{$fg_bold[red]%}"
+  YELLOW="%{$fg_bold[yellow]%}"
+  MAGENTA="%{$fg_bold[magenta]%}"
+  WHITE="%{$fg[white]%}"
+  RESET="%{$reset_color%}"
+  precmd_vcs_info() { vcs_info }
+  precmd_functions+=( precmd_vcs_info )
   function zle-line-init zle-keymap-select {
-    VIM_PROMPT="%{$fg[black]%}%{$bg[yellow]%} NORMAL %{$reset_color%}"
-    RPROMPT="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/} %{$fg[blue]%}% \$vcs_info_msg_0_ %{$reset_color%}%"
+    CODE="%(?.${GREEN}.${RED}[%?]$RESET)"
+    CWD="${YELLOW}[%(5~|%-1~/.../%3~|%4~)]"
+    PROMPT="$MAGENTA%% $RESET"
+    CMD_NUM="${GREEN}[%h]$RESET"
+    TIME="${WHITE}[$(date +%H:%M)]$RESET"
+    VIM_MODE="${${KEYMAP/vicmd/🍑}/(main|viins)/🍆}"
+    VCS_BRANCH="${BLUE}[\$vcs_info_msg_0_]"
+    RPROMPT=""
+    RPROMPT+=$CODE
+    RPROMPT+=$CWD
+    RPROMPT+=$VCS_BRANCH
+    RPROMPT+=$CMD_NUM
+    RPROMPT+=$TIME
+    RPROMPT+=$VIM_MODE
+    RPROMPT+=$RESET
     zle reset-prompt
   }
   zle -N zle-line-init
@@ -49,14 +68,16 @@
   export PATH=$PATH:$GOROOT/bin
   export PATH=$PATH:$JAVA_HOME
 # HIST
-  HISTFILE=~/.zsh/zhistory
-  HISTSIZE=1200
-  SAVEHIST=1000
-  setopt HIST_EXPIRE_DUPS_FIRST
-  setopt EXTENDED_HISTORY
+  HISTFILE=$ZDOTDIR/zhistory
+  HISTSIZE=1000
+  SAVEHIST=10000
   setopt APPEND_HISTORY
-  setopt HIST_IGNORE_DUPS #save only one command if 2 common are same and consistent
+  setopt EXTENDED_HISTORY
+  setopt HIST_EXPIRE_DUPS_FIRST
+  setopt HIST_IGNORE_DUPS # save only one command if 2 common are same and consistent
   setopt HIST_IGNORE_SPACE # http://leahneukirchen.org/blog/archive/2012/02/10-new-zsh-tricks-you-may-not-know.html
+  setopt HIST_SAVE_NO_DUPS
+  unsetopt INC_APPEND_HISTORY_TIME
   unsetopt SHARE_HISTORY
 # alias
   alias ap='apropos'
