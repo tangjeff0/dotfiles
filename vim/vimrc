@@ -63,50 +63,51 @@
   endif
 " vim-plug
   call plug#begin()
-  Plug 'scrooloose/nerdtree'
+  " Plug 'othree/yaus.vim'
+  " Plug 'tpope/projectionist'
+  " Plug 'unblevable/quick-scope'
+  " Plug 'xolox/vim-easytags'
+  Plug 'SirVer/ultisnips'
   Plug 'Xuyuanp/nerdtree-git-plugin'
-  Plug 'tpope/vim-vinegar'
+  Plug 'Yggdroot/indentLine'
+  Plug 'airblade/vim-gitgutter'
+  Plug 'benjifisher/matchit.zip'
+  Plug 'dkarter/bullets.vim'
+  Plug 'easymotion/vim-easymotion'
+  Plug 'ervandew/supertab'
+  Plug 'godlygeek/csapprox'
+  Plug 'honza/vim-snippets'
+  Plug 'itchyny/lightline.vim'
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  Plug 'junegunn/fzf.vim'
+  Plug 'junegunn/goyo.vim'
+  Plug 'junegunn/limelight.vim'
+  Plug 'junegunn/seoul256.vim'
+  Plug 'majutsushi/tagbar'
+  Plug 'marciomazza/vim-brogrammer-theme'
+  Plug 'mattn/emmet-vim'
+  Plug 'mbbill/undotree'
+  Plug 'mileszs/ack.vim'
+  Plug 'mxw/vim-jsx'
+  Plug 'pangloss/vim-javascript'
+  Plug 'python-mode/python-mode'
+  Plug 'reedes/vim-pencil'
+  Plug 'rizzatti/dash.vim'
+  Plug 'scrooloose/nerdtree'
+  Plug 'suan/vim-instant-markdown'
+  Plug 'tangsauce/tmux-resize.vim'
+  Plug 'tpope/vim-abolish'
   Plug 'tpope/vim-commentary'
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-unimpaired'
-  Plug 'tpope/vim-abolish'
-  " Plug 'tpope/projectionist'
-  Plug 'airblade/vim-gitgutter'
-  Plug 'benjifisher/matchit.zip'
-  Plug 'majutsushi/tagbar'
-  " Plug 'xolox/vim-easytags'
-  Plug 'xolox/vim-misc'
-  Plug 'itchyny/lightline.vim'
-  Plug 'Yggdroot/indentLine'
-  Plug 'w0rp/ale'
-  Plug 'mattn/emmet-vim'
-  Plug 'pangloss/vim-javascript'
-  Plug 'mxw/vim-jsx'
-  " Plug 'othree/yaus.vim'
+  Plug 'tpope/vim-vinegar'
   Plug 'valloric/matchtagalways'
-  Plug 'mbbill/undotree'
-  Plug 'tangsauce/tmux-resize.vim'
-  Plug 'reedes/vim-pencil'
-  Plug 'suan/vim-instant-markdown'
-  Plug 'junegunn/goyo.vim'
-  Plug 'junegunn/limelight.vim'
-  Plug 'ervandew/supertab'
-  Plug 'SirVer/ultisnips'
-  Plug 'honza/vim-snippets'
-  Plug 'godlygeek/csapprox'
-  Plug 'rizzatti/dash.vim'
-  Plug 'junegunn/seoul256.vim'
-  Plug 'marciomazza/vim-brogrammer-theme'
-  Plug 'python-mode/python-mode'
-  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-  Plug 'junegunn/fzf.vim'
-  Plug 'mileszs/ack.vim'
+  Plug 'w0rp/ale'
+  Plug 'xolox/vim-misc'
   Plug 'xolox/vim-notes'
-  Plug 'dkarter/bullets.vim'
-  " Plug 'unblevable/quick-scope'
-  Plug 'easymotion/vim-easymotion'
+  Plug 'jlanzarotta/bufexplorer'
   call plug#end()
 " Vanilla Vim
   set nocompatible
@@ -142,7 +143,7 @@
   set nojoinspaces
   set shiftround
   set fillchars+=fold:·
-  " set foldmethod=marker
+  set foldmethod=manual
 " Mappings
   " fn keys
     set pastetoggle=<F1>
@@ -160,11 +161,12 @@
     command! PI source ~/.vim/vimrc | PlugInstall
     command! PC source ~/.vim/vimrc | PlugClean
     command! Revise setlocal number! relativenumber! spell!
+    command! H :Helptags
   " Leader
     let mapleader= " "
     noremap <leader>c "+y
     nnoremap <leader>r :source ~/.vim/vimrc<CR>
-    nnoremap <leader>b :Buffers<CR>
+    nnoremap <leader>bb :Buffers<CR>
     nnoremap <leader>G :Goyo<CR>
     " nnoremap <leader>d "_d
     " TODO: write if statement to toggle color
@@ -192,6 +194,7 @@
     autocmd FileType markdown setlocal nospell
     autocmd BufLeave,InsertEnter *.txt,*.md set nonumber norelativenumber
     autocmd BufEnter,InsertLeave *.txt,*.md set nonumber norelativenumber
+    autocmd BufEnter vimrc,.zshrc,.tmux.conf setlocal foldmethod=expr foldexpr=GetPotionFold(v:lnum) foldtext=Foldtext()
   augroup end
   autocmd User GoyoEnter Limelight
   autocmd User GoyoLeave Limelight!
@@ -246,9 +249,6 @@
         let l:dashes=substitute(v:folddashes, '-', s:middot, 'g')
         return s:raquo . s:middot . s:middot . l:lines . l:dashes . ': ' . l:first
       endfunction
-  set foldmethod=expr
-  set foldexpr=GetPotionFold(v:lnum)
-  set foldtext=Foldtext()
 " Plugin options
   " Lightline
     let g:lightline = {
@@ -268,6 +268,7 @@
     let g:NERDTreeMapOpenSplit = "s"
     let g:NERDTreeMapOpenVSplit = "v"
     let g:NERDTreeCreatePrefix = "silent keepalt keepjumps"
+    let g:NERDTreeShowHidden=1
   " ALE
     let g:ale_linters = {
     \ 'javascript': ['eslint'],

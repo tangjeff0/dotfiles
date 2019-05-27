@@ -18,6 +18,7 @@
   co = checkout
   d = diff
   f = fetch
+  F = pull
   l = log --decorate=full --abbrev-commit
   p = push
   s = status
