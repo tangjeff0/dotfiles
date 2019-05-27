@@ -3,34 +3,74 @@
 # TODO
   # how to make separate Mac and Linux configs?
   # vim ex mode show prev command, default Evil?
+# packages / source
+  export ZDOTDIR=$HOME/.zsh
+  export ADOTDIR=$ZDOTDIR/antigen
+  if ! [ -f $ZDOTDIR/antigen.zsh ]; then
+    curl -L git.io/antigen > $ZDOTDIR/antigen.zsh
+  fi
+  source $ZDOTDIR/antigen.zsh
+  antigen bundle andrewferrier/fzf-z
+  antigen bundle olivierverdier/zsh-git-prompt
+  antigen bundle robbyrussell/oh-my-zsh lib/git.zsh
+  antigen bundle robbyrussell/oh-my-zsh plugins/colored-man-pages
+  antigen bundle robbyrussell/oh-my-zsh plugins/colorize
+  antigen bundle robbyrussell/oh-my-zsh plugins/vi-mode
+  antigen bundle rupa/z
+  antigen bundle zsh-users/zsh-autosuggestions
+  antigen bundle zsh-users/zsh-history-substring-search
+  antigen bundle zsh-users/zsh-syntax-highlighting
+  antigen apply
+  autoload -Uz compinit && compinit
+  # source <(kubectl completion zsh)
+  # source <(helm completion zsh)
+  # source "$HOME/google-cloud-sdk/path.zsh.inc"
+  # source "$HOME/google-cloud-sdk/completion.zsh.inc"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# config
+  # zsh-history-substring-search
+    bindkey -M vicmd 'k' history-substring-search-up
+    bindkey -M vicmd 'j' history-substring-search-down
+  setopt AUTO_CD
 # PROMPT
   autoload -U colors && colors
-  autoload -Uz vcs_info
-  setopt prompt_subst
-  zstyle ':vcs_info:git:*' formats '%b'
   GREEN="%{$fg_bold[green]%}"
   BLUE="%{$fg_bold[blue]%}"
+  CYAN="%{$fg_bold[cyan]%}"
   RED="%{$fg_bold[red]%}"
   YELLOW="%{$fg_bold[yellow]%}"
   MAGENTA="%{$fg_bold[magenta]%}"
   WHITE="%{$fg[white]%}"
   RESET="%{$reset_color%}"
-  precmd_vcs_info() { vcs_info }
-  precmd_functions+=( precmd_vcs_info )
+  ZSH_THEME_GIT_PROMPT_ADDED="%{$fg[green]%}✚"
+  ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg[blue]%}✹"
+  ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[red]%}✖"
+  ZSH_THEME_GIT_PROMPT_RENAMED="%{$fg[magenta]%}➜"
+  ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[yellow]%}§"
+  ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[cyan]%}◒"
+  ZSH_THEME_GIT_PROMPT_PREFIX="${CYAN}["
+  ZSH_THEME_GIT_PROMPT_SUFFIX="${CYAN}]$RESET"
+  ZSH_THEME_GIT_PROMPT_AHEAD="$YELLOW⇡ $RESET"
+  ZSH_THEME_GIT_PROMPT_BEHIND="$CYAN⇣ "
+  ZSH_THEME_GIT_PROMPT_CLEAN="$GREEN✓ $RESET"
+  ZSH_THEME_GIT_PROMPT_DIRTY="💩"
   function zle-line-init zle-keymap-select {
+    CWD="${CYAN}%(5~|%-1~/.../%3~|%4~)"
+    PRIVILEGE=$YELLOW%#
+    PROMPT="$CWD $PRIVILEGE $RESET"
     CODE="%(?.${GREEN}.${RED}[%?]$RESET)"
-    CWD="${YELLOW}[%(5~|%-1~/.../%3~|%4~)]"
-    PROMPT="$MAGENTA%% $RESET"
     CMD_NUM="${GREEN}[%h]$RESET"
     TIME="${WHITE}[$(date +%H:%M)]$RESET"
     VIM_MODE="${${KEYMAP/vicmd/🍑}/(main|viins)/🍆}"
-    VCS_BRANCH="${BLUE}[\$vcs_info_msg_0_]"
+    VCS_INFO="$(git_prompt_info)${RED}[$(git_prompt_status)${RED} ]$RESET"
     RPROMPT=""
     RPROMPT+=$CODE
-    RPROMPT+=$CWD
     RPROMPT+=$VCS_BRANCH
     RPROMPT+=$CMD_NUM
     RPROMPT+=$TIME
+    RPROMPT+=$VCS_INFO
     RPROMPT+=$VIM_MODE
     RPROMPT+=$RESET
     zle reset-prompt
@@ -38,8 +78,6 @@
   zle -N zle-line-init
   zle -N zle-keymap-select
 # export
-  export ZDOTDIR=$HOME/.zsh
-  export ADOTDIR=$ZDOTDIR/antigen
   export ANTIGEN_DEBUG_LOG=/dev/null
   export DOCKER_ID_USER='tangsauce'
   export EDITOR='vim'
@@ -112,30 +150,3 @@
     alias kc='kubectl config current-context'
     alias ku='kubectl config use-context'
     alias kpf='kubectl port-forward'
-# packages / source
-  if ! [ -f $ZDOTDIR/antigen.zsh ]; then
-    curl -L git.io/antigen > $ZDOTDIR/antigen.zsh
-  fi
-  source $ZDOTDIR/antigen.zsh
-  antigen bundle andrewferrier/fzf-z
-  antigen bundle robbyrussell/oh-my-zsh plugins/colored-man-pages
-  antigen bundle robbyrussell/oh-my-zsh plugins/colorize
-  antigen bundle robbyrussell/oh-my-zsh plugins/vi-mode
-  antigen bundle rupa/z
-  antigen bundle zsh-users/zsh-autosuggestions
-  antigen bundle zsh-users/zsh-history-substring-search
-  antigen bundle zsh-users/zsh-syntax-highlighting
-  antigen apply
-  autoload -Uz compinit && compinit
-  # source <(kubectl completion zsh)
-  # source <(helm completion zsh)
-  # source "$HOME/google-cloud-sdk/path.zsh.inc"
-  # source "$HOME/google-cloud-sdk/completion.zsh.inc"
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-# config
-  # zsh-history-substring-search
-    bindkey -M vicmd 'k' history-substring-search-up
-    bindkey -M vicmd 'j' history-substring-search-down
-  setopt AUTO_CD
