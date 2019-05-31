@@ -14,28 +14,17 @@ brew update
 brew upgrade
 
 echo "brew install command line apps"
-brew install $(cat ./brew.list)
+brew install $(cat ./data/brew.list)
 
 echo "brew cask install gui apps"
-brew cask install $(cat ./brew_cask.list)
+brew cask install $(cat ./data/brew_cask.list)
 
 brew cleanup
 
-echo "yarn global install"
-yarn global add $(cat ./npm.list)
-
-
-# echo "install zsh"
-# brew install zsh
-# git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
-# chsh -s /bin/zsh
-
-# echo "copy dotfiles out"
-# ./scripts/nix-out.sh
+# echo "yarn global install"
+# yarn global add $(cat ./npm.list)
 
 # echo "npm install global packages"
 # ./scripts/npm.sh
 
-main () {
-  echo 'yeet'
-}
+chsh -s /bin/zsh

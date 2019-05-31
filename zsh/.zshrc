@@ -44,12 +44,12 @@
   MAGENTA="%{$fg_bold[magenta]%}"
   WHITE="%{$fg[white]%}"
   RESET="%{$reset_color%}"
-  ZSH_THEME_GIT_PROMPT_ADDED="%{$fg[green]%}✚"
-  ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg[blue]%}✹"
-  ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[red]%}✖"
-  ZSH_THEME_GIT_PROMPT_RENAMED="%{$fg[magenta]%}➜"
-  ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[yellow]%}§"
-  ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[cyan]%}◒"
+  ZSH_THEME_GIT_PROMPT_ADDED="%{$fg[green]%}✚ "
+  ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg[blue]%}✹ "
+  ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[red]%}✖ "
+  ZSH_THEME_GIT_PROMPT_RENAMED="%{$fg[magenta]%}➜ "
+  ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[yellow]%}§ "
+  ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[cyan]%}◒ "
   ZSH_THEME_GIT_PROMPT_PREFIX="${CYAN}["
   ZSH_THEME_GIT_PROMPT_SUFFIX="${CYAN}]$RESET"
   ZSH_THEME_GIT_PROMPT_AHEAD="$YELLOW⇡ $RESET"
@@ -66,7 +66,7 @@
     VIM_MODE="${${KEYMAP/vicmd/🍑}/(main|viins)/🍆}"
     VCS_INFO="$(git_prompt_info)"
     if [[ $(git_prompt_status) = *[![:space:]]* ]] ; then
-      VCS_INFO+="${RED}[$(git_prompt_status)${RED} ]$RESET"
+      VCS_INFO+="${RED}[$(git_prompt_status)${RED}]$RESET"
     fi
     RPROMPT=""
     RPROMPT+=$CODE
@@ -131,7 +131,8 @@
   alias d='docker'
   alias py='python3'
   alias soz="source $ZDOTDIR/.zshrc"
-  alias l='ls --color=always -l -a' # color
+  alias l='ls --color=always -l -a' # ubuntu
+  alias l='ls -G -l -a' # mac
   alias ebook='ebook-viewer --continue &'
   alias c='circleci'
   alias gc='gcloud'
