@@ -98,8 +98,6 @@
   export GOPATH=/Users/jefftang/code/go
   export GOROOT=/usr/local/opt/go/libexec
   export LESSHISTFILE=/dev/null
-  export LSCOLORS='gxfxcxdxbxegedabagacad' # mac https://geoff.greer.fm/lscolors/
-  export LS_COLORS='di=36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43' # linux
   export NVM_DIR="$HOME/.nvm"
   export PY=/usr/local/lib/python2.7/site-packages
   export TERM=xterm-256color
@@ -131,8 +129,6 @@
   alias d='docker'
   alias py='python3'
   alias soz="source $ZDOTDIR/.zshrc"
-  alias l='ls --color=always -l -a' # ubuntu
-  alias l='ls -G -l -a' # mac
   alias ebook='ebook-viewer --continue &'
   alias c='circleci'
   alias gc='gcloud'
@@ -154,3 +150,15 @@
     alias kc='kubectl config current-context'
     alias ku='kubectl config use-context'
     alias kpf='kubectl port-forward'
+# OS
+  if [[ "$OSTYPE" == "linux-gnu" ]]; then
+    export LS_COLORS='di=36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43'
+    alias l='ls --color=always -l -a'
+    alias pbcopy='xclip -i'
+    alias pbpaste='xclip -o'
+  elif [[ "$OSTYPE" == "darwin"* ]]; then
+    export LSCOLORS='gxfxcxdxbxegedabagacad' # https://geoff.greer.fm/lscolors/
+    alias l='ls -G -l -a'
+  else
+    echo "neither linux nor Mac. are you sure you want to do this?"
+  fi

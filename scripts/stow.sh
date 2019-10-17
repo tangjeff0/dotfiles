@@ -16,6 +16,7 @@ done
 dir=(
 zsh
 vim
+emacs.d
 )
 for x in ${dir[*]}; do
   if [[ ! -d  ~/.$x ]]; then

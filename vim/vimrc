@@ -113,6 +113,8 @@
   set nocompatible
   colo seoul256
   set directory=~/.vim/swap
+  " set mouse=v
+  " set clipboard=unnamedplus
   set undofile undodir=~/.vim/undodir
   set tabstop=2 shiftwidth=2
   set softtabstop=2 expandtab
