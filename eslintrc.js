@@ -13,7 +13,7 @@ module.exports = {
   // "extends": ["eslint:recommended", 'plugin:react/recommended'],
   // "parser": "babel-eslint",
   // "plugins": [ "react", ],
-  "parser": "@typescript-eslint/parser",
+  // "parser": "@typescript-eslint/parser",
   "plugins": ["@typescript-eslint"],
   "parserOptions": {
     "ecmaFeatures": {

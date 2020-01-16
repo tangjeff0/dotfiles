@@ -59,6 +59,8 @@ up::linux () {
     vim-gui-common \ # important for xterm-clipboard in vim for copy and paste
     silversearcher-ag \
     emacs \
+    htop \
+    jq \
       -y
 
   # redshift
@@ -75,22 +77,23 @@ up::linux () {
   sudo apt-get remove cmdtest
   curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
   echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-  sudo apt-get install yarn
+  sudo apt update && sudo apt install --no-install-recommends yarn
+
   npm init -y
   yarn global add nodemon
-  yarn global add eslint eslint-plugin-react babel-eslint
+  yarn global add eslint \
+    eslint-plugin-react \
+    babel-eslint \
+    @typescript-eslint/parser \
+    @typescript-eslint/eslint-plugin
 
   echo "\nJAVA\n"
   sudo apt-get install openjdk-8-jre -y
 
-  echo "\nNGROK\n"
-  wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip
-  unzip ngrok-stable-linux-amd64.zip
-  rm -f ngrok-stable-linux-amd64.zip
-
   echo "\nSNAP\n"
-  sudo snap install postman
-  sudo snap install spotify
+  sudo snap install \
+    postman \
+    slack
 
 
 }
