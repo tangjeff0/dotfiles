@@ -107,13 +107,14 @@
   Plug 'w0rp/ale'
   Plug 'xolox/vim-misc'
   Plug 'xolox/vim-notes'
-  Plug 'jlanzarotta/bufexplorer'
   call plug#end()
 " Vanilla Vim
   set nocompatible
   colo seoul256
   set directory=~/.vim/swap
-  set undofile undodir=~/.vim/undodir
+  " set mouse=v
+  " set clipboard=unnamedplus
+  set undofile undodir=~/.vim/undo
   set tabstop=2 shiftwidth=2
   set softtabstop=2 expandtab
   set autoindent smartindent
@@ -166,7 +167,7 @@
     let mapleader= " "
     noremap <leader>c "+y
     nnoremap <leader>r :source ~/.vim/vimrc<CR>
-    nnoremap <leader>bb :Buffers<CR>
+    nnoremap <leader>b :Buffers<CR>
     nnoremap <leader>G :Goyo<CR>
     " nnoremap <leader>d "_d
     " TODO: write if statement to toggle color

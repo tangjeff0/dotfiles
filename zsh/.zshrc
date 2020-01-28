@@ -153,10 +153,14 @@
     alias ku='kubectl config use-context'
     alias kpf='kubectl port-forward'
 # OS
-  if [ "$OSTYPE" = "linux-gnu" ]; then
-    alias pbcopy='xclip -selection clipboard'
-    alias pbpaste='xclip -selection clipboard -o'
-    export LS_COLORS='di=36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43' # linux
+  if [[ "$OSTYPE" == "linux-gnu" ]]; then
+    export LS_COLORS='di=36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43'
+    alias l='ls --color=always -l -a'
+    alias pbcopy='xclip -i'
+    alias pbpaste='xclip -o'
+  elif [[ "$OSTYPE" == "darwin"* ]]; then
+    export LSCOLORS='gxfxcxdxbxegedabagacad' # https://geoff.greer.fm/lscolors/
+    alias l='ls -G -l -a'
   else
-    export LSCOLORS='gxfxcxdxbxegedabagacad' # mac https://geoff.greer.fm/lscolors/
+    echo "neither linux nor Mac. are you sure you want to do this?"
   fi
