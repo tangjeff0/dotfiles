@@ -95,19 +95,17 @@
       cat {}) 2> /dev/null | head -100"
   '
   export FZF_ALT_C_OPTS='--preview "tree -aC {}"'
-  export GOPATH=/Users/jefftang/code/go
-  export GOROOT=/usr/local/opt/go/libexec
+  export GOROOT=/usr/local/go
+  export GOPATH=$HOME/Desktop/code/mit-6.824
   export LESSHISTFILE=/dev/null
-  export LSCOLORS='gxfxcxdxbxegedabagacad' # mac https://geoff.greer.fm/lscolors/
-  export LS_COLORS='di=36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43' # linux
   export NVM_DIR="$HOME/.nvm"
   export PY=/usr/local/lib/python2.7/site-packages
   export TERM=xterm-256color
   export _Z_DATA=$ZDOTDIR/z
 # PATH
-  export PATH=$PATH:$GOPATH/bin
   export PATH=$PATH:$GOROOT/bin
   export PATH=$PATH:$JAVA_HOME
+  export PATH=$PATH:~/anaconda3/bin
 # HIST
   HISTFILE=$ZDOTDIR/zhistory
   HISTSIZE=1000
@@ -129,10 +127,10 @@
   alias g='git'
   alias t='terraform'
   alias d='docker'
-  alias py='python3'
+  alias py='python3.6'
   alias soz="source $ZDOTDIR/.zshrc"
   alias l='ls --color=always -l -a' # ubuntu
-  alias l='ls -G -l -a' # mac
+  # alias l='ls -G -l -a' # mac
   alias ebook='ebook-viewer --continue &'
   alias c='circleci'
   alias gc='gcloud'
@@ -154,3 +152,11 @@
     alias kc='kubectl config current-context'
     alias ku='kubectl config use-context'
     alias kpf='kubectl port-forward'
+# OS
+  if [ "$OSTYPE" = "linux-gnu" ]; then
+    alias pbcopy='xclip -selection clipboard'
+    alias pbpaste='xclip -selection clipboard -o'
+    export LS_COLORS='di=36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43' # linux
+  else
+    export LSCOLORS='gxfxcxdxbxegedabagacad' # mac https://geoff.greer.fm/lscolors/
+  fi
