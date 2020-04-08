@@ -2,11 +2,9 @@
 
 # tangsauce's cross platform up script for environment configuration
 
-set -e
-
 up::mac () {
   # update xcode (and git)
-  xcode-select --install
+  # xcode-select --install
 
   # show dotfiles in finder
   defaults write com.apple.finder AppleShowAllFiles NO

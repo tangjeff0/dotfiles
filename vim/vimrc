@@ -67,7 +67,7 @@
   " Plug 'tpope/projectionist'
   " Plug 'unblevable/quick-scope'
   " Plug 'xolox/vim-easytags'
-  Plug 'SirVer/ultisnips'
+  " Plug 'SirVer/ultisnips'
   Plug 'Xuyuanp/nerdtree-git-plugin'
   Plug 'Yggdroot/indentLine'
   Plug 'airblade/vim-gitgutter'

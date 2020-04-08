@@ -95,6 +95,7 @@
       cat {}) 2> /dev/null | head -100"
   '
   export FZF_ALT_C_OPTS='--preview "tree -aC {}"'
+  export JAVA_HOME="$HOME/applications/jdk-11.0.2.jdk/Contents/Home"
   export GOROOT=/usr/local/go
   export GOPATH=$HOME/Desktop/code/mit-6.824
   export LESSHISTFILE=/dev/null
