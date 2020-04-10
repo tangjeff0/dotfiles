@@ -23,7 +23,7 @@ up::mac () {
   brew install $(cat ./data/brew.list)
 
   # brew cask install gui apps
-  brew cask install $(cat ./data/brew_cask.list)
+  brew cask install $(cat ./data/cask.list)
 
   brew cleanup
 }

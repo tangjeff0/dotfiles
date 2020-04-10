@@ -80,7 +80,6 @@
   }
   zle -N zle-line-init
   zle -N zle-keymap-select
-# export
   export ANTIGEN_DEBUG_LOG=/dev/null
   export DOCKER_ID_USER='tangsauce'
   export EDITOR='vim'
@@ -96,6 +95,7 @@
   '
   export FZF_ALT_C_OPTS='--preview "tree -aC {}"'
   export JAVA_HOME="$HOME/applications/jdk-11.0.2.jdk/Contents/Home"
+  export ANDROID_HOME="$HOME/Library/Android/sdk" # mac only
   export GOROOT=/usr/local/go
   export GOPATH=$HOME/Desktop/code/mit-6.824
   export LESSHISTFILE=/dev/null
@@ -104,6 +104,7 @@
   export TERM=xterm-256color
   export _Z_DATA=$ZDOTDIR/z
 # PATH
+  export PATH=$PATH:$HOME/applications
   export PATH=$PATH:$GOROOT/bin
   export PATH=$PATH:$JAVA_HOME
   export PATH=$PATH:~/anaconda3/bin

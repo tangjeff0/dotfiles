@@ -1,0 +1,205 @@
+
+* Shell
+#+BEGIN_SRC emacs-lisp
+(exec-path-from-shell-initialize)
+(exec-path-from-shell-copy-env "JAVA_HOME")
+#+END_SRC
+
+* Server
+#+BEGIN_SRC emacs-lisp
+(load "server")
+(unless (server-running-p) (server-start))
+#+END_SRC
+
+* Aesthetics
+** Font
+#+BEGIN_SRC emacs-lisp
+(set-face-attribute 'default nil :height 175)
+#+END_SRC
+** Theme
+ #+BEGIN_SRC emacs-lisp
+ (use-package seoul256-theme
+ :config (load-theme 'seoul256 t))
+ #+END_SRC
+#+BEGIN_SRC emacs-lisp
+(use-package spacemacs-theme
+  :no-require t
+  :config (load-theme 'spacemacs-dark t))
+#+END_SRC
+** GUI
+ #+BEGIN_SRC emacs-lisp
+ (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+ (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+ (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+
+ #+END_SRC
+
+** Cursor
+ show width of cursor, e.g. TAB
+ #+BEGIN_SRC emacs-lisp
+ (setq x-stretch-cursor t)
+ #+END_SRC
+
+* Backups
+Put all backups in .emacs.d directory
+#+BEGIN_SRC emacs-lisp
+(setq backup-directory-alist
+      `(("." . ,(expand-file-name
+                 (concat user-emacs-directory "backups")))))
+#+END_SRC
+
+* Smex
+#+BEGIN_SRC emacs-lisp
+(use-package smex
+:config
+(global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "M-X") 'smex-major-mode-commands))
+#+END_SRC
+
+* Org
+#+BEGIN_SRC emacs-lisp
+(require 'org-install)
+(setq org-modules '(org-habit org-info org-tempo))
+(org-load-modules-maybe t)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'org-structure-template-alist '("e" "#+BEGIN_SRC emacs-lisp\n?\n#+END_SRC" "<src lang=\"emacs-lisp\">\n?\n</src>"))
+#+END_SRC
+
+* Hydra
+#+BEGIN_SRC emacs-lisp
+(use-package hydra
+  :config
+  (setq hydra-lv nil))
+(defhydra hydra-zoom ()
+  "zoom"
+  ("+" text-scale-increase "in")
+  ("=" text-scale-increase "in")
+  ("-" text-scale-decrease "out")
+  ("_" text-scale-decrease "out")
+  ("0" (text-scale-adjust 0) "reset")
+  ("q" nil "quit" :color blue))
+
+(bind-keys ("C-x C-0" . hydra-zoom/body)
+           ("C-x C-=" . hydra-zoom/body)
+           ("C-x C--" . hydra-zoom/body)
+           ("C-x C-+" . hydra-zoom/body))
+#+END_SRC
+
+#+RESULTS:
+: hydra-zoom/body
+
+* Counsel
+#+BEGIN_SRC emacs-lisp
+(use-package counsel
+    :bind (("C-x C-f" . counsel-find-file)
+           ("M-x" . counsel-M-x)
+           ("C-h f" . counsel-describe-function)
+           ("C-h v" . counsel-describe-variable)
+           ("M-i" . counsel-imenu)
+           ("C-c i" . counsel-unicode-char)
+           :map read-expression-map
+           ("C-r" . counsel-expression-history)))
+
+#+END_SRC
+
+* Ivy Swiper
+
+#+BEGIN_SRC emacs-lisp
+  (use-package swiper
+    :bind (("C-s" . swiper)
+           ("C-r" . swiper)
+           ("C-c C-r" . ivy-resume)
+           :map ivy-minibuffer-map
+           ("C-j" . ivy-immediate-done)
+           ("RET" . ivy-alt-done))
+    :init
+    (ivy-mode 1)
+     :config
+     (setq ivy-count-format "(%d/%d) "
+           ivy-display-style 'fancy
+           ivy-height 20))
+#+END_SRC
+
+* Projectile
+#+BEGIN_SRC emacs-lisp
+(use-package projectile
+  :bind ("C-c p" . projectile-switch-project)
+  :init
+  (projectile-global-mode)
+  (use-package ibuffer-projectile
+    :bind (("C-x C-b" . ibuffer))))
+  #+END_SRC
+
+* Selection (Expand Region)
+#+BEGIN_SRC emacs-lisp
+(use-package expand-region
+  :bind (("C-@" . er/expand-region)
+         ("C-=" . er/expand-region)
+         ("M-3" . er/expand-region)))
+
+(pending-delete-mode t)
+
+#+END_SRC
+
+* Deletion
+#+BEGIN_SRC emacs-lisp
+(use-package browse-kill-ring
+  :bind ("C-x C-y" . browse-kill-ring)
+  :config
+  (setq browse-kill-ring-quit-action 'kill-and-delete-window))
+
+(setq save-interprogram-paste-before-kill t)
+
+(use-package browse-kill-ring
+  :bind ("C-x C-y" . browse-kill-ring)
+  :config
+  (setq browse-kill-ring-quit-action 'kill-and-delete-window))
+
+(setq save-interprogram-paste-before-kill t)
+#+END_SRC
+
+* Prompts
+#+BEGIN_SRC emacs-lisp
+(fset 'yes-or-no-p 'y-or-n-p)
+#+END_SRC
+
+* Which Key
+#+BEGIN_SRC emacs-lisp
+(use-package which-key
+  :init
+  (which-key-mode))
+#+END_SRC
+
+* Magit
+#+BEGIN_SRC emacs-lisp
+(use-package magit
+  :bind (("C-x g" . magit-status)))
+#+END_SRC
+
+* Parens
+#+BEGIN_SRC emacs-lisp
+(use-package rainbow-delimiters
+:hook (prog-mode . rainbow-delimiters-mode))
+#+END_SRC
+
+* Toggle Maximized
+#+BEGIN_SRC emacs-lisp
+(toggle-frame-maximized)
+#+END_SRC
+
+* Paredit
+#+BEGIN_SRC emacs-lisp
+(use-package paredit)
+#+END_SRC
+
+* Clojure
+#+BEGIN_SRC emacs-lisp
+(use-package clojure-mode
+  :mode (("\\.boot$"  . clojure-mode)
+         ("\\.clj$"   . clojure-mode)
+         ("\\.cljs$"  . clojurescript-mode)
+         ("\\.edn$"   . clojure-mode)))
+#+END_SRC
+
