@@ -1,4 +1,13 @@
+* Detect OS
+#+BEGIN_SRC emacs-lisp
+(defun is-mac-p
+    ()
+  (eq system-type 'darwin))
 
+(defun is-linux-p
+    ()
+  (eq system-type 'gnu/linux))
+#+END_SRC
 * Shell
 #+BEGIN_SRC emacs-lisp
 (exec-path-from-shell-initialize)
@@ -175,8 +184,12 @@ Put all backups in .emacs.d directory
 * Magit
 #+BEGIN_SRC emacs-lisp
 (use-package magit
-  :bind (("C-x g" . magit-status)))
+  :bind (("C-x g" . magit-status))
+  :config (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1))
 #+END_SRC
+
+#+RESULTS:
+: magit-status
 
 * Parens
 #+BEGIN_SRC emacs-lisp
@@ -191,7 +204,19 @@ Put all backups in .emacs.d directory
 
 * Paredit
 #+BEGIN_SRC emacs-lisp
-(use-package paredit)
+  ;; (use-package paredit
+  ;;   :ensure t
+  ;;   :config
+  ;;   (add-hook 'emacs-lisp-mode-hook #'paredit-mode)
+  ;;   )
+  (use-package cider
+    :ensure t
+    :config
+    (setq nrepl-log-messages t)
+    (add-hook 'cider-mode-hook #'eldoc-mode)
+    (add-hook 'cider-repl-mode-hook #'eldoc-mode)
+    (add-hook 'cider-repl-mode-hook #'paredit-mode)
+    (add-hook 'cider-repl-mode-hook #'rainbow-delimiters-mode))
 #+END_SRC
 
 * Clojure
@@ -201,5 +226,53 @@ Put all backups in .emacs.d directory
          ("\\.clj$"   . clojure-mode)
          ("\\.cljs$"  . clojurescript-mode)
          ("\\.edn$"   . clojure-mode)))
-#+END_SRC
+(setq cider-repl-pop-to-buffer-on-connect nil)
 
+(use-package highlight-parentheses
+:config
+(add-hook 'clojure-mode-hook
+	  (lambda ()
+	    (highlight-parentheses-mode t))))
+
+(use-package clj-refactor)
+
+#+END_SRC
+* Prog mode
+  #+BEGIN_SRC emacs-lisp
+(use-package rainbow-delimiters
+  :config (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
+(use-package paredit-everywhere
+  :config (add-hook 'prog-mode-hook 'paredit-everywhere-mode)
+      ;; enable in the *scratch* buffer
+    (add-hook 'lisp-interaction-mode-hook #'paredit-mode)
+    (add-hook 'ielm-mode-hook #'paredit-mode)
+    (add-hook 'lisp-mode-hook #'paredit-mode)
+    (add-hook 'clojure-mode-hook #'paredit-mode)
+    (add-hook 'clojurescript-mode-hook #'paredit-mode)
+    (add-hook 'eval-expression-minibuffer-setup-hook #'paredit-mode))
+
+  #+END_SRC
+* Jumping (Avy, Ace-Window)
+#+BEGIN_SRC emacs-lisp
+(use-package avy
+  :bind ("M-SPC" . avy-goto-char)
+  :config
+  (setq avy-background t
+        ;; avy-keys '(?a ?o ?e ?u ?i ?d ?h ?t ?n ?s)
+	))
+(use-package ace-window
+  :bind (("C-x o" . ace-window)
+         ("M-2" . ace-window))
+  :init
+  (setq aw-background nil
+        ;; aw-keys '(?a ?o ?e ?u ?i ?d ?h ?t ?n ?s)
+	))
+#+END_SRC
+* Auto-Save
+#+BEGIN_SRC emacs-lisp
+(defvar backup-dir (expand-file-name "~/.emacs.d/emacs_backup/"))
+(defvar autosave-dir (expand-file-name "~/.emacs.d/autosave/"))
+(setq backup-directory-alist (list (cons ".*" backup-dir))
+      auto-save-list-file-prefix autosave-dir
+      auto-save-file-name-transforms `((".*" ,autosave-dir t)))      
+#+END_SRC

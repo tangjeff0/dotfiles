@@ -96,6 +96,7 @@
   Plug 'scrooloose/nerdtree'
   Plug 'suan/vim-instant-markdown'
   Plug 'tangsauce/tmux-resize.vim'
+  Plug 'tpope/vim-fireplace'
   Plug 'tpope/vim-abolish'
   Plug 'tpope/vim-commentary'
   Plug 'tpope/vim-fugitive'
@@ -106,7 +107,7 @@
   Plug 'valloric/matchtagalways'
   Plug 'w0rp/ale'
   Plug 'xolox/vim-misc'
-  Plug 'xolox/vim-notes'
+  " Plug 'xolox/vim-notes'
   call plug#end()
 " Vanilla Vim
   set nocompatible

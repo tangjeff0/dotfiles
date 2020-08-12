@@ -64,16 +64,16 @@
     CMD_NUM="${GREEN}[%h]$RESET"
     TIME="${WHITE}[$(date +%H:%M)]$RESET"
     VIM_MODE="${${KEYMAP/vicmd/🍑}/(main|viins)/🍆}"
-    VCS_INFO="$(git_prompt_info)"
-    if [[ $(git_prompt_status) = *[![:space:]]* ]] ; then
-      VCS_INFO+="${RED}[$(git_prompt_status)${RED}]$RESET"
-    fi
+    # VCS_INFO="$(git_prompt_info)"
+    # if [[ $(git_prompt_status) = *[![:space:]]* ]] ; then
+    #   VCS_INFO+="${RED}[$(git_prompt_status)${RED}]$RESET"
+    # fi
     RPROMPT=""
     RPROMPT+=$CODE
     RPROMPT+=$VCS_BRANCH
     RPROMPT+=$CMD_NUM
     RPROMPT+=$TIME
-    RPROMPT+=$VCS_INFO
+    # RPROMPT+=$VCS_INFO
     RPROMPT+=$VIM_MODE
     RPROMPT+=$RESET
     zle reset-prompt
@@ -104,10 +104,12 @@
   export TERM=xterm-256color
   export _Z_DATA=$ZDOTDIR/z
 # PATH
+  export PATH=$PATH:/Users/jefftang/code/datomic/datomic-pro-0.9.6045/bin
   export PATH=$PATH:$HOME/applications
   export PATH=$PATH:$GOROOT/bin
   export PATH=$PATH:$JAVA_HOME
   export PATH=$PATH:~/anaconda3/bin
+  export PATH=$PATH:$HOME/.cargo/bin
 # HIST
   HISTFILE=$ZDOTDIR/zhistory
   HISTSIZE=1000
@@ -121,6 +123,7 @@
   unsetopt INC_APPEND_HISTORY_TIME
   unsetopt SHARE_HISTORY
 # alias
+  alias kondo="clj-kondo --lint src  | ag -v 'clojure.string'"
   alias ap='apropos'
   alias h='history'
   alias v='vim'
@@ -137,6 +140,7 @@
   alias c='circleci'
   alias gc='gcloud'
   alias gcl='gcloud config configurations list'
+  alias idea='open -a "IntelliJ IDEA CE"'
   # tmux
     alias ta='tmux attach -t'
     alias tad='tmux attach -d -t'
