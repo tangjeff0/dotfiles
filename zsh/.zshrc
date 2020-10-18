@@ -123,7 +123,11 @@
   unsetopt INC_APPEND_HISTORY_TIME
   unsetopt SHARE_HISTORY
 # alias
+  alias p="source ~/.profile"
+  alias bup="/etc/acpi/dell-brightness.sh up"
+  alias bdo="/etc/acpi/dell-brightness.sh down"
   alias kondo="clj-kondo --lint src  | ag -v 'clojure.string'"
+  alias carve="./script/carve"
   alias ap='apropos'
   alias h='history'
   alias v='vim'

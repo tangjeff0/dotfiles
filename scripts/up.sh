@@ -88,6 +88,24 @@ up::linux () {
   echo "\nJAVA\n"
   sudo apt-get install openjdk-8-jre -y
 
+  # clojure
+  apt-get install -y software-properties-common
+  wget -qO - https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public | sudo apt-key add -
+  sudo add-apt-repository --yes https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/
+  sudo apt-get update
+  sudo apt-get install -y adoptopenjdk-11-hotspot
+  curl https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein > lein
+  sudo mv lein /usr/local/bin/lein
+  sudo chmod a+x /usr/local/bin/lein
+
+  # nvm
+  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
+  wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
+
+
+
+
+
   echo "\nSNAP\n"
   sudo snap install \
     postman \
