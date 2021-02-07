@@ -1,7 +1,6 @@
 calibre
 docker
 evernote
-macvim
 postico
 postman
 spectacle
@@ -9,3 +8,8 @@ spotify
 virtualbox
 visual-studio-code
 slack
+intellij-idea-ce
+emacs
+iterm2
+dropbox
+karabiner-elements
